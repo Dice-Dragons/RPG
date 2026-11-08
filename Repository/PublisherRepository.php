@@ -83,4 +83,54 @@ class PublisherRepository extends Repository
 			false
 		);
 	}
+
+	public function countUsedSettings(int $publisherId): int
+	{
+		if ($publisherId <= 0)
+		{
+			return 0;
+		}
+
+		$db = $this->db();
+		$sm = $db->getSchemaManager();
+		if (!$sm->tableExists('xf_cv6_setting'))
+		{
+			return 0;
+		}
+
+		if ($sm->columnExists('xf_cv6_setting', 'co_publisher_id'))
+		{
+			return (int)$db->fetchOne(
+				'SELECT COUNT(*) FROM xf_cv6_setting WHERE publisher_id = ? OR co_publisher_id = ?',
+				[$publisherId, $publisherId]
+			);
+		}
+
+		return (int)$db->fetchOne(
+			'SELECT COUNT(*) FROM xf_cv6_setting WHERE publisher_id = ?',
+			[$publisherId]
+		);
+	}
+
+	public function reassignPublisherRelations(int $oldPublisherId, int $newPublisherId): void
+	{
+		if ($oldPublisherId <= 0 || $newPublisherId <= 0 || $oldPublisherId === $newPublisherId)
+		{
+			return;
+		}
+
+		$db = $this->db();
+		$sm = $db->getSchemaManager();
+		if (!$sm->tableExists('xf_cv6_setting'))
+		{
+			return;
+		}
+
+		$db->update('xf_cv6_setting', ['publisher_id' => $newPublisherId], 'publisher_id = ?', [$oldPublisherId]);
+
+		if ($sm->columnExists('xf_cv6_setting', 'co_publisher_id'))
+		{
+			$db->update('xf_cv6_setting', ['co_publisher_id' => $newPublisherId], 'co_publisher_id = ?', [$oldPublisherId]);
+		}
+	}
 }

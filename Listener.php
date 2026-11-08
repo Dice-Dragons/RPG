@@ -105,12 +105,13 @@ class Listener
 	{
 		$app = \XF::app();
 		$cacheContainer = $app->simpleCache();
-		$genres = $cacheContainer['cv6/CharEdit']['genreMap'] ?? null;
+		$genres = $cacheContainer['cv6/RPG']['genreMap'] ?? $cacheContainer['cv6/CharEdit']['genreMap'] ?? null;
 		if ($genres === null)
 		{
 			/** @var \cv6\RPG\Repository\GenreRepository $genreRepo */
 			$genreRepo = $app->repository('cv6\RPG:Genre');
 			$genres = $genreRepo->getGenreClassDefinitionList();
+			$cacheContainer['cv6/RPG']['genreMap'] = $genres;
 			$cacheContainer['cv6/CharEdit']['genreMap'] = $genres;
 		}
 		$params['genres'] = $genres;

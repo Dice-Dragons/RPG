@@ -1,0 +1,31 @@
+{
+    "group_name": "cv6Genre",
+    "title": "Basic Pill",
+    "description": "Base Layout for the additional pills",
+    "property_type": "css",
+    "css_components": [
+        "text",
+        "background",
+        "border_width_simple",
+        "border_color_simple",
+        "border_radius_simple",
+        "padding",
+        "extra"
+    ],
+    "value_type": "",
+    "value_parameters": "",
+    "has_variations": false,
+    "depends_on": "",
+    "value_group": "",
+    "property_value": {
+        "font-size": "@xf-fontSizeLarge",
+        "color": "@xf-blockTabHeaderTextColor",
+        "font-weight": "@xf-fontWeightNormal",
+        "background-color": "@xf-blockTabHeaderBg",
+        "padding-top": "@xf-paddingMedium",
+        "padding-right": "@xf-paddingMedium",
+        "padding-bottom": "@xf-paddingMedium",
+        "padding-left": "4px"
+    },
+    "display_order": 2
+}

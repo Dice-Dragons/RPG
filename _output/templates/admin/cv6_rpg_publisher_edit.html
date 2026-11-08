@@ -1,0 +1,58 @@
+<xf:if is="$publisher.isInsert()">
+	<xf:title>{{ phrase('cv6_rpg_add_publisher') }}</xf:title>
+<xf:else />
+	<xf:title>{{ phrase('cv6_rpg_edit_publisher') }}: {$publisher.title}</xf:title>
+</xf:if>
+
+<xf:pageaction if="$publisher.isUpdate()">
+	<xf:button href="{{ link('rpg/publisher/delete', $publisher) }}" icon="delete" overlay="true" />
+</xf:pageaction>
+
+<xf:form action="{{ link('rpg/publisher/save', $publisher) }}" ajax="true" class="block">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:textboxrow name="title" value="{$publisher.title}" maxlength="{{ max_length($publisher, 'title') }}"
+				hint="{{ phrase('field_is_required') }}" required="required"
+				label="{{ phrase('cv6_rpg_publisher_title') }}" explain="{{ phrase('cv6_rpg_publisher_title_explain') }}" />
+
+			<xf:textboxrow name="url_slug" value="{$publisher.url_slug}" label="{{ phrase('url_portion') }}"
+				hint="{{ phrase('optional') }}" explain="{{ phrase('if_entered_url_to_node_not_contain_id_change_breaks_urls') }}"
+				dir="ltr" />
+
+			<xf:editorrow name="description"
+				value="{$publisher.description}"
+				hint="{{ phrase('field_is_required') }}"
+				label="{{ phrase('cv6_description') }}"
+				maxlength="{{ max_length($publisher, 'description') }}"
+				previewable="0" />
+
+			<hr class="formRowSep" />
+
+			<xf:macro id="cv6_assetupload::cv6_assetuploadrow" arg-name="logo_url" arg-asset="cv6publisher"
+				arg-label="{{ phrase('cv6_logo') }}" arg-explain="{{ phrase('cv6_rpg_publisher_image_explain') }}"
+				arg-value="{$publisher.logo_url}" />
+
+			<xf:textboxrow name="url" value="{$publisher.url}" maxlength="{{ max_length($publisher, 'url') }}"
+				label="{{ phrase('cv6_rpg_url') }}" explain="{{ phrase('cv6_rpg_url_explain') }}" />
+
+			<xf:textarearow name="license_notice" value="{$publisher.license_notice}"
+				rows="4"
+				autosize="true"
+				label="{{ phrase('cv6_rpg_publisher_license_notice') }}"
+				explain="{{ phrase('cv6_rpg_publisher_license_notice_explain') }}" />
+
+			<hr class="formRowSep" />
+
+			<xf:macro id="display_order_macros::row"
+				arg-value="{$publisher.display_order}" />
+
+			<xf:macro id="cv6_admin_macros::is_active"
+				arg-selected="{$publisher.active}"
+				arg-hint="{{ phrase('cv6_rpg_publisher_active_hint') }}" />
+
+			<hr class="formRowSep" />
+		</div>
+
+		<xf:submitrow sticky="true" icon="save" />
+	</div>
+</xf:form>

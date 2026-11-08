@@ -1,0 +1,1 @@
+FontAwesome 5 icon displayed on genre pills, filter buttons, and lists.

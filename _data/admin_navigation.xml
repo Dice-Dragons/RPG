@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<admin_navigation>
+  <admin_navigation_entry navigation_id="cv6Genre" parent_navigation_id="cv6Rpg" display_order="30" link="rpg/genre" icon="fa-tags fad" admin_permission_id="cv6ManageCharsettings" debug_only="0" development_only="0" hide_no_children="0"/>
+  <admin_navigation_entry navigation_id="cv6Publisher" parent_navigation_id="cv6Rpg" display_order="20" link="rpg/publisher" icon="fa-building fad" admin_permission_id="cv6ManagePublisher" debug_only="0" development_only="0" hide_no_children="0"/>
+  <admin_navigation_entry navigation_id="cv6Rpg" display_order="795" link="rpg/manager" icon="fa-dice-d20" debug_only="0" development_only="0" hide_no_children="1"/>
+  <admin_navigation_entry navigation_id="cv6RpgManager" parent_navigation_id="cv6Rpg" display_order="5" link="rpg/manager" icon="fa-puzzle-piece fad" debug_only="0" development_only="0" hide_no_children="0"/>
+  <admin_navigation_entry navigation_id="cv6RpgOptions" parent_navigation_id="cv6Rpg" display_order="10" link="options/groups/cv6Rpg" icon="fa-cogs fad" admin_permission_id="option" debug_only="0" development_only="0" hide_no_children="0"/>
+</admin_navigation>

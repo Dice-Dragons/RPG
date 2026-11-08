@@ -137,12 +137,6 @@ class CampaignContent extends Entity
 			'is_visible_to_players' => true,
 		];
 		$structure->relations = [
-			'Campaign' => [
-				'entity' => 'cv6\CharEdit:Campaign',
-				'type' => self::TO_ONE,
-				'conditions' => 'campaign_id',
-				'primary' => true,
-			],
 			'AddedUser' => [
 				'entity' => 'XF:User',
 				'type' => self::TO_ONE,
@@ -150,6 +144,16 @@ class CampaignContent extends Entity
 				'primary' => true,
 			],
 		];
+
+		if (\XF::isAddOnActive('cv6/CharEdit'))
+		{
+			$structure->relations['Campaign'] = [
+				'entity' => 'cv6\CharEdit:Campaign',
+				'type' => self::TO_ONE,
+				'conditions' => 'campaign_id',
+				'primary' => true,
+			];
+		}
 
 		return $structure;
 	}

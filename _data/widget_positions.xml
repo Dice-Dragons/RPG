@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget_positions>
+  <widget_position position_id="cv6_rpg_dashboard_above" active="1"/>
+  <widget_position position_id="cv6_rpg_dashboard_below" active="1"/>
+  <widget_position position_id="cv6_rpg_dashboard_main" active="1"/>
+  <widget_position position_id="cv6_rpg_dashboard_sidebar" active="1"/>
+  <widget_position position_id="cv6_rpg_dashboard_sidenav" active="1"/>
+</widget_positions>

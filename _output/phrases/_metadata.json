@@ -77,11 +77,59 @@
         "version_string": "1.0.0 Beta 1",
         "hash": "eef11ffbdf943cb4a19d245e48d75f3e"
     },
+    "admin_permission.cv6ManageRpg.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "e24346744ba2af95af71d09e6ad3a0c1"
+    },
+    "cv6_ce_genre_title_1.txt": {
+        "global_cache": false,
+        "version_id": 1020031,
+        "version_string": "1.2.0 Beta 1",
+        "hash": "8045a0a6c688b0635e3caccc408a1446"
+    },
+    "cv6_ce_genre_title_3.txt": {
+        "global_cache": false,
+        "version_id": 1020011,
+        "version_string": "1.2.0 Alpha 1",
+        "hash": "f8e19bfcbc718a84ee8ed8aae472f9e2"
+    },
+    "cv6_ce_genre_title_5.txt": {
+        "global_cache": false,
+        "version_id": 1020011,
+        "version_string": "1.2.0 Alpha 1",
+        "hash": "0fac4047d5a877ddd12cccbe55098e11"
+    },
+    "cv6_ce_genre_title_6.txt": {
+        "global_cache": false,
+        "version_id": 1020011,
+        "version_string": "1.2.0 Alpha 1",
+        "hash": "4f66b2bde693ae66204ea41406a6e1d5"
+    },
+    "cv6_ce_genre_title_7.txt": {
+        "global_cache": false,
+        "version_id": 1020031,
+        "version_string": "1.2.0 Beta 1",
+        "hash": "502032f297a1ceb58313538d65da2b55"
+    },
+    "cv6_ce_genre_title_8.txt": {
+        "global_cache": false,
+        "version_id": 1020031,
+        "version_string": "1.2.0 Beta 1",
+        "hash": "f5f3d8889e4a7280df3846aeda33007e"
+    },
     "cv6_rpg_active_settings.txt": {
         "global_cache": false,
         "version_id": 1000031,
         "version_string": "1.0.0 Beta 1",
         "hash": "34307e914d12be35c687c36f3f11dea0"
+    },
+    "cv6_rpg_add_publisher.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "9948838cb56b609f0a3c63158e5c9ced"
     },
     "cv6_rpg_addon_desc_battlemaps.txt": {
         "global_cache": false,
@@ -167,6 +215,12 @@
         "version_string": "1.0.0 Beta 1",
         "hash": "386beff906db2236af79b2a7ca9905d1"
     },
+    "cv6_rpg_all_genres.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "3615ab0d7a589e4a55e0f01cfcf73a32"
+    },
     "cv6_rpg_battlemap.txt": {
         "global_cache": false,
         "version_id": 1000031,
@@ -215,6 +269,12 @@
         "version_string": "1.0.0 Beta 1",
         "hash": "cc8303d8cfec4d040799ec2508f0ab62"
     },
+    "cv6_rpg_class_must_be_unique.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "f1dd7000cc84528e10638fed9bb26416"
+    },
     "cv6_rpg_companion_bar.txt": {
         "global_cache": false,
         "version_id": 1000031,
@@ -233,17 +293,59 @@
         "version_string": "1.0.0 Beta 1",
         "hash": "6c887eeb421a51bede58145cb71cfded"
     },
+    "cv6_rpg_create_character.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "4fa3837a6ab14e1d6e5bf1d32a907180"
+    },
     "cv6_rpg_create_handout.txt": {
         "global_cache": false,
         "version_id": 1000031,
         "version_string": "1.0.0 Beta 1",
         "hash": "5bcc45424c742209b5e846d954969e8d"
     },
+    "cv6_rpg_create_your_first.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "b1fa9e5468006c665a88f386bfa4fb3e"
+    },
+    "cv6_rpg_db_error_x.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "79a4c1c3a7cc4ef7bb75f1c8b2d35a8d"
+    },
+    "cv6_rpg_default_cant_deleted.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "80630967758e6b9eecbcd65ce2df28eb"
+    },
+    "cv6_rpg_default_genre_cannot_be_disabled.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "c0b04ae505a58b56d098b120ee6a0ae3"
+    },
     "cv6_rpg_dice_rolling.txt": {
         "global_cache": false,
         "version_id": 1000031,
         "version_string": "1.0.0 Beta 1",
         "hash": "fc24cd86ab9fca775967eda88c18bcf8"
+    },
+    "cv6_rpg_edit_genre.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "254492a0dafeaddccfb58f12e573aa30"
+    },
+    "cv6_rpg_edit_publisher.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "5114341cdc9801ff3d365eeecbaff9b6"
     },
     "cv6_rpg_field_is_rollable.txt": {
         "global_cache": false,
@@ -263,11 +365,65 @@
         "version_string": "1.0.0 Beta 1",
         "hash": "cd3d012a3e04d3f919317566ef139749"
     },
+    "cv6_rpg_genre.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "91563b044939df33670bd362715e334e"
+    },
+    "cv6_rpg_genre_active_hint.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "27c92cf5fae0ace29cbd053e3216241c"
+    },
+    "cv6_rpg_genre_cannot_delete_only_genre_in_use.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "ae21602d94a7144531fd1ff6ba53858f"
+    },
+    "cv6_rpg_genre_class.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "a4f67ad6bb884e6734898096161ade74"
+    },
+    "cv6_rpg_genre_class_explain.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "4f8c9d936753915611f6eede97511a91"
+    },
     "cv6_rpg_genre_counter_display.txt": {
         "global_cache": false,
         "version_id": 1000031,
         "version_string": "1.0.0 Beta 1",
         "hash": "5bfbf8dde2b57c1ade4e9bf46aaa72b1"
+    },
+    "cv6_rpg_genre_explain.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "6ca3ee5e61a36c4157f94dc7419bacbf"
+    },
+    "cv6_rpg_genre_icon.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "bc7153d28f4c050fe667437b4b69e0ff"
+    },
+    "cv6_rpg_genre_icon_explain.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "77c728857024acb8bf0130220cc1ca50"
+    },
+    "cv6_rpg_genre_in_use_with_x_items.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "582fbc6fd22783f2092da6d221be281e"
     },
     "cv6_rpg_genre_layout_grid.txt": {
         "global_cache": false,
@@ -280,6 +436,18 @@
         "version_id": 1000031,
         "version_string": "1.0.0 Beta 1",
         "hash": "b9326caf169b8c99e1c8be8d99286148"
+    },
+    "cv6_rpg_genre_layout_property_description.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "acd684bbcaadbec755c9147299d74bae"
+    },
+    "cv6_rpg_genre_layout_property_title.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "5a7c4e6bc82c97b748eac9919ab30714"
     },
     "cv6_rpg_genre_layout_sidenav.txt": {
         "global_cache": false,
@@ -299,6 +467,18 @@
         "version_string": "1.0.0 Beta 1",
         "hash": "4f280729fa1033e7beb30257846204c2"
     },
+    "cv6_rpg_genre_title.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "6025419b494e8915cd628d63c3a96cce"
+    },
+    "cv6_rpg_genres.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "4798cc774d4e385a2e87e911a1be6378"
+    },
     "cv6_rpg_gm_notes.txt": {
         "global_cache": false,
         "version_id": 1000031,
@@ -316,6 +496,18 @@
         "version_id": 1000031,
         "version_string": "1.0.0 Beta 1",
         "hash": "205807074aaa28a5186e00fec2718a0b"
+    },
+    "cv6_rpg_import_publishers.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "e8972f00effc4d83bb3691e72c072df0"
+    },
+    "cv6_rpg_include_images_in_export.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "d66298efeb2386f2689a5c74924c0cee"
     },
     "cv6_rpg_link_battlemap.txt": {
         "global_cache": false,
@@ -335,6 +527,12 @@
         "version_string": "1.0.0 Beta 1",
         "hash": "c9abcbfe8a06d4ddd95dfd991b479956"
     },
+    "cv6_rpg_map_count.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "620df7827e1c8e458cc67c777e73bf3f"
+    },
     "cv6_rpg_my_campaigns.txt": {
         "global_cache": false,
         "version_id": 1000031,
@@ -353,17 +551,35 @@
         "version_string": "1.0.0 Beta 1",
         "hash": "29eb2b4dc865004deb36fbeb4f826542"
     },
+    "cv6_rpg_new_genre.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "e12c04f02543ebf0abb874dc8d5b4966"
+    },
     "cv6_rpg_no_battlemaps_linked.txt": {
         "global_cache": false,
         "version_id": 1000031,
         "version_string": "1.0.0 Beta 1",
         "hash": "b1dafad426f1d209611c908e868cc384"
     },
+    "cv6_rpg_no_genre_property.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "62fac61323be8f224ec3c6061e0ff152"
+    },
     "cv6_rpg_no_handouts_linked.txt": {
         "global_cache": false,
         "version_id": 1000031,
         "version_string": "1.0.0 Beta 1",
         "hash": "6aaae192ca6c15ae8fd85d32280e743b"
+    },
+    "cv6_rpg_no_publishers_have_been_added_yet.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "7877a2808f059148bf05aaf40b9c59ec"
     },
     "cv6_rpg_not_installed.txt": {
         "global_cache": false,
@@ -383,6 +599,48 @@
         "version_string": "1.0.0 Beta 1",
         "hash": "636da1d35e805b00eae0fcd8333f9234"
     },
+    "cv6_rpg_please_confirm_that_you_want_to_delete_genre.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "1b7d094cd41c0302159d76c42fbcdd86"
+    },
+    "cv6_rpg_please_confirm_that_you_want_to_delete_publisher.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "c5f40a0c66ff07b49001f9c5391e49de"
+    },
+    "cv6_rpg_please_confirm_that_you_want_to_rebuild_genre_properties.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "200168b9862d80b51fe900f8728a79bd"
+    },
+    "cv6_rpg_please_enter_valid_cssclass.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "76c80e64afbc355d11615b1616a6f4e8"
+    },
+    "cv6_rpg_please_enter_valid_description.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "7dd2bb2ca1ed9e1ecc34372aefd54614"
+    },
+    "cv6_rpg_please_select_at_least_one_publisher_to_export.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "7ea2c3f8279a718cba52eb7b5bf669b5"
+    },
+    "cv6_rpg_please_select_at_least_one_publisher_to_import.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "316959f3c85e84e16b0b325f0d903fe0"
+    },
     "cv6_rpg_primary_wireset.txt": {
         "global_cache": false,
         "version_id": 1000031,
@@ -395,17 +653,125 @@
         "version_string": "1.0.0 Beta 1",
         "hash": "f6c2aa800ef95fb1efd4f12cd88b7150"
     },
+    "cv6_rpg_property_will_be_created_after_saving.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "b3a2559bbf5718ce98538334222d155e"
+    },
     "cv6_rpg_public_campaigns.txt": {
         "global_cache": false,
         "version_id": 1000031,
         "version_string": "1.0.0 Beta 1",
         "hash": "5c04a747e33b0eebeca7f6551912f493"
     },
+    "cv6_rpg_publisher.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "32c73be0cb175da278c8e2af0811b0d1"
+    },
+    "cv6_rpg_publisher_active_hint.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "6298835cc637b18375835ed489d4ade2"
+    },
+    "cv6_rpg_publisher_cannot_delete_only_publisher_in_use.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "45b2b8a5351128add33a1317c9055eb9"
+    },
+    "cv6_rpg_publisher_image_explain.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "64f33860492f6042323b004df44c58fa"
+    },
+    "cv6_rpg_publisher_import_file_explain.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "2432e5e16541ad46c1de606c912ac808"
+    },
+    "cv6_rpg_publisher_in_use_with_x_settings.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "10710c9d970742e335da335018d3f9cf"
+    },
+    "cv6_rpg_publisher_license_notice.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "9b8731a34602574100d7b13b2dd6d42c"
+    },
+    "cv6_rpg_publisher_license_notice_explain.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "4c8ed48978eaec5c69e6dd1107c6eaef"
+    },
+    "cv6_rpg_publisher_title.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "8999f5f5992db0b6d133184b95ffe37e"
+    },
+    "cv6_rpg_publisher_title_explain.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "e9e1722cc9361cbae6cbebdb80db87e7"
+    },
+    "cv6_rpg_publisher_x.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "f29f303246e3c605572c72ae70c450a9"
+    },
+    "cv6_rpg_publishers.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "1ec46a3c476af55e505c6885aa43baf8"
+    },
+    "cv6_rpg_publishers_imported_successfully.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "b1adfa46fb286ada31b7711f3b25ab3f"
+    },
+    "cv6_rpg_reassign_items_to_genre.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "72e49bd5617a219bef9ac03e10865f28"
+    },
+    "cv6_rpg_reassign_items_to_publisher.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "346aef52f860bf6c943e453bf055ed1e"
+    },
     "cv6_rpg_rebuild_genre_counters.txt": {
         "global_cache": false,
         "version_id": 1000031,
         "version_string": "1.0.0 Beta 1",
         "hash": "e618b39840a7828520667ca8df60671a"
+    },
+    "cv6_rpg_rebuild_genre_properties.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "11db8ca0a77b193c61fcd4e638c93c17"
+    },
+    "cv6_rpg_rebuild_genre_properties_title.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "480f242a7d307ae5bc0d1c254a7d5ed5"
     },
     "cv6_rpg_resource_page.txt": {
         "global_cache": false,
@@ -430,6 +796,48 @@
         "version_id": 1000031,
         "version_string": "1.0.0 Beta 1",
         "hash": "f265376eebcc3e3c63c598f694f731e0"
+    },
+    "cv6_rpg_select_publishers_to_import.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "cb3d4bee8e25695ee87881c1ba1e69bd"
+    },
+    "cv6_rpg_setting_count.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "f4f70727dc34561dfde1a3c529b6205c"
+    },
+    "cv6_rpg_settings.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "f4f70727dc34561dfde1a3c529b6205c"
+    },
+    "cv6_rpg_slug_must_be_unique.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "17e3b696b55e885c64fc89582a02bb35"
+    },
+    "cv6_rpg_sort_genres.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "a660ecf6cfab5e92ceb18fbe53eed93a"
+    },
+    "cv6_rpg_sort_manual.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "dee15671c16af44e96351c285ba82ebc"
+    },
+    "cv6_rpg_sort_publishers.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "86bebfb3434d0b634abb5ddec067e40d"
     },
     "cv6_rpg_suite.txt": {
         "global_cache": false,
@@ -461,6 +869,24 @@
         "version_string": "1.0.0 Beta 1",
         "hash": "5eef01393bcbc1ac1004cf4c3bf854b6"
     },
+    "cv6_rpg_url.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "2a84bf35647baabac3934127aed63dbe"
+    },
+    "cv6_rpg_url_explain.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "d6440082051b8e80a99d4f0cf3273c1a"
+    },
+    "cv6_rpg_url_slug_contain_more_numbers_hyphen.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "4e8301b7d9467534bf12b88c81d16ea9"
+    },
     "cv6_rpg_use_account_default_dice_set.txt": {
         "global_cache": false,
         "version_id": 1000031,
@@ -472,6 +898,12 @@
         "version_id": 1000031,
         "version_string": "1.0.0 Beta 1",
         "hash": "9e5e0079663ecef21135093b69cb84cd"
+    },
+    "cv6_rpg_visibility.txt": {
+        "global_cache": false,
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "1729a56cfc89021478498fe0c89a843a"
     },
     "cv6_rpg_visibility_gm_only.txt": {
         "global_cache": false,
@@ -551,11 +983,107 @@
         "version_string": "1.0.0 Beta 1",
         "hash": "4345f414b0adaeeb228886c9a8690229"
     },
+    "style_prop.cv6Genre_cyberpunk.txt": {
+        "global_cache": false,
+        "version_id": 1020011,
+        "version_string": "1.2.0 Alpha 1",
+        "hash": "9f2d9e8bb56eeed44b681317b646f106"
+    },
+    "style_prop.cv6Genre_default.txt": {
+        "global_cache": false,
+        "version_id": 1020031,
+        "version_string": "1.2.0 Beta 1",
+        "hash": "8bacefffdccdfa2728dd9fc39afc9af0"
+    },
+    "style_prop.cv6Genre_fantasy.txt": {
+        "global_cache": false,
+        "version_id": 1000051,
+        "version_string": "1.0.0 Release Candidate 1",
+        "hash": "d9d8e47eb355da93cc05dc88117fe48d"
+    },
+    "style_prop.cv6Genre_horror.txt": {
+        "global_cache": false,
+        "version_id": 1020031,
+        "version_string": "1.2.0 Beta 1",
+        "hash": "3fa434cc99076950d097b380f5823bc9"
+    },
+    "style_prop.cv6Genre_pa.txt": {
+        "global_cache": false,
+        "version_id": 1020031,
+        "version_string": "1.2.0 Beta 1",
+        "hash": "f2bfdb08382edd3c701afd11bde73614"
+    },
+    "style_prop.cv6Genre_scifi.txt": {
+        "global_cache": false,
+        "version_id": 1020031,
+        "version_string": "1.2.0 Beta 1",
+        "hash": "96ecf4f9d4a420d7158465688696cf8d"
+    },
+    "style_prop.cv6genre_base.txt": {
+        "global_cache": false,
+        "version_id": 1020031,
+        "version_string": "1.2.0 Beta 1",
+        "hash": "f1051f05dccbf2c89ba903f56fc77f80"
+    },
+    "style_prop_desc.cv6Genre_cyberpunk.txt": {
+        "global_cache": false,
+        "version_id": 1000051,
+        "version_string": "1.0.0 Release Candidate 1",
+        "hash": "d732ef8b54710dcdfe8be774d0ade7e5"
+    },
+    "style_prop_desc.cv6Genre_default.txt": {
+        "global_cache": false,
+        "version_id": 1010070,
+        "version_string": "1.1.0",
+        "hash": "4b034e3697175998f4f43b93ac836413"
+    },
+    "style_prop_desc.cv6Genre_fantasy.txt": {
+        "global_cache": false,
+        "version_id": 1000051,
+        "version_string": "1.0.0 Release Candidate 1",
+        "hash": "ec38c59ea7df2c877b7dfbd991962b75"
+    },
+    "style_prop_desc.cv6Genre_horror.txt": {
+        "global_cache": false,
+        "version_id": 1020031,
+        "version_string": "1.2.0 Beta 1",
+        "hash": "939f971ac59754639409de9470ae4dcc"
+    },
+    "style_prop_desc.cv6Genre_pa.txt": {
+        "global_cache": false,
+        "version_id": 1020031,
+        "version_string": "1.2.0 Beta 1",
+        "hash": "1903134f9cdc106ad6753321bbb810c3"
+    },
+    "style_prop_desc.cv6Genre_scifi.txt": {
+        "global_cache": false,
+        "version_id": 1000051,
+        "version_string": "1.0.0 Release Candidate 1",
+        "hash": "a2457b273c55a939ecc103a2f1e45315"
+    },
+    "style_prop_desc.cv6genre_base.txt": {
+        "global_cache": false,
+        "version_id": 1000051,
+        "version_string": "1.0.0 Release Candidate 1",
+        "hash": "fccc4e03206b7e664ac63473afbe37a8"
+    },
+    "style_prop_group.cv6Genre.txt": {
+        "global_cache": false,
+        "version_id": 1000051,
+        "version_string": "1.0.0 Release Candidate 1",
+        "hash": "6866b0cde41d68ce21835761026c8185"
+    },
+    "style_prop_group_desc.cv6Genre.txt": {
+        "global_cache": false,
+        "version_id": 1000051,
+        "version_string": "1.0.0 Release Candidate 1",
+        "hash": "30ad80e2276dac583b36ab7747fefa6b"
+    },
     "widget.cv6_rpg_dashboard_genres.txt": {
         "global_cache": false,
         "version_id": 1000031,
         "version_string": "1.0.0 Beta 1",
-        "hash": "d41d8cd98f00b204e9800998ecf8427e"
+        "hash": "cd3d012a3e04d3f919317566ef139749"
     },
     "widget_def.cv6_rpg_genres.txt": {
         "global_cache": false,

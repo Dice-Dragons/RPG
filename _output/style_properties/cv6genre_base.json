@@ -1,0 +1,32 @@
+{
+    "group_name": "cv6Genre",
+    "title": "Base Genre Name Layout",
+    "description": "Base Layout for Charactername for all Genres",
+    "property_type": "css",
+    "css_components": [
+        "text",
+        "background",
+        "border",
+        "border_radius",
+        "padding",
+        "extra"
+    ],
+    "value_type": "",
+    "value_parameters": "",
+    "has_variations": false,
+    "depends_on": "",
+    "value_group": "",
+    "property_value": {
+        "font-size": "@xf-fontSizeLargest",
+        "color": "@xf-blockTabHeaderTextColor",
+        "font-weight": "@xf-fontWeightHeavy",
+        "background-color": "@xf-blockTabHeaderBg",
+        "border-radius": "@xf-borderRadiusLarge",
+        "padding-top": "@xf-paddingSmall",
+        "padding-right": "@xf-paddingLarge",
+        "padding-bottom": "@xf-paddingMedium",
+        "padding-left": "@xf-paddingLarge",
+        "extra": ""
+    },
+    "display_order": 1
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<routes>
+  <route route_type="admin" route_prefix="rpg" sub_name="genre" format="genre/:int&lt;genre_id,title&gt;" controller="cv6\RPG:Genre" context="cv6Genre"/>
+  <route route_type="admin" route_prefix="rpg" sub_name="manager" format="manager" controller="cv6\RPG:Manager" context="cv6Rpg"/>
+  <route route_type="admin" route_prefix="rpg" sub_name="publisher" format="publisher/:int&lt;publisher_id,title&gt;" controller="cv6\RPG:Publisher" context="cv6Publisher"/>
+  <route route_type="public" route_prefix="rpg" controller="cv6\RPG:Index" context="cv6Rpg"/>
+</routes>

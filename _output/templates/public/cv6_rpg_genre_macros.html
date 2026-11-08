@@ -36,7 +36,9 @@
 								<span class="cv6-rpg-genreColorDot genre--{$genre.class} cv6-genre--{$genre.class}"></span>
 							</xf:if>
 							<span class="cv6-rpg-genrePill__title">{$genre.title}</span>
-							<xf:if is="$countField == 'setting_count' && $genre.setting_count !== null">
+							<xf:if is="$countField == 'total_count' && $genre.total_count !== null">
+								<span class="cv6-rpg-genrePill__count">{$genre.total_count|number}</span>
+							<xf:elseif is="$countField == 'setting_count' && $genre.setting_count !== null" />
 								<span class="cv6-rpg-genrePill__count">{$genre.setting_count|number}</span>
 							<xf:elseif is="$countField == 'map_count' && $genre.map_count !== null" />
 								<span class="cv6-rpg-genrePill__count">{$genre.map_count|number}</span>
@@ -78,7 +80,9 @@
 								</span>
 							</xf:if>
 							<span class="cv6-rpg-genreBtn__title">{$genre.title}</span>
-							<xf:if is="$countField == 'setting_count' && $genre.setting_count !== null">
+							<xf:if is="$countField == 'total_count' && $genre.total_count !== null">
+								<span class="cv6-rpg-genreBtn__badge label label--subtle label--smallest">{$genre.total_count|number}</span>
+							<xf:elseif is="$countField == 'setting_count' && $genre.setting_count !== null" />
 								<span class="cv6-rpg-genreBtn__badge label label--subtle label--smallest">{$genre.setting_count|number}</span>
 							<xf:elseif is="$countField == 'map_count' && $genre.map_count !== null" />
 								<span class="cv6-rpg-genreBtn__badge label label--subtle label--smallest">{$genre.map_count|number}</span>
@@ -114,7 +118,11 @@
 									</xf:if>
 									<span class="cv6-rpg-genreFilterLink__title">{$genre.title}</span>
 								</a>
-								<xf:if is="$countField == 'setting_count' && $genre.setting_count !== null">
+								<xf:if is="$countField == 'total_count' && $genre.total_count !== null">
+									<span class="categoryList-label">
+										<span class="label label--subtle label--smallest">{$genre.total_count|number}</span>
+									</span>
+								<xf:elseif is="$countField == 'setting_count' && $genre.setting_count !== null" />
 									<span class="categoryList-label">
 										<span class="label label--subtle label--smallest">{$genre.setting_count|number}</span>
 									</span>
@@ -159,7 +167,7 @@
 	arg-selectedGenreId="{{ 0 }}"
 	arg-selectedGenreClass=""
 	arg-countField="setting_count"
-	arg-allLabel="{{ phrase('cv6_all_genres') }}"
+	arg-allLabel="{{ phrase('cv6_rpg_all_genres') }}"
 	arg-buttonClass=""
 	arg-icon="fa-filter"
 	arg-resetValue="{{ 0 }}">
@@ -232,8 +240,8 @@
 	arg-genres="!"
 	arg-value="{{ 0 }}"
 	arg-name="genre_id"
-	arg-label="{{ phrase('cv6_genre') }}"
-	arg-explain="{{ phrase('cv6_genre_explain') }}"
+	arg-label="{{ phrase('cv6_rpg_genre') }}"
+	arg-explain="{{ phrase('cv6_rpg_genre_explain') }}"
 	arg-hint=""
 	arg-includeNone="{{ false }}"
 	arg-noneLabel="{{ phrase('(none)') }}"

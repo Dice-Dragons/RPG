@@ -1,0 +1,8 @@
+{
+    "additional_files": [
+        "js/cv6/rpg"
+    ],
+    "minify": [
+        "js/cv6/rpg/suite.js"
+    ]
+}

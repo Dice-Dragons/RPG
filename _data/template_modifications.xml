@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template_modifications>
+  <modification type="public" template="custom_fields_macros" modification_key="cv6_rpg_custom_fields_roll_trigger" description="Adds rollable badge / trigger icon next to rollable character custom fields" execution_order="30" enabled="1" action="str_replace">
+    <find><![CDATA[<dd>{$fieldValue}]]></find>
+    <replace><![CDATA[$0
+	<xf:if is="$type == 'characters' && $fieldDefinition.cv6_rpg_rollable && is_addon_active('cv6/DiceRoller')">
+		<xf:set var="$rpgChar" value="{$set.getEntity()}" />
+		<xf:if is="$rpgChar && $rpgChar.hasViewableThread() && $rpgChar.Thread.canRollDice()">
+			<a href="{{ link('dice-roller/roll', $rpgChar.Thread, {'character_id': $rpgChar.character_id, 'rpg_field': $fieldId}) }}"
+				class="cv6-rpg-field-roll-trigger"
+				data-xf-click="overlay"
+				data-xf-init="tooltip"
+				title="{{ phrase('cv6_rpg_roll_x', {'field': $fieldDefinition.title}) }}"><xf:fa icon="fa-dice-d20" /></a>
+		<xf:else />
+			<span class="cv6-rpg-field-roll-trigger" data-xf-init="tooltip" title="{{ phrase('cv6_rpg_rollable_field') }}"><xf:fa icon="fa-dice-d20" /></span>
+		</xf:if>
+	</xf:if>]]></replace>
+  </modification>
+  <modification type="public" template="cv6_campaign_view" modification_key="cv6_rpg_campaign_view_assets" description="Adds BattleMaps, Handouts, and Dice Roll Log blocks to Campaign Hub" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<div class="block">
+	<div class="block-container">
+		<h2 class="block-header">
+			<xf:fa icon="fa-shield-alt" /> {{ phrase('cv6_ce_party_characters') }}]]></find>
+    <replace><![CDATA[<xf:macro template="cv6_rpg_campaign_macros" name="campaign_assets"
+	arg-campaign="{$campaign}"
+	arg-battlemapLinks="{$rpgBattlemapLinks}"
+	arg-handoutLinks="{$rpgHandoutLinks}"
+	arg-recentRolls="{$rpgRecentRolls}"
+	arg-isGm="{$rpgIsGm}" />
+
+$0]]></replace>
+  </modification>
+  <modification type="admin" template="cv6_character_field_edit" modification_key="cv6_rpg_character_field_edit_rollable" description="Adds RPG rollable field options to CharacterField edit form" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:checkboxrow label="{{ phrase('cv6_visibility') }}">]]></find>
+    <replace><![CDATA[<xf:if is="is_addon_active('cv6/DiceRoller')">
+	<xf:checkboxrow label="{{ phrase('cv6_rpg_dice_rolling') }}">
+		<xf:option name="cv6_rpg_rollable" selected="$field.cv6_rpg_rollable"
+			label="{{ phrase('cv6_rpg_field_is_rollable') }}"
+			hint="{{ phrase('cv6_rpg_field_is_rollable_explain') }}"
+			data-hide="true">
+			<xf:dependent>
+				<div class="inputGroup">
+					<span class="inputGroup-text">{{ phrase('cv6_rpg_target_parameter') }}:</span>
+					<xf:textbox name="cv6_rpg_roll_config[param_target]"
+						value="{{ $field.cv6_rpg_roll_config.param_target ?: 'modifier' }}"
+						placeholder="modifier" />
+					<xf:if is="$rpgWiresetPairs is not empty">
+						<span class="inputGroup-splitter"></span>
+						<xf:select name="cv6_rpg_roll_config[wireset_override]"
+							value="{{ $field.cv6_rpg_roll_config.wireset_override ?: '' }}">
+							<xf:option value="">{{ phrase('cv6_rpg_use_setting_wireset') }}</xf:option>
+							<xf:foreach loop="$rpgWiresetPairs" key="$wsTag" value="$wsTitle">
+								<xf:option value="{$wsTag}">{$wsTitle}</xf:option>
+							</xf:foreach>
+						</xf:select>
+					</xf:if>
+				</div>
+			</xf:dependent>
+		</xf:option>
+	</xf:checkboxrow>
+</xf:if>
+
+$0]]></replace>
+  </modification>
+  <modification type="public" template="cv6_character_macros" modification_key="cv6_rpg_character_macros_diceset" description="Adds Character DiceSet selector to step_globalbasics" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:if is="$char.canSetNpcMode()">]]></find>
+    <replace><![CDATA[<xf:if is="$rpgSelectableDiceSets is not empty">
+	<xf:selectrow name="{$fieldname}[cv6_rpg_dice_set]"
+		value="{{ $char.cv6_rpg_dice_set ?: '' }}"
+		label="{{ phrase('cv6_rpg_character_dice_set') }}"
+		explain="{{ phrase('cv6_rpg_character_dice_set_explain') }}">
+		<xf:option value="">{{ phrase('cv6_rpg_use_account_default_dice_set') }}</xf:option>
+		<xf:foreach loop="$rpgSelectableDiceSets" value="$dSet">
+			<xf:option value="{$dSet.set_key}">{$dSet.title}</xf:option>
+		</xf:foreach>
+	</xf:selectrow>
+</xf:if>
+
+$0]]></replace>
+  </modification>
+  <modification type="public" template="cv6_dice_macros" modification_key="cv6_rpg_dice_macros_character" description="Displays Character identity in roll headers and uses Character DiceSet graphics" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:if is="{$rollItem.comment}">]]></find>
+    <replace><![CDATA[<xf:if is="$rollItem.hasCharacter()">
+	<xf:css src="cv6_rpg.less" />
+	<span class="cv6-rpg-roll-character-badge">
+		{{ character_portrait($rollItem.Character, 'xxs', link('char', $rollItem.Character), true) }}
+		<a href="{{ link('char', $rollItem.Character) }}"
+			<xf:if is="$rollItem.Character.Setting && $rollItem.Character.Setting.idcard">data-xf-init="cv6-character-tooltip" data-character-id="{$rollItem.Character.character_id}"</xf:if>
+		><strong>{$rollItem.Character.name}</strong></a>:
+	</span>
+</xf:if>
+$0]]></replace>
+  </modification>
+  <modification type="public" template="cv6_dice_macros" modification_key="cv6_rpg_dice_macros_setkey_call" description="Passes rollItem EffectiveDiceSetKey to dice_all_results and dice_result_display" execution_order="20" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:macro id="dice_all_results" 
+					arg-roll="{$rollItem.RollData}"
+					arg-user="{$rollItem.User}"
+				/>]]></find>
+    <replace><![CDATA[<xf:macro id="dice_all_results" 
+					arg-roll="{$rollItem.RollData}"
+					arg-user="{$rollItem.User}"
+					arg-setKey="{$rollItem.EffectiveDiceSetKey}"
+				/>]]></replace>
+  </modification>
+  <modification type="public" template="cv6_dice_macros" modification_key="cv6_rpg_dice_macros_setkey_def" description="Uses setKey in dice_all_results and dice_result_display when Character DiceSet is set" execution_order="30" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:macro id="dice_all_results" arg-roll="!" arg-user="">
+	<xf:foreach loop="$roll" key="$tag" value="$die">
+		<xf:if is="$tag == 'info'">
+			{{ phrase('cv6_option_issue') }}
+		<xf:else />
+			<xf:if is="is_array($die) AND {$die.result|count} > 0">
+				<div class="bbCodeBlock--roll">
+					<xf:macro id="dice_result_display" arg-die="{$die}" arg-user="{$user}" />
+				</div>
+			</xf:if>
+		</xf:if>
+	</xf:foreach>
+</xf:macro>
+
+<xf:macro id="dice_result_display" arg-die="!" arg-user="">
+	<xf:set var="$dieObj" value="{$xf.allDice.{$die.tag}}" />
+	<xf:if is="$dieObj">
+		<xf:if is="{$dieObj.big}">
+			<xf:set var="$extra-class" value=" die--big" />
+			<xf:set var="$setClass" value="" />
+			<xf:set var="$graphicUrl" value="" />
+		<xf:else />
+			<xf:set var="$extra-class" value="" />
+			<xf:set var="$graphicUrl" value="{{ $dieObj.getGraphicUrl($user) }}" />
+			<xf:if is="{$dieObj.graphic_type} == 'set'">
+				<xf:set var="$effectiveDefaultSet" value="{{ property('cv6DefaultDiceSet') ?: ($xf.options.cv6DiceDefaultSet ?: 'default') }}" />
+				<xf:set var="$userSetKey" value="{{ ($user && $user.Option && $user.Option.cv6_dice_set && $user.Option.cv6_dice_set != 'default') ? $user.Option.cv6_dice_set : $effectiveDefaultSet }}" />]]></find>
+    <replace><![CDATA[<xf:macro id="dice_all_results" arg-roll="!" arg-user="" arg-setKey="">
+	<xf:foreach loop="$roll" key="$tag" value="$die">
+		<xf:if is="$tag == 'info'">
+			{{ phrase('cv6_option_issue') }}
+		<xf:else />
+			<xf:if is="is_array($die) AND {$die.result|count} > 0">
+				<div class="bbCodeBlock--roll">
+					<xf:macro id="dice_result_display" arg-die="{$die}" arg-user="{$user}" arg-setKey="{$setKey}" />
+				</div>
+			</xf:if>
+		</xf:if>
+	</xf:foreach>
+</xf:macro>
+
+<xf:macro id="dice_result_display" arg-die="!" arg-user="" arg-setKey="">
+	<xf:set var="$dieObj" value="{$xf.allDice.{$die.tag}}" />
+	<xf:if is="$dieObj">
+		<xf:if is="{$dieObj.big}">
+			<xf:set var="$extra-class" value=" die--big" />
+			<xf:set var="$setClass" value="" />
+			<xf:set var="$graphicUrl" value="" />
+		<xf:else />
+			<xf:set var="$extra-class" value="" />
+			<xf:set var="$graphicUrl" value="{{ $setKey ? $dieObj.getGraphicUrlForSetKey($setKey, $user) : $dieObj.getGraphicUrl($user) }}" />
+			<xf:if is="{$dieObj.graphic_type} == 'set'">
+				<xf:set var="$effectiveDefaultSet" value="{{ property('cv6DefaultDiceSet') ?: ($xf.options.cv6DiceDefaultSet ?: 'default') }}" />
+				<xf:set var="$userSetKey" value="{{ $setKey ?: (($user && $user.Option && $user.Option.cv6_dice_set && $user.Option.cv6_dice_set != 'default') ? $user.Option.cv6_dice_set : $effectiveDefaultSet) }}" />]]></replace>
+  </modification>
+  <modification type="public" template="cv6_dice_roll_interface" modification_key="cv6_rpg_dice_roll_interface" description="Adds Character selector and Quick-Skill Chips to the Dice Roller dialog" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<ul class="tabPanes js-diceTabPanes">]]></find>
+    <replace><![CDATA[<xf:if is="$rpgCharacters is not empty">
+	<xf:css src="cv6_rpg.less" />
+	<xf:js src="cv6/rpg/suite.js" min="1" addon="cv6/RPG" />
+	<div class="block-row"
+		data-xf-init="cv6-rpg-roll-character"
+		data-rollables="{$rpgCharacterRollablesJson|for_attr}"
+		data-prefill-field="{$rpgPrefill.field_id|for_attr}"
+		data-prefill-comment="{$rpgPrefill.comment|for_attr}"
+		data-prefill-modifier="{$rpgPrefill.modifier|for_attr}"
+		data-prefill-wireset="{$rpgPrefill.wireset|for_attr}"
+		data-prefill-target="{$rpgPrefill.target|for_attr}">
+		<xf:selectrow name="cv6_character_id"
+			value="{$rpgSelectedCharacterId}"
+			class="js-cv6RpgCharacterSelect"
+			label="{{ phrase('cv6_rpg_roll_as_character') }}">
+			<xf:option value="0">{{ phrase('(none)') }}</xf:option>
+			<xf:foreach loop="$rpgCharacters" value="$rpgChar">
+				<xf:option value="{$rpgChar.character_id}">{$rpgChar.name}</xf:option>
+			</xf:foreach>
+		</xf:selectrow>
+		<div class="cv6-rpg-skill-chips js-cv6RpgSkillChips u-hidden"></div>
+	</div>
+</xf:if>
+$0]]></replace>
+  </modification>
+  <modification type="admin" template="cv6_genre_edit" modification_key="cv6_rpg_genre_edit_generator_type" description="Add Core Icon chooser to Genre edit form" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[			<xf:textarearow name="description"]]></find>
+    <replace><![CDATA[			<xf:macro template="cv6_fa_icon" name="cv6_inputIcon"
+				arg-target="genreIcon"
+				arg-name="icon"
+				arg-value="{$genre.icon}"
+				arg-label="{{ phrase('icon') }}"
+				arg-explain="{{ phrase('cv6_icon_explain') }}"
+				arg-autocomplete="{{ true }}" />
+
+			<xf:textarearow name="description"]]></replace>
+  </modification>
+  <modification type="admin" template="cv6_genre_list" modification_key="cv6_rpg_genre_list_icon" description="Display Genre icon and map/wireset counters in AdminCP Genre list" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[                            <xf:main href="{{ link('char-edit/genre/edit', $genre) }}">
+                                <xf:label>{$genre.title}</xf:label>
+                                <xf:hint>{$genre.class}</xf:hint>
+                            </xf:main>
+                            <xf:cell class="dataList-cell--min dataList-cell--hint" title="{{ phrase('cv6_setting_count') }}" data-xf-init="tooltip">
+                                {$genre.setting_count|number}
+                            </xf:cell>]]></find>
+    <replace><![CDATA[                            <xf:cell class="dataList-cell--min dataList-cell--iconic">
+                                <xf:if is="$genre.icon">
+                                    <xf:fa icon="{{ cv6icon($genre.icon) }}" />
+                                <xf:else />
+                                    <xf:fa icon="fa-tags" class="u-muted" />
+                                </xf:if>
+                            </xf:cell>
+                            <xf:main href="{{ link('char-edit/genre/edit', $genre) }}">
+                                <xf:label>{$genre.title}</xf:label>
+                                <xf:hint>{$genre.class}</xf:hint>
+                            </xf:main>
+                            <xf:cell class="dataList-cell--min dataList-cell--hint" title="{{ phrase('cv6_setting_count') }}" data-xf-init="tooltip">
+                                <xf:fa icon="fa-book" class="u-muted" /> {$genre.setting_count|number}
+                            </xf:cell>
+                            <xf:if is="is_addon_active('cv6/BattleMaps')">
+                                <xf:cell class="dataList-cell--min dataList-cell--hint" title="{{ phrase('cv6_rpg_battlemap_count') }}" data-xf-init="tooltip">
+                                    <xf:fa icon="fa-map" class="u-muted" /> {$genre.map_count|number}
+                                </xf:cell>
+                            </xf:if>
+                            <xf:if is="is_addon_active('cv6/DiceRoller')">
+                                <xf:cell class="dataList-cell--min dataList-cell--hint" title="{{ phrase('cv6_rpg_wireset_count') }}" data-xf-init="tooltip">
+                                    <xf:fa icon="fa-dice-d20" class="u-muted" /> {$genre.wireset_count|number}
+                                </xf:cell>
+                            </xf:if>]]></replace>
+  </modification>
+  <modification type="admin" template="cv6_setting_edit" modification_key="cv6_rpg_setting_edit_wireset" description="Adds Primary Wireset selector to Setting edit form" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:selectrow name="setting_node_id" value="{$setting.setting_node_id}" id="js-cv6SettingNodeList"]]></find>
+    <replace><![CDATA[<xf:if is="$rpgWiresetPairs is not empty">
+	<xf:selectrow name="cv6_rpg_wireset" value="{$setting.cv6_rpg_wireset}"
+		label="{{ phrase('cv6_rpg_primary_wireset') }}"
+		explain="{{ phrase('cv6_rpg_primary_wireset_explain') }}">
+		<xf:option value="">{{ phrase('(none)') }}</xf:option>
+		<xf:foreach loop="$rpgWiresetPairs" key="$wsTag" value="$wsTitle">
+			<xf:option value="{$wsTag}">{$wsTitle}</xf:option>
+		</xf:foreach>
+	</xf:selectrow>
+</xf:if>
+
+$0]]></replace>
+  </modification>
+  <modification type="public" template="cv6_settings_wrapper" modification_key="cv6_rpg_settings_wrapper_genre_filter" description="Use centralized RPG Suite genre_filter_dropdown macro in cv6_settings_wrapper" execution_order="10" enabled="1" action="str_replace">
+    <find><![CDATA[<xf:macro id="genrefilter" arg-genres="!" arg-selectedGenreId="0" arg-view="list">
+	<xf:set var="$link">
+		char/setting/{$view}
+	</xf:set>
+	<xf:set var="$selectedGenre" value="{$genres.{$selectedGenreId}}" />
+	<xf:button class="menuTrigger" data-xf-click="menu" aria-expanded="false" aria-haspopup="true">
+		<xf:fa icon="fa-filter" /> <xf:if is="$selectedGenre">{$selectedGenre.title}<xf:else />{{ phrase('cv6_all_genres') }}</xf:if>
+	</xf:button>
+	<div class="menu" data-menu="menu" aria-hidden="true">
+		<div class="menu-content">
+			<xf:if is="$selectedGenreId > 0">
+				<a href="{{ link($link, false, {'genre_id': 0}) }}" class="menu-linkRow">{{ phrase('cv6_all_genres') }}</a>
+			</xf:if>
+			<xf:foreach loop="$genres" value="$genre">
+				<xf:if is="$genre.genre_id == $selectedGenreId">
+					<span class="menu-linkRow is-selected">
+						<span class="u-pullRight">{$genre.setting_count|number}</span>
+						{$genre.title}
+					</span>
+				<xf:else />
+					<a href="{{ link($link, false, {'genre_id': $genre.genre_id}) }}" class="menu-linkRow">
+						<span class="u-pullRight">{$genre.setting_count|number}</span>
+						{$genre.title}
+					</a>
+				</xf:if>
+			</xf:foreach>
+		</div>
+	</div>
+</xf:macro>]]></find>
+    <replace><![CDATA[<xf:macro id="genrefilter" arg-genres="!" arg-selectedGenreId="0" arg-view="list">
+	<xf:macro template="public:cv6_rpg_genre_macros" name="genre_filter_dropdown"
+		arg-genres="{$genres}"
+		arg-route="char/setting/{$view}"
+		arg-selectedGenreId="{$selectedGenreId}"
+		arg-countField="setting_count" />
+</xf:macro>]]></replace>
+  </modification>
+  <modification type="public" template="thread_view" modification_key="cv6_rpg_thread_view_companion" description="Adds collapsible In-Thread RPG Companion Bar in Campaign Forum threads" execution_order="15" enabled="1" action="str_replace">
+    <find><![CDATA[<!--[XF:content_top]-->]]></find>
+    <replace><![CDATA[$0
+<xf:if is="$rpgThreadCampaign">
+	<xf:macro template="cv6_rpg_thread_companion" name="companion_bar"
+		arg-campaign="{$rpgThreadCampaign}"
+		arg-thread="{$thread}"
+		arg-characters="{$rpgThreadCharacters}"
+		arg-battlemapLinks="{$rpgThreadBattlemapLinks}"
+		arg-handoutLinks="{$rpgThreadHandoutLinks}"
+		arg-isGm="{$rpgThreadIsGm}" />
+</xf:if>]]></replace>
+  </modification>
+  <modification type="admin" template="tools_rebuild" modification_key="cv6_rpg_tools_rebuild_genre_counters" description="Adds RPG Suite genre counter rebuild job to Tools -&gt; Rebuild caches" execution_order="40" enabled="1" action="str_replace">
+    <find><![CDATA[<!--[XF:after_reaction_status]-->]]></find>
+    <replace><![CDATA[$0
+<xf:if is="!is_addon_active('cv6/CharEdit')">
+	<xf:macro name="rebuild_job"
+		arg-header="{{ phrase('cv6_rpg_rebuild_genre_counters') }}"
+		arg-job="cv6\RPG:GenreCounterRebuild" />
+</xf:if>]]></replace>
+  </modification>
+</template_modifications>

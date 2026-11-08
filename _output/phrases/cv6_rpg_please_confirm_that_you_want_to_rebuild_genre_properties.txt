@@ -1,0 +1,1 @@
+Please confirm that you want to sync and rebuild the genre style properties.<br />This will link existing style properties to matching genres and create missing properties if needed.

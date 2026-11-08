@@ -1,0 +1,1 @@
+Select a JSON or ZIP (with images) export file containing publisher definitions to import.

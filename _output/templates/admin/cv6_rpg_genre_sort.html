@@ -1,0 +1,30 @@
+<xf:title>{{ phrase('cv6_rpg_sort_genres') }}</xf:title>
+
+<xf:macro id="public:nestable_macros::setup" />
+
+<xf:form action="{{ link('rpg/genre/sort') }}" class="block" ajax="true">
+	<div class="block-container">
+		<div class="block-body">
+			<div class="nestable-container" data-xf-init="nestable" data-max-depth="1" data-value-function="serialize">
+				<xf:macro id="genre_list" arg-genres="{$genres}" />
+				<xf:hiddenval name="genres" value="" />
+			</div>
+		</div>
+		<xf:submitrow icon="save" rowtype="simple" />
+	</div>
+</xf:form>
+
+<xf:macro id="genre_list" arg-genres="!">
+	<ol class="nestable-list">
+		<xf:foreach loop="$genres" key="$id" value="$genre">
+			<li class="nestable-item" data-id="{$id}">
+				<div class="nestable-handle" aria-label="{{ phrase('drag_handle')|for_attr }}">
+					<xf:fa icon="fa-bars" />
+				</div>
+				<div class="nestable-content">
+					<strong>{{ $genre.title }}</strong>
+				</div>
+			</li>
+		</xf:foreach>
+	</ol>
+</xf:macro>

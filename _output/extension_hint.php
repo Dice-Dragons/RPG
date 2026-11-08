@@ -11,7 +11,6 @@
 namespace cv6\RPG\cv6\CharEdit\Admin\Controller
 {
 	class XFCP_CharacterFieldController extends \cv6\CharEdit\Admin\Controller\CharacterFieldController {}
-	class XFCP_GenreController extends \cv6\CharEdit\Admin\Controller\GenreController {}
 	class XFCP_SettingController extends \cv6\CharEdit\Admin\Controller\SettingController {}
 }
 

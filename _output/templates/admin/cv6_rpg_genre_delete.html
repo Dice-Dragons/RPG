@@ -1,0 +1,35 @@
+<xf:title>{{ phrase('confirm_action') }}</xf:title>
+
+<xf:form action="{$confirmUrl}" ajax="true" class="block">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:inforow rowtype="confirm">
+				{{ phrase('cv6_rpg_please_confirm_that_you_want_to_delete_genre') }}
+				<xf:if is="$contentUrl">
+					<strong><a href="{$contentUrl}">{$contentTitle}</a></strong>
+				<xf:else />
+					<strong>{$contentTitle}</strong>
+				</xf:if>
+				<xf:if is="$deletionImportantPhrase">
+					<div class="blockMessage blockMessage--important blockMessage--iconic">
+						{{ phrase_dynamic($deletionImportantPhrase) }}
+					</div>
+				</xf:if>
+			</xf:inforow>
+			<xf:if is="$used">
+				<xf:inforow>
+					<div class="blockMessage blockMessage--important blockMessage--iconic">
+						{{ phrase('cv6_rpg_genre_in_use_with_x_items', {'count': $used}) }}
+					</div>
+				</xf:inforow>
+				<xf:macro template="public:cv6_rpg_genre_macros" name="genre_select_row"
+					arg-genres="{$other}"
+					arg-name="reassign_genre_id"
+					arg-label="{{ phrase('cv6_rpg_reassign_items_to_genre') }}"
+					arg-explain=""
+					arg-checkOption="{{ false }}" />
+			</xf:if>
+		</div>
+		<xf:submitrow rowtype="simple" icon="delete" />
+	</div>
+</xf:form>

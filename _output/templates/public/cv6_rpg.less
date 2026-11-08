@@ -377,6 +377,18 @@
 			</xf:if>
 		}
 
+		.label.cv6-genre--{$class},
+		.badge.cv6-genre--{$class}
+		{
+			<xf:if is="property('cv6Genre_' . $class . '--color')">color: @xf-cv6Genre_{$class}--color;</xf:if>
+			<xf:if is="property('cv6Genre_' . $class . '--background-color')">background-color: @xf-cv6Genre_{$class}--background-color;</xf:if>
+			<xf:if is="property('cv6Genre_' . $class . '--border-color')">
+				border-color: @xf-cv6Genre_{$class}--border-color;
+			<xf:elseif is="property('cv6Genre_' . $class . '--background-color')" />
+				border-color: @xf-cv6Genre_{$class}--background-color;
+			</xf:if>
+		}
+
 		.cv6-rpg-genreBtn.no-icon.genre--{$class}
 		{
 			<xf:if is="property('cv6Genre_' . $class . '--color')">color: @xf-cv6Genre_{$class}--color;</xf:if>

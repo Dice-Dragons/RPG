@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<class_extensions>
+  <extension from_class="cv6\CharEdit\Admin\Controller\CharacterFieldController" to_class="cv6\RPG\cv6\CharEdit\Admin\Controller\CharacterFieldController" execute_order="10" active="1"/>
+  <extension from_class="cv6\CharEdit\Admin\Controller\SettingController" to_class="cv6\RPG\cv6\CharEdit\Admin\Controller\SettingController" execute_order="10" active="1"/>
+  <extension from_class="cv6\CharEdit\Entity\Character" to_class="cv6\RPG\cv6\CharEdit\Entity\Character" execute_order="10" active="1"/>
+  <extension from_class="cv6\CharEdit\Entity\CharacterField" to_class="cv6\RPG\cv6\CharEdit\Entity\CharacterField" execute_order="10" active="1"/>
+  <extension from_class="cv6\CharEdit\Entity\Setting" to_class="cv6\RPG\cv6\CharEdit\Entity\Setting" execute_order="10" active="1"/>
+  <extension from_class="cv6\CharEdit\Pub\Controller\CampaignController" to_class="cv6\RPG\cv6\CharEdit\Pub\Controller\CampaignController" execute_order="10" active="1"/>
+  <extension from_class="cv6\CharEdit\Pub\Controller\CharacterController" to_class="cv6\RPG\cv6\CharEdit\Pub\Controller\CharacterController" execute_order="10" active="1"/>
+  <extension from_class="cv6\CharEdit\Service\Campaign\NodeManager" to_class="cv6\RPG\cv6\CharEdit\Service\Campaign\NodeManager" execute_order="10" active="1"/>
+  <extension from_class="cv6\DiceRoller\ControllerPlugin\Roller" to_class="cv6\RPG\cv6\DiceRoller\ControllerPlugin\Roller" execute_order="10" active="1"/>
+  <extension from_class="cv6\DiceRoller\Entity\Dice" to_class="cv6\RPG\cv6\DiceRoller\Entity\Dice" execute_order="10" active="1"/>
+  <extension from_class="cv6\DiceRoller\Entity\Rolls" to_class="cv6\RPG\cv6\DiceRoller\Entity\Rolls" execute_order="10" active="1"/>
+  <extension from_class="cv6\DiceRoller\Repository\DiceSetRepository" to_class="cv6\RPG\cv6\DiceRoller\Repository\DiceSetRepository" execute_order="10" active="1"/>
+  <extension from_class="cv6\Handout\Entity\Handout" to_class="cv6\RPG\cv6\Handout\Entity\Handout" execute_order="10" active="1"/>
+  <extension from_class="XF\Pub\Controller\ThreadController" to_class="cv6\RPG\XF\Pub\Controller\ThreadController" execute_order="10" active="1"/>
+  <extension from_class="XF\Service\Post\PreparerService" to_class="cv6\RPG\XF\Service\Post\PreparerService" execute_order="20" active="1"/>
+</class_extensions>

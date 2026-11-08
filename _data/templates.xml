@@ -1,0 +1,1850 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+  <template type="admin" title="cv6_rpg_admin.less" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[.cv6-rpg-addonIcon--inactive
+{
+	img,
+	i
+	{
+		filter: grayscale(100%);
+		opacity: 0.5;
+	}
+}
+
+a.cv6-rpg-statusAction
+{
+	text-decoration: none;
+
+	&:hover
+	{
+		text-decoration: none;
+		filter: brightness(1.08);
+	}
+}
+]]></template>
+  <template type="admin" title="cv6_rpg_genre_delete" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[<xf:title>{{ phrase('confirm_action') }}</xf:title>
+
+<xf:form action="{$confirmUrl}" ajax="true" class="block">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:inforow rowtype="confirm">
+				{{ phrase('cv6_rpg_please_confirm_that_you_want_to_delete_genre') }}
+				<xf:if is="$contentUrl">
+					<strong><a href="{$contentUrl}">{$contentTitle}</a></strong>
+				<xf:else />
+					<strong>{$contentTitle}</strong>
+				</xf:if>
+				<xf:if is="$deletionImportantPhrase">
+					<div class="blockMessage blockMessage--important blockMessage--iconic">
+						{{ phrase_dynamic($deletionImportantPhrase) }}
+					</div>
+				</xf:if>
+			</xf:inforow>
+			<xf:if is="$used">
+				<xf:inforow>
+					<div class="blockMessage blockMessage--important blockMessage--iconic">
+						{{ phrase('cv6_rpg_genre_in_use_with_x_items', {'count': $used}) }}
+					</div>
+				</xf:inforow>
+				<xf:macro template="public:cv6_rpg_genre_macros" name="genre_select_row"
+					arg-genres="{$other}"
+					arg-name="reassign_genre_id"
+					arg-label="{{ phrase('cv6_rpg_reassign_items_to_genre') }}"
+					arg-explain=""
+					arg-checkOption="{{ false }}" />
+			</xf:if>
+		</div>
+		<xf:submitrow rowtype="simple" icon="delete" />
+	</div>
+</xf:form>
+]]></template>
+  <template type="admin" title="cv6_rpg_genre_edit" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[<xf:if is="$genre.isInsert()">
+	<xf:title>{{ phrase('cv6_rpg_new_genre') }}</xf:title>
+<xf:else />
+	<xf:title>{{ phrase('cv6_rpg_edit_genre') }}: {$genre.title}</xf:title>
+</xf:if>
+
+<xf:pageaction if="$genre.isUpdate() && $genre.canDelete()">
+	<xf:button href="{{ link('rpg/genre/delete', $genre) }}" icon="delete" overlay="true" />
+</xf:pageaction>
+
+<xf:form action="{{ link('rpg/genre/save', $genre) }}" ajax="true" class="block">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:textboxrow name="title"
+				value="{$genre.MasterTitle.phrase_text}"
+				maxlength="50"
+				label="{{ phrase('cv6_rpg_genre_title') }}"
+				phrase="{$genre.getPhraseName('title')}" />
+
+			<xf:textboxrow name="class"
+				value="{$genre.class}"
+				maxlength="{{ max_length($genre, 'class') }}"
+				hint="{{ phrase('cv6_az') }}"
+				label="{{ phrase('cv6_rpg_genre_class') }}"
+				explain="{{ phrase('cv6_rpg_genre_class_explain') }}"
+				disabled="{{ !$genre.canDelete() && $genre.isUpdate() ? 'disabled' : '' }}" />
+
+			<xf:macro template="cv6_fa_icon" name="cv6_inputIcon"
+				arg-target="icon"
+				arg-name="icon"
+				arg-value="{$genre.icon}"
+				arg-label="{{ phrase('cv6_rpg_genre_icon') }}"
+				arg-explain="{{ phrase('cv6_rpg_genre_icon_explain') }}"
+				arg-autocomplete="{{ true }}" />
+
+			<xf:textarearow name="description"
+				value="{$genre.MasterDescription.phrase_text}"
+				autosize="true"
+				class="codeEditor--autoSize codeEditor--proportional"
+				label="{{ phrase('cv6_description') }}"
+				phrase="{$genre.getPhraseName('desc')}" />
+
+			<xf:formrow label="{{ phrase('style_property') }}">
+				<xf:if is="$genre.isInsert() || !$genre.Property">
+					{{ phrase('cv6_rpg_property_will_be_created_after_saving') }}
+				<xf:else />
+					<xf:button href="{{ link('styles/style-properties/group', $style, {'group': $genre.Property.Group.group_name}) }}#sp-cv6Genre_{$genre.class}" icon="edit" />
+				</xf:if>
+			</xf:formrow>
+
+			<hr class="formRowSep" />
+
+			<xf:macro id="display_order_macros::row"
+				arg-value="{$genre.display_order}" />
+
+			<xf:checkboxrow>
+				<xf:option name="active" selected="$genre.active" label="{{ phrase('cv6_active') }}"
+					hint="{{ phrase('cv6_rpg_genre_active_hint') }}" />
+			</xf:checkboxrow>
+		</div>
+
+		<xf:submitrow sticky="true" icon="save" />
+	</div>
+</xf:form>
+]]></template>
+  <template type="admin" title="cv6_rpg_genre_list" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[<xf:title>{{ phrase('cv6_rpg_genres') }}</xf:title>
+
+<xf:pageaction>
+	<div class="buttonGroup">
+		<xf:button href="{{ link('rpg/genre/add') }}" icon="add">{{ phrase('cv6_rpg_new_genre') }}</xf:button>
+		<xf:button href="{{ link('rpg/genre/sort') }}" icon="sort" overlay="true" />
+		<xf:button href="{{ link('rpg/genre/sort-abc') }}" fa="fa-sort-alpha-down">{{ phrase('cv6_sort_abc') }}</xf:button>
+		<xf:if contentcheck="true">
+			<div class="buttonGroup-buttonWrapper">
+				<xf:button class="menuTrigger" data-xf-click="menu" aria-expanded="false" aria-haspopup="true" title="{{ phrase('more_options') }}">&#8226;&#8226;&#8226;</xf:button>
+				<div class="menu" data-menu="menu" aria-hidden="true">
+					<div class="menu-content">
+						<h4 class="menu-header">{{ phrase('more_options') }}</h4>
+						<xf:contentcheck>
+							<xf:if is="$xf.visitor.Admin.advanced || $xf.debugMode">
+								<a href="{{ link('rpg/genre/rebuild-properties') }}" class="menu-linkRow" data-xf-click="overlay">{{ phrase('cv6_rpg_rebuild_genre_properties') }}</a>
+							</xf:if>
+						</xf:contentcheck>
+					</div>
+				</div>
+			</div>
+		</xf:if>
+	</div>
+</xf:pageaction>
+
+<xf:form action="{{ link('rpg/genre/toggle') }}" ajax="true" class="block">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:datalist data-xf-init="responsive-data-list">
+				<tbody class="dataList-rowGroup">
+					<xf:foreach loop="{$genres.genre}" key="$genre_id" value="$genre">
+						<xf:datarow>
+							<xf:cell class="dataList-cell--iconic">
+								<xf:if is="$genre.icon">
+									<xf:fa icon="{$genre.icon}" />
+								<xf:else />
+									<xf:fa icon="fa-dice-d20" />
+								</xf:if>
+							</xf:cell>
+							<xf:main href="{{ link('rpg/genre/edit', $genre) }}">
+								<xf:label>{$genre.title}</xf:label>
+								<xf:hint>{$genre.class}</xf:hint>
+							</xf:main>
+							<xf:cell class="dataList-cell--min dataList-cell--hint" title="{{ phrase('cv6_rpg_setting_count') }}" data-xf-init="tooltip">
+								<xf:fa icon="fa-id-card" /> {$genre.setting_count|number}
+							</xf:cell>
+							<xf:cell class="dataList-cell--min dataList-cell--hint" title="{{ phrase('cv6_rpg_map_count') }}" data-xf-init="tooltip">
+								<xf:fa icon="fa-map" /> {$genre.map_count|number}
+							</xf:cell>
+							<xf:cell class="dataList-cell--min dataList-cell--hint" title="{{ phrase('cv6_rpg_wireset_count') }}" data-xf-init="tooltip">
+								<xf:fa icon="fa-dice" /> {$genre.wireset_count|number}
+							</xf:cell>
+							<xf:cell class="dataList-cell--min dataList-cell--hint">
+								<xf:if is="$genre.Property">
+									{$genre.Property.title}
+								<xf:else />
+									<strong>{{ phrase('cv6_rpg_no_genre_property') }}</strong>
+								</xf:if>
+							</xf:cell>
+							<xf:cell class="dataList-cell dataList-cell--iconic">
+								<xf:if is="!$genre.Property">
+									<a href="{{ link('rpg/genre/property', $genre) }}">
+										<xf:fa icon="fa-plus-square" title="{{ phrase('create') }}" data-xf-init="tooltip" />
+									</a>
+								<xf:else />
+									<a href="{{ link('styles/style-properties/group', $style, {'group': $genre.Property.Group.group_name}) }}#sp-cv6Genre_{$genre.class}">
+										<xf:fa icon="fa-object-group" title="{{ phrase('edit') }}" data-xf-init="tooltip" />
+									</a>
+								</xf:if>
+							</xf:cell>
+							<xf:if is="$genre.canDelete()">
+								<xf:toggle name="active[{$genre.genre_id}]" selected="$genre.active" class="dataList-cell--separated" submit="true"
+									tooltip="{{ phrase('enable_disable_x', {'title': $genre.title}) }}" />
+								<xf:delete href="{{ link('rpg/genre/delete', $genre) }}" />
+							<xf:else />
+								<xf:cell class="dataList-cell dataList-cell--iconic dataList-cell--alt" colspan="2">
+									<xf:fa icon="fa-minus-octagon" class="cv6-icon-off" data-original-title="{{ phrase('cv6_rpg_default_cant_deleted') }}"
+										data-xf-init="tooltip" />
+								</xf:cell>
+							</xf:if>
+						</xf:datarow>
+					</xf:foreach>
+				</tbody>
+			</xf:datalist>
+		</div>
+	</div>
+</xf:form>
+]]></template>
+  <template type="admin" title="cv6_rpg_genre_rebuild" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[<xf:title>{{ phrase('cv6_rpg_rebuild_genre_properties_title') }}</xf:title>
+
+<xf:form action="{{ link('rpg/genre/rebuild-properties') }}" class="block" ajax="true">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:inforow rowtype="confirm">
+				{{ phrase('cv6_rpg_please_confirm_that_you_want_to_rebuild_genre_properties') }}
+			</xf:inforow>
+			<xf:submitrow submit="{{ phrase('yes') }}" fa="fa-object-group" />
+		</div>
+	</div>
+</xf:form>
+]]></template>
+  <template type="admin" title="cv6_rpg_genre_sort" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[<xf:title>{{ phrase('cv6_rpg_sort_genres') }}</xf:title>
+
+<xf:macro id="public:nestable_macros::setup" />
+
+<xf:form action="{{ link('rpg/genre/sort') }}" class="block" ajax="true">
+	<div class="block-container">
+		<div class="block-body">
+			<div class="nestable-container" data-xf-init="nestable" data-max-depth="1" data-value-function="serialize">
+				<xf:macro id="genre_list" arg-genres="{$genres}" />
+				<xf:hiddenval name="genres" value="" />
+			</div>
+		</div>
+		<xf:submitrow icon="save" rowtype="simple" />
+	</div>
+</xf:form>
+
+<xf:macro id="genre_list" arg-genres="!">
+	<ol class="nestable-list">
+		<xf:foreach loop="$genres" key="$id" value="$genre">
+			<li class="nestable-item" data-id="{$id}">
+				<div class="nestable-handle" aria-label="{{ phrase('drag_handle')|for_attr }}">
+					<xf:fa icon="fa-bars" />
+				</div>
+				<div class="nestable-content">
+					<strong>{{ $genre.title }}</strong>
+				</div>
+			</li>
+		</xf:foreach>
+	</ol>
+</xf:macro>
+]]></template>
+  <template type="admin" title="cv6_rpg_manager" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[<xf:title>{$title}</xf:title>
+<xf:css src="cv6_rpg_admin.less" />
+
+<xf:pageaction>
+	<xf:button href="{{ link_type('public', 'rpg') }}" target="_blank" fa="fa-external-link-alt">
+		{{ phrase('cv6_rpg_open_frontend_dashboard') }}
+	</xf:button>
+	<xf:button href="{{ link('add-ons') }}" fa="fa-puzzle-piece">
+		{{ phrase('add_ons') }}
+	</xf:button>
+</xf:pageaction>
+
+<div class="block">
+	<div class="block-container">
+		<h2 class="block-header">
+			<xf:fa icon="fa-dice-d20" /> {{ phrase('cv6_rpg_suite_ecosystem_overview') }}
+		</h2>
+		<div class="block-body">
+			<xf:datalist data-xf-init="responsive-data-list">
+				<xf:foreach loop="$addonGroups" key="$groupKey" value="$group">
+					<tbody class="dataList-rowGroup">
+						<xf:datarow rowtype="subsection" rowclass="dataList-row--noHover">
+							<xf:cell colspan="4">{{ phrase_dynamic($group.title_phrase) }}</xf:cell>
+						</xf:datarow>
+						<xf:foreach loop="$group.items" key="$addOnId" value="$item">
+							<xf:datarow>
+								<xf:if is="$item.addOn && $item.addOn.hasIcon()">
+									<xf:cell class="dataList-cell--min dataList-cell--image dataList-cell--imageSmall{{ !$item.is_active ? ' cv6-rpg-addonIcon--inactive' : '' }}">
+										<img src="{$item.addOn.getIconUri()}" alt="{$item.title}" />
+									</xf:cell>
+								<xf:elseif is="$item.addOn && $item.addOn.hasFaIcon()" />
+									<xf:cell class="dataList-cell--iconic{{ !$item.is_active ? ' cv6-rpg-addonIcon--inactive' : '' }}">
+										<xf:fa icon="{$item.addOn.icon}" />
+									</xf:cell>
+								<xf:else />
+									<xf:cell class="dataList-cell--iconic{{ !$item.is_active ? ' cv6-rpg-addonIcon--inactive' : '' }}">
+										<xf:fa icon="{$item.icon}" />
+									</xf:cell>
+								</xf:if>
+								<xf:main
+									label="{$item.title}"
+									hint="{$item.addon_id}{{ $item.version_string ? ' • ' . $item.version_string : '' }} — {{ phrase_dynamic($item.desc_phrase) }}" />
+								<xf:cell class="dataList-cell--min">
+									<xf:if is="$item.resource_url">
+										<a href="{$item.resource_url}" target="_blank" rel="noopener">
+											<xf:fa icon="fa-external-link-alt" /> {{ phrase('cv6_rpg_resource_page') }}
+										</a>
+									</xf:if>
+								</xf:cell>
+								<xf:cell class="dataList-cell--min">
+									<xf:if is="$item.is_active">
+										<span class="label label--primary">
+											<xf:fa icon="fa-check-circle" /> {{ phrase('installed') }}
+										</span>
+									<xf:elseif is="$item.is_installed" />
+										<a href="{{ link('rpg/manager/toggle', null, {'addon_id': $item.addon_id, 't': csrf_token()}) }}"
+											class="label label--warning cv6-rpg-statusAction"
+											data-xf-init="tooltip"
+											title="{{ phrase('enable')|for_attr }}">
+											<xf:fa icon="fa-pause-circle" /> {{ phrase('disabled') }} &bull; {{ phrase('enable') }}
+										</a>
+									<xf:elseif is="$item.is_available_on_disk && $item.addOn && $item.addOn.canInstall()" />
+										<a href="{{ link('add-ons/install', $item.addOn) }}"
+											data-xf-click="overlay"
+											data-cache="0"
+											class="label label--accent cv6-rpg-statusAction"
+											data-xf-init="tooltip"
+											title="{{ phrase('install')|for_attr }}">
+											<xf:fa icon="fa-box-open" /> {{ phrase('installable') }} &bull; {{ phrase('install') }}
+										</a>
+									<xf:elseif is="$item.is_available_on_disk" />
+										<span class="label label--accent">
+											<xf:fa icon="fa-box-open" /> {{ phrase('installable') }}
+										</span>
+									<xf:else />
+										<span class="label label--subtle">
+											<xf:fa icon="fa-times-circle" /> {{ phrase('cv6_rpg_not_installed') }}
+										</span>
+									</xf:if>
+								</xf:cell>
+							</xf:datarow>
+						</xf:foreach>
+					</tbody>
+				</xf:foreach>
+			</xf:datalist>
+		</div>
+	</div>
+</div>
+
+<xf:macro template="section_nav_macros" name="section_nav" arg-section="{$entry.navigation_id}" />]]></template>
+  <template type="admin" title="cv6_rpg_publisher_delete" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[<xf:title>{{ phrase('confirm_action') }}</xf:title>
+
+<xf:form action="{$confirmUrl}" ajax="true" class="block">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:inforow rowtype="confirm">
+				{{ phrase('cv6_rpg_please_confirm_that_you_want_to_delete_publisher') }}
+				<xf:if is="$contentUrl">
+					<strong><a href="{$contentUrl}">{$contentTitle}</a></strong>
+				<xf:else />
+					<strong>{$contentTitle}</strong>
+				</xf:if>
+				<xf:if is="$deletionImportantPhrase">
+					<div class="blockMessage blockMessage--important blockMessage--iconic">
+						{{ phrase_dynamic($deletionImportantPhrase) }}
+					</div>
+				</xf:if>
+			</xf:inforow>
+			<xf:if is="$used">
+				<xf:inforow>
+					<div class="blockMessage blockMessage--important blockMessage--iconic">
+						{{ phrase('cv6_rpg_publisher_in_use_with_x_settings', {'count': $used}) }}
+					</div>
+				</xf:inforow>
+				<xf:selectrow name="reassign_publisher_id" label="{{ phrase('cv6_rpg_reassign_items_to_publisher') }}" required="true">
+					<xf:option value="0">{{ phrase('none') }}</xf:option>
+					<xf:foreach loop="$other" value="$publisher">
+						<xf:option value="{$publisher.publisher_id}">{$publisher.title}</xf:option>
+					</xf:foreach>
+				</xf:selectrow>
+			</xf:if>
+		</div>
+		<xf:submitrow rowtype="simple" icon="delete" />
+	</div>
+</xf:form>
+]]></template>
+  <template type="admin" title="cv6_rpg_publisher_edit" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[<xf:if is="$publisher.isInsert()">
+	<xf:title>{{ phrase('cv6_rpg_add_publisher') }}</xf:title>
+<xf:else />
+	<xf:title>{{ phrase('cv6_rpg_edit_publisher') }}: {$publisher.title}</xf:title>
+</xf:if>
+
+<xf:pageaction if="$publisher.isUpdate()">
+	<xf:button href="{{ link('rpg/publisher/delete', $publisher) }}" icon="delete" overlay="true" />
+</xf:pageaction>
+
+<xf:form action="{{ link('rpg/publisher/save', $publisher) }}" ajax="true" class="block">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:textboxrow name="title" value="{$publisher.title}" maxlength="{{ max_length($publisher, 'title') }}"
+				hint="{{ phrase('field_is_required') }}" required="required"
+				label="{{ phrase('cv6_rpg_publisher_title') }}" explain="{{ phrase('cv6_rpg_publisher_title_explain') }}" />
+
+			<xf:textboxrow name="url_slug" value="{$publisher.url_slug}" label="{{ phrase('url_portion') }}"
+				hint="{{ phrase('optional') }}" explain="{{ phrase('if_entered_url_to_node_not_contain_id_change_breaks_urls') }}"
+				dir="ltr" />
+
+			<xf:editorrow name="description"
+				value="{$publisher.description}"
+				hint="{{ phrase('field_is_required') }}"
+				label="{{ phrase('cv6_description') }}"
+				maxlength="{{ max_length($publisher, 'description') }}"
+				previewable="0" />
+
+			<hr class="formRowSep" />
+
+			<xf:macro id="cv6_assetupload::cv6_assetuploadrow" arg-name="logo_url" arg-asset="cv6publisher"
+				arg-label="{{ phrase('cv6_logo') }}" arg-explain="{{ phrase('cv6_rpg_publisher_image_explain') }}"
+				arg-value="{$publisher.logo_url}" />
+
+			<xf:textboxrow name="url" value="{$publisher.url}" maxlength="{{ max_length($publisher, 'url') }}"
+				label="{{ phrase('cv6_rpg_url') }}" explain="{{ phrase('cv6_rpg_url_explain') }}" />
+
+			<xf:textarearow name="license_notice" value="{$publisher.license_notice}"
+				rows="4"
+				autosize="true"
+				label="{{ phrase('cv6_rpg_publisher_license_notice') }}"
+				explain="{{ phrase('cv6_rpg_publisher_license_notice_explain') }}" />
+
+			<hr class="formRowSep" />
+
+			<xf:macro id="display_order_macros::row"
+				arg-value="{$publisher.display_order}" />
+
+			<xf:macro id="cv6_admin_macros::is_active"
+				arg-selected="{$publisher.active}"
+				arg-hint="{{ phrase('cv6_rpg_publisher_active_hint') }}" />
+
+			<hr class="formRowSep" />
+		</div>
+
+		<xf:submitrow sticky="true" icon="save" />
+	</div>
+</xf:form>
+]]></template>
+  <template type="admin" title="cv6_rpg_publisher_import" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[<xf:title>{{ phrase('cv6_rpg_import_publishers') }}</xf:title>
+
+<xf:form action="{{ link('rpg/publisher/import') }}" upload="true" class="block">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:uploadrow name="upload" accept=".json,.zip"
+				label="{{ phrase('upload_file') }}"
+				explain="{{ phrase('cv6_rpg_publisher_import_file_explain') }}" />
+		</div>
+		<xf:submitrow submit="{{ phrase('proceed...') }}" />
+	</div>
+</xf:form>
+]]></template>
+  <template type="admin" title="cv6_rpg_publisher_import_form" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[<xf:title>{{ phrase('cv6_rpg_import_publishers') }}</xf:title>
+
+<xf:form action="{{ link('rpg/publisher/import') }}" ajax="true" class="block">
+	<div class="block-container">
+		<h2 class="block-header">{{ phrase('cv6_rpg_select_publishers_to_import') }}</h2>
+		<div class="block-body">
+			<xf:datalist data-xf-init="responsive-data-list">
+				<thead>
+					<xf:datarow rowtype="header">
+						<xf:cell class="dataList-cell--min">
+							<xf:checkbox standalone="true">
+								<xf:option check-all="< .block-container" data-xf-init="tooltip" title="{{ phrase('select_all') }}" />
+							</xf:checkbox>
+						</xf:cell>
+						<xf:cell>{{ phrase('title') }}</xf:cell>
+						<xf:cell>{{ phrase('description') }}</xf:cell>
+						<xf:cell>{{ phrase('url') }}</xf:cell>
+					</xf:datarow>
+				</thead>
+				<tbody class="dataList-rowGroup">
+				<xf:foreach loop="$publishers" key="$i" value="$publisher">
+					<xf:datarow>
+						<xf:toggle name="import[]" value="{$i}" selected="true" />
+						<xf:cell>
+							<strong>{$publisher.title}</strong>
+							<xf:if is="$publisher.url_slug">
+								<span class="u-muted">({$publisher.url_slug})</span>
+							</xf:if>
+							<xf:hiddenval name="publishers[{$i}][title]" value="{$publisher.title}" />
+							<xf:hiddenval name="publishers[{$i}][url_slug]" value="{$publisher.url_slug}" />
+							<xf:hiddenval name="publishers[{$i}][description]" value="{$publisher.description}" />
+							<xf:hiddenval name="publishers[{$i}][logo_url]" value="{$publisher.logo_url}" />
+							<xf:hiddenval name="publishers[{$i}][url]" value="{$publisher.url}" />
+							<xf:hiddenval name="publishers[{$i}][active]" value="{$publisher.active}" />
+							<xf:hiddenval name="publishers[{$i}][display_order]" value="{$publisher.display_order}" />
+						</xf:cell>
+						<xf:cell class="dataList-cell--snippet">
+							{{ snippet($publisher.description, 100) }}
+						</xf:cell>
+						<xf:cell>
+							<xf:if is="$publisher.url">
+								<a href="{$publisher.url}" target="_blank">{$publisher.url}</a>
+							<xf:else />
+								<span class="u-muted">{{ phrase('n_a') }}</span>
+							</xf:if>
+						</xf:cell>
+					</xf:datarow>
+				</xf:foreach>
+				</tbody>
+			</xf:datalist>
+		</div>
+		<div class="block-footer block-footer--split">
+			<span class="block-footer-select">
+				<xf:checkbox standalone="true">
+					<xf:option check-all="< .block-container" label="{{ phrase('select_all') }}" />
+				</xf:checkbox>
+			</span>
+			<span class="block-footer-controls">
+				<xf:hiddenval name="confirm" value="1" />
+				<xf:button type="submit" icon="import">{{ phrase('import') }}</xf:button>
+			</span>
+		</div>
+	</div>
+</xf:form>
+]]></template>
+  <template type="admin" title="cv6_rpg_publisher_list" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[<xf:title>{{ phrase('cv6_rpg_publisher') }}</xf:title>
+
+<xf:pageaction>
+	<div class="buttonGroup">
+		<xf:button href="{{ link('rpg/publisher/add') }}" icon="add">{{ phrase('cv6_rpg_add_publisher') }}</xf:button>
+		<xf:button href="{{ link('rpg/publisher/sort') }}" icon="sort" overlay="true">{{ phrase('cv6_rpg_sort_manual') }}</xf:button>
+		<xf:button href="{{ link('rpg/publisher/abcSort') }}" fa="fa-sort-alpha-down">{{ phrase('cv6_sort_abc') }}</xf:button>
+		<div class="buttonGroup-buttonWrapper">
+			<xf:button class="menuTrigger" data-xf-click="menu" aria-expanded="false" aria-haspopup="true" title="{{ phrase('more_options') }}">&#8226;&#8226;&#8226;</xf:button>
+			<div class="menu" data-menu="menu" aria-hidden="true">
+				<div class="menu-content">
+					<h4 class="menu-header">{{ phrase('more_options') }}</h4>
+					<a href="{{ link('rpg/publisher/import') }}" class="menu-linkRow">{{ phrase('button.import') }}</a>
+					<a href="{{ link('rpg/publisher', {}, {'export': 1}) }}" class="menu-linkRow">{{ phrase('button.export') }}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</xf:pageaction>
+
+<xf:form action="{{ link(($exportView ? 'rpg/publisher/export' : 'rpg/publisher/toggle')) }}"
+	ajax="{{ $exportView ? false : true }}" class="block">
+
+	<div class="block-outer">
+		<xf:macro template="filter_macros" name="quick_filter" arg-key="publishers" arg-class="block-outer-opposite" />
+	</div>
+	<div class="block-container">
+
+		<h2 class="block-tabHeader tabs" role="tablist">
+			<!--[XF:tabs:start]-->
+			<a class="tabs-tab {{ $exportView ? '' : 'is-active' }}" role="tab" tabindex="0" aria-controls="publisher-list" href="{{ link('rpg/publisher') }}">{{ phrase('cv6_rpg_publishers') }}</a>
+			<a class="tabs-tab {{ $exportView ? 'is-active' : '' }}" role="tab" tabindex="0" aria-controls="export-mode" href="{{ link('rpg/publisher', {}, {'export': 1}) }}">{{ phrase('export') }}</a>
+			<!--[XF:tabs:end]-->
+		</h2>
+
+		<div class="block-body">
+			<xf:datalist data-xf-init="responsive-data-list">
+				<xf:if is="$exportView">
+					<thead>
+						<xf:datarow rowtype="header">
+							<xf:cell class="dataList-cell--min">
+								<xf:checkbox standalone="true">
+									<xf:option check-all="< .block-container" data-xf-init="tooltip" title="{{ phrase('select_all') }}" />
+								</xf:checkbox>
+							</xf:cell>
+							<xf:cell>{{ phrase('title') }}</xf:cell>
+						</xf:datarow>
+					</thead>
+				</xf:if>
+				<tbody class="dataList-rowGroup">
+				<xf:foreach loop="{$publisherData.publisher}" value="$publisher">
+					<xf:datarow>
+						<xf:if is="$exportView">
+							<xf:toggle name="export[]" value="{$publisher.publisher_id}" />
+						</xf:if>
+						<xf:main href="{{ link('rpg/publisher/edit', $publisher) }}">
+							<xf:label>{$publisher.title}</xf:label>
+							<xf:hint>{$publisher.url}</xf:hint>
+						</xf:main>
+						<xf:if is="!$exportView">
+							<xf:toggle name="active[{$publisher.publisher_id}]" selected="$publisher.active" class="dataList-cell--separated"
+								submit="true" tooltip="{{ phrase('enable_disable_x', {'title': $publisher.title}) }}" />
+							<xf:delete href="{{ link('rpg/publisher/delete', $publisher) }}" />
+						</xf:if>
+					</xf:datarow>
+				<xf:else />
+					<xf:datarow rowclass="dataList-row--noHover dataList-row--note">
+						<xf:cell colspan="{{ $exportView ? 2 : 3 }}" class="dataList-cell--noSearch">
+							{{ phrase('cv6_rpg_no_publishers_have_been_added_yet') }}
+							<a href="{{ link('rpg/publisher/add') }}">{{ phrase('cv6_rpg_create_your_first') }}</a>
+						</xf:cell>
+					</xf:datarow>
+				</xf:foreach>
+				</tbody>
+			</xf:datalist>
+		</div>
+		<div class="block-footer block-footer--split">
+			<span class="block-footer-counter">{{ display_totals($publisherData.totalpublisher) }}</span>
+			<xf:if is="$exportView">
+				<span class="block-footer-select">
+					<xf:checkbox standalone="true">
+						<xf:option check-all="< .block-container" label="{{ phrase('select_all') }}" />
+					</xf:checkbox>
+				</span>
+				<span class="block-footer-controls">
+					<xf:checkbox standalone="true" class="u-pullLeft cv6-export-checkbox">
+						<xf:option name="with_images" value="1" checked="checked" label="{{ phrase('cv6_rpg_include_images_in_export') }}" />
+					</xf:checkbox>
+					<xf:button type="submit" icon="export">{{ phrase('export') }}</xf:button>
+				</span>
+			</xf:if>
+		</div>
+	</div>
+</xf:form>
+]]></template>
+  <template type="admin" title="cv6_rpg_publisher_sort" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[<xf:title>{{ phrase('cv6_rpg_sort_publishers') }}</xf:title>
+
+<xf:macro template="public:nestable_macros" name="setup" />
+
+<xf:form action="{{ link('rpg/publisher/sort') }}" class="block" ajax="true">
+	<div class="block-container">
+		<div class="block-body">
+			<div class="nestable-container" data-xf-init="nestable" data-max-depth="1" data-value-function="serialize">
+				<xf:macro name="publisher_list" arg-publishers="{$publisher}" />
+				<xf:hiddenval name="publishers" value="" />
+			</div>
+		</div>
+		<xf:submitrow icon="save" rowtype="simple" />
+	</div>
+</xf:form>
+
+<xf:macro name="publisher_list" arg-publishers="!">
+	<ol class="nestable-list">
+		<xf:foreach loop="$publishers" key="$id" value="$publisher">
+			<li class="nestable-item" data-id="{$id}">
+				<div class="nestable-handle" aria-label="{{ phrase('drag_handle')|for_attr }}"><xf:fa icon="fa-bars" /></div>
+				<div class="nestable-content">
+					<strong>{{ $publisher.title }}</strong>
+				</div>
+			</li>
+		</xf:foreach>
+	</ol>
+</xf:macro>
+]]></template>
+  <template type="admin" title="widget_def_options_cv6_rpg_genres" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[<hr class="formRowSep" />
+
+<xf:radiorow name="options[layout]" value="{$options.layout}" label="{{ phrase('display_style') }}">
+	<xf:option value="sidenav" label="{{ phrase('cv6_rpg_genre_layout_sidenav') }}" />
+	<xf:option value="grid" label="{{ phrase('cv6_rpg_genre_layout_grid') }}" />
+	<xf:option value="pills" label="{{ phrase('cv6_rpg_genre_layout_pills') }}" />
+</xf:radiorow>
+
+<xf:selectrow name="options[target_route]" value="{$options.target_route}" label="{{ phrase('cv6_rpg_genre_target_route') }}">
+	<xf:option value="rpg">{{ phrase('cv6_rpg_suite') }} (rpg)</xf:option>
+	<xf:option value="char/setting/list">{{ phrase('cv6_settings') }} (char/setting/list)</xf:option>
+	<xf:option value="battle-maps">{{ phrase('cv6_rpg_battlemap_count') }} (battle-maps)</xf:option>
+</xf:selectrow>
+
+<xf:selectrow name="options[count_field]" value="{$options.count_field}" label="{{ phrase('cv6_rpg_genre_counter_display') }}">
+	<xf:option value="total_count">{{ phrase('total') }}</xf:option>
+	<xf:option value="setting_count">{{ phrase('cv6_settings') }}</xf:option>
+	<xf:option value="map_count">{{ phrase('cv6_rpg_battlemap_count') }}</xf:option>
+	<xf:option value="wireset_count">{{ phrase('cv6_rpg_wireset_count') }}</xf:option>
+	<xf:option value="">{{ phrase('(none)') }}</xf:option>
+</xf:selectrow>
+
+<xf:checkboxrow>
+	<xf:option name="options[show_all]" selected="$options.show_all" label="{{ phrase('cv6_rpg_genre_show_all_link') }}" />
+</xf:checkboxrow>
+]]></template>
+  <template type="public" title="cv6_rpg.less" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[.cv6-rpg-dashboard-grid
+{
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: @xf-paddingLarge;
+	padding: @xf-paddingLarge;
+}
+
+.cv6-rpg-card
+{
+	border: @xf-borderSize solid @xf-borderColor;
+	border-radius: @xf-borderRadiusMedium;
+	background: @xf-contentBg;
+	padding: @xf-paddingMedium;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: @xf-paddingSmall;
+}
+
+.cv6-rpg-card__header
+{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: @xf-paddingSmall;
+}
+
+.cv6-rpg-card__title
+{
+	font-weight: @xf-fontWeightHeavy;
+	font-size: @xf-fontSizeNormal;
+}
+
+.cv6-rpg-card__meta
+{
+	font-size: @xf-fontSizeSmaller;
+	color: @xf-textColorMuted;
+}
+
+.cv6-rpg-card__actions
+{
+	display: flex;
+	align-items: center;
+	gap: @xf-paddingSmall;
+	margin-top: @xf-paddingSmall;
+}
+
+.cv6-rpg-skill-chips
+{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-top: @xf-paddingSmall;
+}
+
+.cv6-rpg-skill-chip
+{
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	border: @xf-borderSize solid @xf-borderColor;
+	border-radius: @xf-borderRadiusSmall;
+	padding: 2px 8px;
+	background: @xf-contentAltBg;
+
+	&.is-selected
+	{
+		border-color: @xf-borderColorFeature;
+		background: @xf-inlineModHighlightColor;
+		font-weight: @xf-fontWeightHeavy;
+	}
+}
+
+.cv6-rpg-skill-chip__val
+{
+	font-weight: @xf-fontWeightHeavy;
+	color: @xf-textColorFeature;
+}
+
+.cv6-rpg-roll-character-badge
+{
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	margin-right: 6px;
+	vertical-align: middle;
+
+	.avatar
+	{
+		width: 20px;
+		height: 20px;
+		font-size: 12px;
+	}
+}
+
+.cv6-rpg-field-roll-trigger
+{
+	margin-left: 6px;
+	color: @xf-textColorFeature;
+	text-decoration: none;
+
+	&:hover
+	{
+		color: @xf-linkHoverColor;
+	}
+}
+
+.cv6-rpg-companion
+{
+	margin-bottom: @xf-elementSpacer;
+
+	.cv6-rpg-companion__section
+	{
+		padding: @xf-paddingMedium @xf-paddingLarge;
+		border-bottom: @xf-borderSize solid @xf-borderColorLight;
+
+		&:last-child
+		{
+			border-bottom: none;
+		}
+	}
+
+	.cv6-rpg-companion__charRow
+	{
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: @xf-paddingMedium;
+	}
+
+	.cv6-rpg-companion__charIdentity
+	{
+		display: flex;
+		align-items: center;
+		gap: @xf-paddingSmall;
+	}
+}
+
+// =========================================================================
+// RPG Suite Genre Picker Grid, Pills & Sidenav Filter
+// =========================================================================
+
+.cv6-rpg-genreGrid
+{
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: @xf-paddingSmall;
+
+	&--2col
+	{
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	&--4col
+	{
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+}
+
+.cv6-rpg-genreBtn
+{
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 54px;
+	padding: @xf-paddingSmall;
+	border: @xf-borderSize solid @xf-borderColor;
+	border-radius: @xf-borderRadiusMedium;
+	background: @xf-contentBg;
+	color: @xf-textColor;
+	font-size: @xf-fontSizeSmaller;
+	font-weight: @xf-fontWeightHeavy;
+	text-align: center;
+	text-decoration: none;
+	overflow: hidden;
+	cursor: pointer;
+	transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+
+	.cv6-rpg-genreBtn__icon
+	{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: opacity 0.22s ease, transform 0.22s ease;
+
+		svg, i, .fa--xf
+		{
+			font-size: 1.65rem;
+			color: @xf-textColorMuted;
+			transition: color 0.2s ease;
+		}
+	}
+
+	.cv6-rpg-genreBtn__title
+	{
+		position: relative;
+		z-index: 2;
+		line-height: 1.2;
+		transition: opacity 0.22s ease, transform 0.22s ease;
+	}
+
+	.cv6-rpg-genreBtn__badge
+	{
+		position: absolute;
+		top: 4px;
+		right: 4px;
+		z-index: 3;
+	}
+
+	&.has-icon:not(.cv6-rpg-genreBtn--inline)
+	{
+		.cv6-rpg-genreBtn__icon
+		{
+			position: absolute;
+			inset: 0;
+			z-index: 1;
+			opacity: 1;
+			transform: scale(1);
+		}
+
+		.cv6-rpg-genreBtn__title
+		{
+			opacity: 0;
+			transform: translateY(4px);
+			pointer-events: none;
+		}
+
+		&:hover,
+		&:focus-visible
+		{
+			.cv6-rpg-genreBtn__icon
+			{
+				opacity: 0.16;
+				transform: scale(0.88);
+			}
+
+			.cv6-rpg-genreBtn__title
+			{
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+	}
+
+	&--inline
+	{
+		flex-direction: row;
+		gap: 6px;
+		min-height: 38px;
+
+		.cv6-rpg-genreBtn__icon
+		{
+			svg, i, .fa--xf
+			{
+				font-size: 1.15rem;
+			}
+		}
+	}
+
+	&:hover
+	{
+		background: @xf-contentHighlightBg;
+		border-color: @xf-borderColorHeavy;
+		text-decoration: none;
+	}
+
+	&.is-active
+	{
+		background: @xf-buttonPrimaryBg;
+		border-color: @xf-buttonPrimaryBg;
+		color: @xf-buttonPrimaryTextColor;
+		font-weight: @xf-fontWeightHeavy;
+
+		.cv6-rpg-genreBtn__icon
+		{
+			svg, i, .fa--xf
+			{
+				color: @xf-buttonPrimaryTextColor;
+			}
+		}
+	}
+}
+
+.cv6-rpg-genrePills
+{
+	display: flex;
+	flex-wrap: wrap;
+	gap: @xf-paddingSmall;
+}
+
+.cv6-rpg-genrePill
+{
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 4px 10px;
+	border: @xf-borderSize solid @xf-borderColor;
+	border-radius: 999px;
+	background: @xf-contentBg;
+	color: @xf-textColor;
+	font-size: @xf-fontSizeSmaller;
+	text-decoration: none;
+	transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+	&:hover
+	{
+		background: @xf-contentHighlightBg;
+		border-color: @xf-borderColorHeavy;
+		text-decoration: none;
+	}
+
+	&.is-active
+	{
+		background: @xf-buttonPrimaryBg;
+		border-color: @xf-buttonPrimaryBg;
+		color: @xf-buttonPrimaryTextColor;
+		font-weight: @xf-fontWeightHeavy;
+	}
+
+	&__count
+	{
+		font-size: @xf-fontSizeSmallest;
+		opacity: 0.75;
+	}
+}
+
+.cv6-rpg-genreFilterLink
+{
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.cv6-rpg-genreMenuRow
+{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: @xf-paddingSmall;
+
+	&__label
+	{
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+	}
+}
+
+.cv6-rpg-genreColorDot
+{
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: @xf-textColorMuted;
+	border: 1px solid @xf-borderColorHeavy;
+	flex-shrink: 0;
+}
+
+<xf:if is="$genres is not empty">
+	<xf:foreach loop="$genres" key="$key" value="$class">
+		.cv6-rpg-genreColorDot.genre--{$class},
+		.cv6-rpg-genreColorDot.cv6-genre--{$class}
+		{
+			<xf:if is="property('cv6Genre_' . $class . '--background-color')">
+				background-color: @xf-cv6Genre_{$class}--background-color;
+			<xf:elseif is="property('cv6Genre_' . $class . '--color')" />
+				background-color: @xf-cv6Genre_{$class}--color;
+			</xf:if>
+			<xf:if is="property('cv6Genre_' . $class . '--border-color')">
+				border-color: @xf-cv6Genre_{$class}--border-color;
+			<xf:elseif is="property('cv6Genre_' . $class . '--color')" />
+				border-color: @xf-cv6Genre_{$class}--color;
+			</xf:if>
+		}
+
+		.label.cv6-genre--{$class},
+		.badge.cv6-genre--{$class}
+		{
+			<xf:if is="property('cv6Genre_' . $class . '--color')">color: @xf-cv6Genre_{$class}--color;</xf:if>
+			<xf:if is="property('cv6Genre_' . $class . '--background-color')">background-color: @xf-cv6Genre_{$class}--background-color;</xf:if>
+			<xf:if is="property('cv6Genre_' . $class . '--border-color')">
+				border-color: @xf-cv6Genre_{$class}--border-color;
+			<xf:elseif is="property('cv6Genre_' . $class . '--background-color')" />
+				border-color: @xf-cv6Genre_{$class}--background-color;
+			</xf:if>
+		}
+
+		.cv6-rpg-genreBtn.no-icon.genre--{$class}
+		{
+			<xf:if is="property('cv6Genre_' . $class . '--color')">color: @xf-cv6Genre_{$class}--color;</xf:if>
+			<xf:if is="property('cv6Genre_' . $class . '--background-color')">background-color: fade(@xf-cv6Genre_{$class}--background-color, 85%);</xf:if>
+			<xf:if is="property('cv6Genre_' . $class . '--border-color')">
+				border-color: @xf-cv6Genre_{$class}--border-color;
+			<xf:elseif is="property('cv6Genre_' . $class . '--background-color')" />
+				border-color: @xf-cv6Genre_{$class}--background-color;
+			</xf:if>
+		}
+
+		.cv6-rpg-genrePill.no-icon.genre--{$class},
+		.cv6-rpg-genreFilterLink.no-icon.genre--{$class}
+		{
+			<xf:if is="property('cv6Genre_' . $class . '--border-color')">
+				border-left: 3px solid @xf-cv6Genre_{$class}--border-color;
+			<xf:elseif is="property('cv6Genre_' . $class . '--background-color')" />
+				border-left: 3px solid @xf-cv6Genre_{$class}--background-color;
+			<xf:elseif is="property('cv6Genre_' . $class . '--color')" />
+				border-left: 3px solid @xf-cv6Genre_{$class}--color;
+			</xf:if>
+		}
+
+		.cv6-rpg-genreBtn.genre--{$class}.is-active,
+		.cv6-rpg-genrePill.genre--{$class}.is-active
+		{
+			<xf:if is="property('cv6Genre_' . $class . '--color')">color: @xf-cv6Genre_{$class}--color;</xf:if>
+			<xf:if is="property('cv6Genre_' . $class . '--background-color')">background-color: @xf-cv6Genre_{$class}--background-color;</xf:if>
+			<xf:if is="property('cv6Genre_' . $class . '--border-color')">
+				border-color: @xf-cv6Genre_{$class}--border-color;
+			<xf:elseif is="property('cv6Genre_' . $class . '--background-color')" />
+				border-color: @xf-cv6Genre_{$class}--background-color;
+			</xf:if>
+
+			svg, i, .fa--xf
+			{
+				<xf:if is="property('cv6Genre_' . $class . '--color')">color: @xf-cv6Genre_{$class}--color;</xf:if>
+			}
+		}
+	</xf:foreach>
+</xf:if>
+]]></template>
+  <template type="public" title="cv6_rpg_campaign_link_content" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[<xf:title>{{ phrase('cv6_rpg_link_content_to_campaign') }}: {$campaign.title}</xf:title>
+
+<xf:form action="{{ link('char/campaigns/rpg-link-content', $campaign) }}" ajax="true" class="block">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:hiddenval name="content_type">{$contentType}</xf:hiddenval>
+
+			<xf:if is="$availableItems is not empty">
+				<xf:selectrow name="content_id" label="{{ $contentType == 'handout' ? phrase('cv6_rpg_handout') : phrase('cv6_rpg_battlemap') }}" required="required">
+					<xf:foreach loop="$availableItems" key="$id" value="$title">
+						<xf:option value="{$id}">{$title}</xf:option>
+					</xf:foreach>
+				</xf:selectrow>
+			<xf:else />
+				<xf:numberboxrow name="content_id" min="1" required="required"
+					label="{{ $contentType == 'handout' ? phrase('cv6_rpg_handout_id') : phrase('cv6_rpg_battlemap_id') }}" />
+			</xf:if>
+
+			<xf:radiorow name="visibility" value="gm_only" label="{{ phrase('cv6_visibility') }}">
+				<xf:option value="gm_only" label="{{ phrase('cv6_rpg_visibility_gm_only') }}"
+					hint="{{ phrase('cv6_rpg_visibility_gm_only_explain') }}" />
+				<xf:option value="players" label="{{ phrase('cv6_rpg_visibility_players') }}"
+					hint="{{ phrase('cv6_rpg_visibility_players_explain') }}" />
+			</xf:radiorow>
+
+			<xf:textboxrow name="title_override" maxlength="150"
+				label="{{ phrase('cv6_rpg_title_override') }}"
+				hint="{{ phrase('optional') }}" />
+
+			<xf:textarearow name="notes" rows="2" autosize="true"
+				label="{{ phrase('cv6_rpg_gm_notes') }}"
+				hint="{{ phrase('optional') }}" />
+
+			<xf:macro template="public:display_order_macros" name="row" arg-value="10" />
+		</div>
+		<xf:submitrow icon="save" />
+	</div>
+</xf:form>
+]]></template>
+  <template type="public" title="cv6_rpg_campaign_macros" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[<xf:macro name="campaign_assets"
+	arg-campaign="!"
+	arg-battlemapLinks="{{ [] }}"
+	arg-handoutLinks="{{ [] }}"
+	arg-recentRolls="{{ [] }}"
+	arg-isGm="{{ false }}">
+
+	<xf:css src="cv6_rpg.less" />
+
+	<xf:if is="is_addon_active('cv6/BattleMaps') && ($battlemapLinks is not empty || $isGm)">
+		<div class="block">
+			<div class="block-container">
+				<h2 class="block-header cv6-campaign-block-header">
+					<span class="cv6-campaign-block-headerTitle">
+						<xf:fa icon="fa-map" /> {{ phrase('cv6_rpg_campaign_battlemaps') }} ({{ $battlemapLinks is not empty ? $battlemapLinks|count : 0 }})
+					</span>
+					<xf:if is="$isGm">
+						<span class="cv6-campaign-block-headerControls">
+							<a href="{{ link('char/campaigns/rpg-link-content', $campaign, {'content_type': 'battlemap'}) }}"
+								class="button button--link button--small"
+								data-xf-click="overlay">
+								<xf:fa icon="fa-link" /> {{ phrase('cv6_rpg_link_battlemap') }}
+							</a>
+							<xf:if is="$xf.visitor.hasPermission('cv6_bm', 'add')">
+								<a href="{{ link('battle-maps/add', null, {'genre_id': $campaign.Setting ? $campaign.Setting.genre_id : 0}) }}"
+									class="button button--link button--small">
+									<xf:fa icon="fa-plus" /> {{ phrase('cv6_rpg_create_battlemap') }}
+								</a>
+							</xf:if>
+						</span>
+					</xf:if>
+				</h2>
+				<div class="block-body">
+					<xf:if is="$battlemapLinks is not empty">
+						<xf:datalist>
+							<xf:foreach loop="$battlemapLinks" value="$link">
+								<xf:set var="$map" value="{$link.Content}" />
+								<xf:datarow>
+									<xf:cell>
+										<xf:if is="$map">
+											<a href="{{ link('battle-maps', $map) }}"><strong>{$link.effective_title}</strong></a>
+										<xf:else />
+											<strong>{$link.effective_title}</strong>
+										</xf:if>
+										<xf:if is="$link.isVisibleToPlayers()">
+											<span class="label label--green label--smallest"><xf:fa icon="fa-users" /> {{ phrase('cv6_rpg_visibility_players') }}</span>
+										<xf:else />
+											<span class="label label--subtle label--smallest"><xf:fa icon="fa-eye-slash" /> {{ phrase('cv6_rpg_visibility_gm_only') }}</span>
+										</xf:if>
+										<xf:if is="$isGm && $link.notes">
+											<div class="u-muted u-smaller">{$link.notes}</div>
+										</xf:if>
+									</xf:cell>
+									<xf:if is="$isGm">
+										<xf:cell class="dataList-cell--min">
+											<a href="{{ link('char/campaigns/rpg-toggle-visibility', $campaign, {'link_id': $link.link_id, 't': csrf_token()}) }}"
+												class="button button--link button--smaller"
+												title="{{ phrase('cv6_rpg_toggle_player_visibility') }}"
+												data-xf-init="tooltip">
+												<xf:fa icon="{{ $link.isVisibleToPlayers() ? 'fa-eye-slash' : 'fa-eye' }}" />
+											</a>
+										</xf:cell>
+										<xf:cell class="dataList-cell--min">
+											<a href="{{ link('char/campaigns/rpg-unlink-content', $campaign, {'link_id': $link.link_id, 't': csrf_token()}) }}"
+												class="button button--link button--smaller"
+												title="{{ phrase('remove') }}"
+												data-xf-init="tooltip">
+												<xf:fa icon="fa-unlink" />
+											</a>
+										</xf:cell>
+									</xf:if>
+								</xf:datarow>
+							</xf:foreach>
+						</xf:datalist>
+					<xf:else />
+						<div class="block-row u-muted">{{ phrase('cv6_rpg_no_battlemaps_linked') }}</div>
+					</xf:if>
+				</div>
+			</div>
+		</div>
+	</xf:if>
+
+	<xf:if is="is_addon_active('cv6/Handout') && ($handoutLinks is not empty || $isGm)">
+		<div class="block">
+			<div class="block-container">
+				<h2 class="block-header cv6-campaign-block-header">
+					<span class="cv6-campaign-block-headerTitle">
+						<xf:fa icon="fa-scroll" /> {{ phrase('cv6_rpg_campaign_handouts') }} ({{ $handoutLinks is not empty ? $handoutLinks|count : 0 }})
+					</span>
+					<xf:if is="$isGm">
+						<span class="cv6-campaign-block-headerControls">
+							<a href="{{ link('char/campaigns/rpg-link-content', $campaign, {'content_type': 'handout'}) }}"
+								class="button button--link button--small"
+								data-xf-click="overlay">
+								<xf:fa icon="fa-link" /> {{ phrase('cv6_rpg_link_handout') }}
+							</a>
+							<xf:if is="$xf.visitor.hasPermission('cv6_handouts', 'create')">
+								<a href="{{ link('handouts/create') }}"
+									class="button button--link button--small"
+									data-xf-click="overlay">
+									<xf:fa icon="fa-plus" /> {{ phrase('cv6_rpg_create_handout') }}
+								</a>
+							</xf:if>
+						</span>
+					</xf:if>
+				</h2>
+				<div class="block-body">
+					<xf:if is="$handoutLinks is not empty">
+						<xf:datalist>
+							<xf:foreach loop="$handoutLinks" value="$link">
+								<xf:set var="$handout" value="{$link.Content}" />
+								<xf:datarow>
+									<xf:cell>
+										<xf:if is="$handout">
+											<a href="{{ link('handouts/view', $handout) }}" data-xf-click="overlay"><strong>{$link.effective_title}</strong></a>
+										<xf:else />
+											<strong>{$link.effective_title}</strong>
+										</xf:if>
+										<xf:if is="$link.isVisibleToPlayers()">
+											<span class="label label--green label--smallest"><xf:fa icon="fa-users" /> {{ phrase('cv6_rpg_visibility_players') }}</span>
+										<xf:else />
+											<span class="label label--subtle label--smallest"><xf:fa icon="fa-eye-slash" /> {{ phrase('cv6_rpg_visibility_gm_only') }}</span>
+										</xf:if>
+										<xf:if is="$isGm && $link.notes">
+											<div class="u-muted u-smaller">{$link.notes}</div>
+										</xf:if>
+									</xf:cell>
+									<xf:if is="$isGm">
+										<xf:cell class="dataList-cell--min">
+											<a href="{{ link('char/campaigns/rpg-toggle-visibility', $campaign, {'link_id': $link.link_id, 't': csrf_token()}) }}"
+												class="button button--link button--smaller"
+												title="{{ phrase('cv6_rpg_toggle_player_visibility') }}"
+												data-xf-init="tooltip">
+												<xf:fa icon="{{ $link.isVisibleToPlayers() ? 'fa-eye-slash' : 'fa-eye' }}" />
+											</a>
+										</xf:cell>
+										<xf:cell class="dataList-cell--min">
+											<a href="{{ link('char/campaigns/rpg-unlink-content', $campaign, {'link_id': $link.link_id, 't': csrf_token()}) }}"
+												class="button button--link button--smaller"
+												title="{{ phrase('remove') }}"
+												data-xf-init="tooltip">
+												<xf:fa icon="fa-unlink" />
+											</a>
+										</xf:cell>
+									</xf:if>
+								</xf:datarow>
+							</xf:foreach>
+						</xf:datalist>
+					<xf:else />
+						<div class="block-row u-muted">{{ phrase('cv6_rpg_no_handouts_linked') }}</div>
+					</xf:if>
+				</div>
+			</div>
+		</div>
+	</xf:if>
+
+	<xf:if is="is_addon_active('cv6/DiceRoller') && $recentRolls is not empty">
+		<div class="block">
+			<div class="block-container">
+				<h2 class="block-header">
+					<xf:fa icon="fa-dice-d20" /> {{ phrase('cv6_rpg_campaign_dice_log') }}
+				</h2>
+				<div class="block-body">
+					<xf:datalist>
+						<xf:foreach loop="$recentRolls" value="$roll">
+							<xf:datarow>
+								<xf:cell>
+									<xf:if is="$roll.hasCharacter()">
+										<a href="{{ link('char', $roll.Character) }}"><strong>{$roll.Character.name}</strong></a>
+										<span class="u-muted">({{ $roll.User ? $roll.User.username : '' }})</span>
+									<xf:elseif is="$roll.User" />
+										<xf:username user="{$roll.User}" />
+									</xf:if>
+									—
+									<strong>{{ $roll.Wireset ? $roll.Wireset.title : $roll.wireset }}</strong>
+									<xf:if is="$roll.comment">
+										<span class="u-muted">({$roll.comment})</span>
+									</xf:if>
+									<xf:if is="$roll.Thread">
+										<div class="u-muted u-smaller">
+											<a href="{{ link('threads', $roll.Thread) }}">{$roll.Thread.title}</a> • <xf:date time="{$roll.roll_time}" />
+										</div>
+									</xf:if>
+								</xf:cell>
+								<xf:cell class="dataList-cell--min">
+									<xf:if is="$roll.RuleResult">
+										<span class="label label--{{ $roll.RuleResult.isSuccess() ? 'green' : 'red' }}">
+											{$roll.RuleResult.getBadgeText()}
+										</span>
+									<xf:elseif is="$roll.result_sum !== null" />
+										<strong>{$roll.result_sum}</strong>
+									<xf:elseif is="$roll.wins" />
+										<strong>{$roll.wins}</strong>
+									</xf:if>
+								</xf:cell>
+							</xf:datarow>
+						</xf:foreach>
+					</xf:datalist>
+				</div>
+			</div>
+		</div>
+	</xf:if>
+</xf:macro>
+]]></template>
+  <template type="public" title="cv6_rpg_dashboard" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[<xf:title>{{ phrase('cv6_rpg_suite') }}</xf:title>
+<xf:h1>{{ phrase('cv6_rpg_suite') }}</xf:h1>
+
+<xf:css src="structured_list.less" />
+<xf:css src="cv6_rpg.less" />
+<xf:if is="is_addon_active('cv6/CharEdit')">
+	<xf:css src="cv6_charedit.less" />
+	<xf:css src="cv6_character_tooltip.less" />
+	<xf:js src="cv6/ce/tooltip.js" min="1" addon="cv6/CharEdit" />
+</xf:if>
+
+<xf:pageaction>
+	<xf:if is="is_addon_active('cv6/CharEdit') && $xf.visitor.canCreateCharacter()">
+		<xf:button href="{{ link('char/wizard/step', {'step': 1}) }}" fa="fa-magic" overlay="true" class="button--cta">
+			{{ phrase('cv6_add_new_char') }}
+		</xf:button>
+	</xf:if>
+	<xf:if is="is_addon_active('cv6/CharEdit') && $xf.visitor.hasPermission('cv6Character', 'requestCampaign')">
+		<xf:button href="{{ link('char/campaigns/add') }}" fa="fa-shield-alt" overlay="true">
+			{{ phrase('cv6_rpg_create_campaign') }}
+		</xf:button>
+	</xf:if>
+	<xf:if is="is_addon_active('cv6/BattleMaps') && $xf.visitor.hasPermission('cv6_bm', 'generate')">
+		<xf:button href="{{ link('battle-maps/generator') }}" fa="fa-map">
+			{{ phrase('cv6_rpg_create_battlemap') }}
+		</xf:button>
+	</xf:if>
+	<xf:if is="is_addon_active('cv6/Handout') && $xf.visitor.canCreateHandout()">
+		<xf:button href="{{ link('handouts/add') }}" fa="fa-scroll">
+			{{ phrase('cv6_rpg_create_handout') }}
+		</xf:button>
+	</xf:if>
+</xf:pageaction>
+
+<xf:widgetpos id="cv6_rpg_dashboard_sidenav" position="sidenav" context-genre_id="{$genreId}" />
+<xf:widgetpos id="cv6_rpg_dashboard_sidebar" position="sidenav" context-genre_id="{$genreId}" />
+<xf:sidenav>
+	<xf:ad position="cv6_rpg_dashboard_sidenav_below" />
+	<xf:ad position="cv6_rpg_dashboard_sidebar_below" />
+</xf:sidenav>
+
+<xf:ad position="cv6_rpg_dashboard_above" />
+
+<xf:if is="$selectedGenre">
+	<div class="block">
+		<div class="block-container">
+			<div class="block-filterBar">
+				<div class="filterBar">
+					<ul class="filterBar-filters">
+						<li>
+							<a href="{{ link('rpg') }}" class="filterBar-filterToggle" data-xf-init="tooltip" title="{{ phrase('remove_this_filter') }}">
+								<span class="filterBar-filterToggle-label">{{ phrase('cv6_rpg_genre') }}:</span>
+								<xf:if is="$selectedGenre.icon"><xf:fa icon="{{ cv6icon($selectedGenre.icon) }}" /> </xf:if>{$selectedGenre.title}
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</xf:if>
+
+<xf:widgetpos id="cv6_rpg_dashboard_above" context-genre_id="{$genreId}" />
+
+<xf:if contentcheck="true">
+	<xf:contentcheck>
+		<xf:widgetpos id="cv6_rpg_dashboard_main" context-genre_id="{$genreId}" />
+	</xf:contentcheck>
+<xf:else />
+	<div class="blockMessage">{{ phrase('no_items_to_display') }}</div>
+</xf:if>
+
+<xf:widgetpos id="cv6_rpg_dashboard_below" context-genre_id="{$genreId}" />
+
+<xf:ad position="cv6_rpg_dashboard_below" />
+]]></template>
+  <template type="public" title="cv6_rpg_genre_macros" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[<xf:macro name="genre_filter_sidenav"
+	arg-genres="!"
+	arg-route="!"
+	arg-data="{{ null }}"
+	arg-params="{{ [] }}"
+	arg-selectedGenreId="{{ 0 }}"
+	arg-selectedGenreClass=""
+	arg-countField=""
+	arg-layout="sidenav"
+	arg-title="{{ phrase('cv6_rpg_filter_by_genre') }}"
+	arg-allLabel="{{ phrase('all') }}"
+	arg-showAll="{{ true }}"
+	arg-showBlock="{{ true }}">
+
+	<xf:if is="$genres is not empty">
+		<xf:css src="cv6_rpg.less" />
+
+		<xf:set var="$resetParams" value="{$params}" />
+		<xf:set var="$innerContent">
+			<xf:if is="$layout == 'pills'">
+				<div class="cv6-rpg-genrePills">
+					<xf:if is="$showAll">
+						<a href="{{ link($route, $data, $resetParams + {'genre_id': null, 'genre': null}) }}"
+							class="cv6-rpg-genrePill {{ (!$selectedGenreId && !$selectedGenreClass) ? 'is-active' : '' }}">
+							<span>{$allLabel}</span>
+						</a>
+					</xf:if>
+					<xf:foreach loop="$genres" key="$gKey" value="$genre">
+						<xf:set var="$gId" value="{{ $genre.genre_id ?: $gKey }}" />
+						<xf:set var="$isActive" value="{{ ($selectedGenreId && $selectedGenreId == $gId) || (!$selectedGenreId && $selectedGenreClass && $selectedGenreClass == $genre.class) }}" />
+						<a href="{{ link($route, $data, $params + {'genre_id': $gId}) }}"
+							class="cv6-rpg-genrePill genre--{$genre.class} cv6-genre--{$genre.class} {{ $genre.icon ? 'has-icon' : 'no-icon' }} {{ $isActive ? 'is-active' : '' }}">
+							<xf:if is="$genre.icon">
+								<xf:fa icon="{{ cv6icon($genre.icon) }}" />
+							<xf:else />
+								<span class="cv6-rpg-genreColorDot genre--{$genre.class} cv6-genre--{$genre.class}"></span>
+							</xf:if>
+							<span class="cv6-rpg-genrePill__title">{$genre.title}</span>
+							<xf:if is="$countField == 'total_count' && $genre.total_count !== null">
+								<span class="cv6-rpg-genrePill__count">{$genre.total_count|number}</span>
+							<xf:elseif is="$countField == 'setting_count' && $genre.setting_count !== null" />
+								<span class="cv6-rpg-genrePill__count">{$genre.setting_count|number}</span>
+							<xf:elseif is="$countField == 'map_count' && $genre.map_count !== null" />
+								<span class="cv6-rpg-genrePill__count">{$genre.map_count|number}</span>
+							<xf:elseif is="$countField == 'wireset_count' && $genre.wireset_count !== null" />
+								<span class="cv6-rpg-genrePill__count">{$genre.wireset_count|number}</span>
+							</xf:if>
+						</a>
+					</xf:foreach>
+				</div>
+			<xf:elseif is="$layout == 'dropdown'" />
+				<xf:macro name="genre_filter_dropdown"
+					arg-genres="{$genres}"
+					arg-route="{$route}"
+					arg-data="{$data}"
+					arg-params="{$params}"
+					arg-selectedGenreId="{$selectedGenreId}"
+					arg-selectedGenreClass="{$selectedGenreClass}"
+					arg-countField="{$countField}"
+					arg-allLabel="{$allLabel}" />
+			<xf:elseif is="$layout == 'grid'" />
+				<div class="cv6-rpg-genreGrid">
+					<xf:if is="$showAll">
+						<a href="{{ link($route, $data, $resetParams + {'genre_id': null, 'genre': null}) }}"
+							class="cv6-rpg-genreBtn has-icon {{ (!$selectedGenreId && !$selectedGenreClass) ? 'is-active' : '' }}">
+							<span class="cv6-rpg-genreBtn__icon">
+								<xf:fa icon="fa-layer-group" />
+							</span>
+							<span class="cv6-rpg-genreBtn__title">{$allLabel}</span>
+						</a>
+					</xf:if>
+					<xf:foreach loop="$genres" key="$gKey" value="$genre">
+						<xf:set var="$gId" value="{{ $genre.genre_id ?: $gKey }}" />
+						<xf:set var="$isActive" value="{{ ($selectedGenreId && $selectedGenreId == $gId) || (!$selectedGenreId && $selectedGenreClass && $selectedGenreClass == $genre.class) }}" />
+						<a href="{{ link($route, $data, $params + {'genre_id': $gId}) }}"
+							class="cv6-rpg-genreBtn genre--{$genre.class} cv6-genre--{$genre.class} {{ $genre.icon ? 'has-icon' : 'no-icon' }} {{ $isActive ? 'is-active' : '' }}">
+							<xf:if is="$genre.icon">
+								<span class="cv6-rpg-genreBtn__icon">
+									<xf:fa icon="{{ cv6icon($genre.icon) }}" />
+								</span>
+							</xf:if>
+							<span class="cv6-rpg-genreBtn__title">{$genre.title}</span>
+							<xf:if is="$countField == 'total_count' && $genre.total_count !== null">
+								<span class="cv6-rpg-genreBtn__badge label label--subtle label--smallest">{$genre.total_count|number}</span>
+							<xf:elseif is="$countField == 'setting_count' && $genre.setting_count !== null" />
+								<span class="cv6-rpg-genreBtn__badge label label--subtle label--smallest">{$genre.setting_count|number}</span>
+							<xf:elseif is="$countField == 'map_count' && $genre.map_count !== null" />
+								<span class="cv6-rpg-genreBtn__badge label label--subtle label--smallest">{$genre.map_count|number}</span>
+							<xf:elseif is="$countField == 'wireset_count' && $genre.wireset_count !== null" />
+								<span class="cv6-rpg-genreBtn__badge label label--subtle label--smallest">{$genre.wireset_count|number}</span>
+							</xf:if>
+						</a>
+					</xf:foreach>
+				</div>
+			<xf:else />
+				<ol class="categoryList toggleTarget is-active cv6-rpg-genreSidenav">
+					<xf:if is="$showAll">
+						<li class="categoryList-item">
+							<div class="categoryList-itemRow">
+								<a href="{{ link($route, $data, $resetParams + {'genre_id': null, 'genre': null}) }}"
+									class="categoryList-link {{ (!$selectedGenreId && !$selectedGenreClass) ? 'is-selected' : '' }}">
+									{$allLabel}
+								</a>
+							</div>
+						</li>
+					</xf:if>
+					<xf:foreach loop="$genres" key="$gKey" value="$genre">
+						<xf:set var="$gId" value="{{ $genre.genre_id ?: $gKey }}" />
+						<xf:set var="$isActive" value="{{ ($selectedGenreId && $selectedGenreId == $gId) || (!$selectedGenreId && $selectedGenreClass && $selectedGenreClass == $genre.class) }}" />
+						<li class="categoryList-item">
+							<div class="categoryList-itemRow">
+								<a href="{{ link($route, $data, $params + {'genre_id': $gId}) }}"
+									class="categoryList-link cv6-rpg-genreFilterLink genre--{$genre.class} cv6-genre--{$genre.class} {{ $genre.icon ? 'has-icon' : 'no-icon' }} {{ $isActive ? 'is-selected' : '' }}">
+									<xf:if is="$genre.icon">
+										<xf:fa icon="{{ cv6icon($genre.icon) }}" />
+									<xf:else />
+										<span class="cv6-rpg-genreColorDot genre--{$genre.class} cv6-genre--{$genre.class}"></span>
+									</xf:if>
+									<span class="cv6-rpg-genreFilterLink__title">{$genre.title}</span>
+								</a>
+								<xf:if is="$countField == 'total_count' && $genre.total_count !== null">
+									<span class="categoryList-label">
+										<span class="label label--subtle label--smallest">{$genre.total_count|number}</span>
+									</span>
+								<xf:elseif is="$countField == 'setting_count' && $genre.setting_count !== null" />
+									<span class="categoryList-label">
+										<span class="label label--subtle label--smallest">{$genre.setting_count|number}</span>
+									</span>
+								<xf:elseif is="$countField == 'map_count' && $genre.map_count !== null" />
+									<span class="categoryList-label">
+										<span class="label label--subtle label--smallest">{$genre.map_count|number}</span>
+									</span>
+								<xf:elseif is="$countField == 'wireset_count' && $genre.wireset_count !== null" />
+									<span class="categoryList-label">
+										<span class="label label--subtle label--smallest">{$genre.wireset_count|number}</span>
+									</span>
+								</xf:if>
+							</div>
+						</li>
+					</xf:foreach>
+				</ol>
+			</xf:if>
+		</xf:set>
+
+		<xf:if is="$showBlock && $layout != 'dropdown'">
+			<div class="block">
+				<div class="block-container">
+					<xf:if is="$title">
+						<h3 class="block-minorHeader">{$title}</h3>
+					</xf:if>
+					<div class="block-body {{ ($layout == 'grid' || $layout == 'pills') ? 'block-row' : '' }}">
+						{$innerContent|raw}
+					</div>
+				</div>
+			</div>
+		<xf:else />
+			{$innerContent|raw}
+		</xf:if>
+	</xf:if>
+</xf:macro>
+
+<xf:macro name="genre_filter_dropdown"
+	arg-genres="!"
+	arg-route="!"
+	arg-data="{{ null }}"
+	arg-params="{{ [] }}"
+	arg-selectedGenreId="{{ 0 }}"
+	arg-selectedGenreClass=""
+	arg-countField="setting_count"
+	arg-allLabel="{{ phrase('cv6_rpg_all_genres') }}"
+	arg-buttonClass=""
+	arg-icon="fa-filter"
+	arg-resetValue="{{ 0 }}">
+
+	<xf:if is="$genres is not empty">
+		<xf:css src="cv6_rpg.less" />
+
+		<xf:set var="$selectedGenre" value="{{ null }}" />
+		<xf:foreach loop="$genres" key="$gKey" value="$genreItem">
+			<xf:set var="$gId" value="{{ $genreItem.genre_id ?: $gKey }}" />
+			<xf:if is="($selectedGenreId && $selectedGenreId == $gId) || (!$selectedGenreId && $selectedGenreClass && $selectedGenreClass == $genreItem.class)">
+				<xf:set var="$selectedGenre" value="{$genreItem}" />
+			</xf:if>
+		</xf:foreach>
+
+		<xf:button class="menuTrigger {$buttonClass}" data-xf-click="menu" aria-expanded="false" aria-haspopup="true">
+			<xf:if is="$selectedGenre && $selectedGenre.icon">
+				<xf:fa icon="{{ cv6icon($selectedGenre.icon) }}" />
+			<xf:elseif is="$icon" />
+				<xf:fa icon="{$icon}" />
+			</xf:if>
+			<xf:if is="$selectedGenre">{$selectedGenre.title}<xf:else />{$allLabel}</xf:if>
+		</xf:button>
+		<div class="menu" data-menu="menu" aria-hidden="true">
+			<div class="menu-content">
+				<xf:if is="$selectedGenreId > 0 || $selectedGenreClass">
+					<a href="{{ link($route, $data, $params + {'genre_id': $resetValue, 'genre': null}) }}" class="menu-linkRow cv6-rpg-genreMenuRow">
+						<span class="cv6-rpg-genreMenuRow__label">
+							<xf:if is="$icon"><xf:fa icon="{$icon}" /></xf:if>
+							<span>{$allLabel}</span>
+						</span>
+					</a>
+				</xf:if>
+				<xf:foreach loop="$genres" key="$gKey" value="$genre">
+					<xf:set var="$gId" value="{{ $genre.genre_id ?: $gKey }}" />
+					<xf:set var="$isActive" value="{{ ($selectedGenreId && $selectedGenreId == $gId) || (!$selectedGenreId && $selectedGenreClass && $selectedGenreClass == $genre.class) }}" />
+					<xf:set var="$rowContent">
+						<span class="cv6-rpg-genreMenuRow__label">
+							<xf:if is="$genre.icon">
+								<xf:fa icon="{{ cv6icon($genre.icon) }}" />
+							<xf:elseif is="$genre.class" />
+								<span class="cv6-rpg-genreColorDot genre--{$genre.class} cv6-genre--{$genre.class}"></span>
+							</xf:if>
+							<span>{$genre.title}</span>
+						</span>
+						<xf:if is="$countField == 'setting_count' && $genre.setting_count !== null">
+							<span class="u-pullRight">{$genre.setting_count|number}</span>
+						<xf:elseif is="$countField == 'map_count' && $genre.map_count !== null" />
+							<span class="u-pullRight">{$genre.map_count|number}</span>
+						<xf:elseif is="$countField == 'wireset_count' && $genre.wireset_count !== null" />
+							<span class="u-pullRight">{$genre.wireset_count|number}</span>
+						</xf:if>
+					</xf:set>
+					<xf:if is="$isActive">
+						<span class="menu-linkRow cv6-rpg-genreMenuRow is-selected">
+							{$rowContent|raw}
+						</span>
+					<xf:else />
+						<a href="{{ link($route, $data, $params + {'genre_id': $gId}) }}" class="menu-linkRow cv6-rpg-genreMenuRow">
+							{$rowContent|raw}
+						</a>
+					</xf:if>
+				</xf:foreach>
+			</div>
+		</div>
+	</xf:if>
+</xf:macro>
+
+<xf:macro name="genre_select_row"
+	arg-genres="!"
+	arg-value="{{ 0 }}"
+	arg-name="genre_id"
+	arg-label="{{ phrase('cv6_rpg_genre') }}"
+	arg-explain="{{ phrase('cv6_rpg_genre_explain') }}"
+	arg-hint=""
+	arg-includeNone="{{ false }}"
+	arg-noneLabel="{{ phrase('(none)') }}"
+	arg-checkOption="{{ true }}">
+
+	<xf:if is="(!$checkOption || $xf.options.cv6EnableGenre) && $genres is not empty">
+		<xf:selectrow name="{$name}" value="{$value}" label="{$label}" explain="{$explain}" hint="{$hint}">
+			<xf:if is="$includeNone">
+				<xf:option value="0">{$noneLabel}</xf:option>
+			</xf:if>
+			<xf:foreach loop="$genres" key="$gKey" value="$genre">
+				<xf:if is="is_scalar($genre) || is_phrase($genre)">
+					<xf:option value="{$gKey}">{$genre}</xf:option>
+				<xf:else />
+					<xf:option value="{{ $genre.genre_id ?: $gKey }}">{$genre.title}</xf:option>
+				</xf:if>
+			</xf:foreach>
+		</xf:selectrow>
+	<xf:else />
+		<xf:hiddenval name="{$name}" value="{$value}" />
+	</xf:if>
+</xf:macro>
+
+<xf:macro name="genre_select"
+	arg-genres="!"
+	arg-value="{{ 0 }}"
+	arg-name="genre_id"
+	arg-class=""
+	arg-includeNone="{{ false }}"
+	arg-noneLabel="{{ phrase('(none)') }}">
+
+	<xf:select name="{$name}" value="{$value}" class="{$class}">
+		<xf:if is="$includeNone">
+			<xf:option value="0">{$noneLabel}</xf:option>
+		</xf:if>
+		<xf:foreach loop="$genres" key="$gKey" value="$genre">
+			<xf:if is="is_scalar($genre) || is_phrase($genre)">
+				<xf:option value="{$gKey}">{$genre}</xf:option>
+			<xf:else />
+				<xf:option value="{{ $genre.genre_id ?: $gKey }}">{$genre.title}</xf:option>
+			</xf:if>
+		</xf:foreach>
+	</xf:select>
+</xf:macro>
+
+<xf:macro name="genre_picker_grid"
+	arg-genres="!"
+	arg-selectedGenreId="{{ 0 }}"
+	arg-selectedGenreClass=""
+	arg-buttonClass="js-bmGenreBtn"
+	arg-gridClass=""
+	arg-iconPosition="top">
+
+	<xf:css src="cv6_rpg.less" />
+
+	<div class="cv6-rpg-genreGrid {$gridClass}">
+		<xf:if is="$genres is not empty">
+			<xf:foreach loop="$genres" key="$gKey" value="$genre">
+				<xf:set var="$gId" value="{{ $genre.genre_id ?: $gKey }}" />
+				<xf:set var="$isActive" value="{{ ($selectedGenreId && $selectedGenreId == $gId) || (!$selectedGenreId && $selectedGenreClass && $selectedGenreClass == $genre.class) }}" />
+				<button type="button"
+					class="cv6-rpg-genreBtn cv6-bm-pickerBtn genre--{$genre.class} cv6-genre--{$genre.class} {{ $genre.icon ? 'has-icon' : 'no-icon' }} {{ $iconPosition == 'inline' ? 'cv6-rpg-genreBtn--inline' : '' }} {{ $isActive ? 'is-active' : '' }} {$buttonClass}"
+					data-genre-id="{$gId}"
+					data-genre-class="{$genre.class}"
+					data-genre="{$genre.class}">
+					<xf:if is="$genre.icon">
+						<span class="cv6-rpg-genreBtn__icon">
+							<xf:fa icon="{{ cv6icon($genre.icon) }}" />
+						</span>
+					</xf:if>
+					<span class="cv6-rpg-genreBtn__title">{$genre.title}</span>
+				</button>
+			</xf:foreach>
+		</xf:if>
+	</div>
+</xf:macro>
+]]></template>
+  <template type="public" title="cv6_rpg_thread_companion" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[<xf:macro name="companion_bar"
+	arg-campaign="!"
+	arg-thread="!"
+	arg-characters="{{ [] }}"
+	arg-battlemapLinks="{{ [] }}"
+	arg-handoutLinks="{{ [] }}"
+	arg-isGm="{{ false }}">
+
+	<xf:if is="$campaign && ($characters is not empty || $battlemapLinks is not empty || $handoutLinks is not empty)">
+		<xf:css src="cv6_rpg.less" />
+		<xf:js src="cv6/rpg/suite.js" min="1" addon="cv6/RPG" />
+
+		<div class="block cv6-rpg-companion">
+			<div class="block-container">
+				<h3 class="block-formSectionHeader">
+					<span class="collapseTrigger collapseTrigger--block is-active" data-xf-click="toggle" data-target="< :up:next">
+						<span class="block-formSectionHeader-aligner">
+							<xf:fa icon="fa-dice-d20" /> {{ phrase('cv6_rpg_companion_bar') }}: {$campaign.title}
+						</span>
+					</span>
+				</h3>
+				<div class="block-body block-body--collapsible is-active">
+					<xf:if is="$characters is not empty">
+						<div class="cv6-rpg-companion__section">
+							<xf:foreach loop="$characters" value="$char">
+								<div class="cv6-rpg-companion__charRow">
+									<div class="cv6-rpg-companion__charIdentity">
+										{{ character_portrait($char, 'xs', link('char', $char), true) }}
+										<div>
+											<a href="{{ link('char', $char) }}"
+												<xf:if is="$char.Setting && $char.Setting.idcard">data-xf-init="cv6-character-tooltip" data-character-id="{$char.character_id}"</xf:if>
+											><strong>{$char.name}</strong></a>
+											<xf:if is="$char.archetypes_title">
+												<div class="u-muted u-smaller">{$char.archetypes_title}</div>
+											</xf:if>
+										</div>
+									</div>
+
+									<xf:set var="$rollables" value="{$char.rollable_fields}" />
+									<xf:if is="$rollables is not empty && is_addon_active('cv6/DiceRoller') && $thread.canRollDice()">
+										<div class="cv6-rpg-skill-chips">
+											<xf:foreach loop="$rollables" key="$fId" value="$fData">
+												<a href="{{ link('dice-roller/roll', $thread, {'character_id': $char.character_id, 'rpg_field': $fId, 'rpg_comment': $fData.title, 'rpg_modifier': $fData.value, 'rpg_wireset': $fData.wireset, 'rpg_target': $fData.param_target}) }}"
+													class="button button--link button--smaller cv6-rpg-skill-chip"
+													data-xf-click="cv6-rpg-quick-roll"
+													data-character-id="{$char.character_id}"
+													data-field-id="{$fId}"
+													data-comment="{$fData.title}"
+													data-modifier="{$fData.value}"
+													data-wireset="{$fData.wireset}"
+													data-target="{$fData.param_target}">
+													<xf:fa icon="fa-dice-d20" />
+													<span class="cv6-rpg-skill-chip__label">{$fData.title}</span>
+													<span class="cv6-rpg-skill-chip__val">{$fData.formatted_value}</span>
+												</a>
+											</xf:foreach>
+										</div>
+									</xf:if>
+								</div>
+							</xf:foreach>
+						</div>
+					</xf:if>
+
+					<xf:if is="$battlemapLinks is not empty || $handoutLinks is not empty">
+						<div class="cv6-rpg-companion__section">
+							<ul class="listInline listInline--bullet">
+								<xf:foreach loop="$battlemapLinks" value="$bmLink">
+									<xf:set var="$bm" value="{$bmLink.Content}" />
+									<xf:if is="$bm">
+										<li>
+											<a href="{{ link('battle-maps', $bm) }}">
+												<xf:fa icon="fa-map" /> {$bmLink.effective_title}
+											</a>
+										</li>
+									</xf:if>
+								</xf:foreach>
+								<xf:foreach loop="$handoutLinks" value="$hoLink">
+									<xf:set var="$ho" value="{$hoLink.Content}" />
+									<xf:if is="$ho">
+										<li>
+											<a href="{{ link('handouts/view', $ho) }}" data-xf-click="overlay">
+												<xf:fa icon="fa-scroll" /> {$hoLink.effective_title}
+											</a>
+										</li>
+									</xf:if>
+								</xf:foreach>
+							</ul>
+						</div>
+					</xf:if>
+				</div>
+			</div>
+		</div>
+	</xf:if>
+</xf:macro>
+]]></template>
+  <template type="public" title="cv6_rpg_widget_genres" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[<div {{ widget_data($widget) }}>
+	<xf:macro template="public:cv6_rpg_genre_macros" name="genre_filter_sidenav"
+		arg-genres="{$genres}"
+		arg-route="{$targetRoute}"
+		arg-selectedGenreId="{$selectedGenreId}"
+		arg-countField="{$countField}"
+		arg-layout="{$layout}"
+		arg-title="{$title}"
+		arg-showAll="{$showAll}"
+		arg-showBlock="{{ true }}" />
+</div>
+]]></template>
+</templates>

@@ -1,0 +1,1 @@
+Used as a CSS class suffix and style property identifier for this genre.

@@ -7,11 +7,13 @@
 </xf:radiorow>
 
 <xf:selectrow name="options[target_route]" value="{$options.target_route}" label="{{ phrase('cv6_rpg_genre_target_route') }}">
+	<xf:option value="rpg">{{ phrase('cv6_rpg_suite') }} (rpg)</xf:option>
 	<xf:option value="char/setting/list">{{ phrase('cv6_settings') }} (char/setting/list)</xf:option>
 	<xf:option value="battle-maps">{{ phrase('cv6_rpg_battlemap_count') }} (battle-maps)</xf:option>
 </xf:selectrow>
 
 <xf:selectrow name="options[count_field]" value="{$options.count_field}" label="{{ phrase('cv6_rpg_genre_counter_display') }}">
+	<xf:option value="total_count">{{ phrase('total') }}</xf:option>
 	<xf:option value="setting_count">{{ phrase('cv6_settings') }}</xf:option>
 	<xf:option value="map_count">{{ phrase('cv6_rpg_battlemap_count') }}</xf:option>
 	<xf:option value="wireset_count">{{ phrase('cv6_rpg_wireset_count') }}</xf:option>

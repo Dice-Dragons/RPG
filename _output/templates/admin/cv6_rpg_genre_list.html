@@ -1,0 +1,87 @@
+<xf:title>{{ phrase('cv6_rpg_genres') }}</xf:title>
+
+<xf:pageaction>
+	<div class="buttonGroup">
+		<xf:button href="{{ link('rpg/genre/add') }}" icon="add">{{ phrase('cv6_rpg_new_genre') }}</xf:button>
+		<xf:button href="{{ link('rpg/genre/sort') }}" icon="sort" overlay="true" />
+		<xf:button href="{{ link('rpg/genre/sort-abc') }}" fa="fa-sort-alpha-down">{{ phrase('cv6_sort_abc') }}</xf:button>
+		<xf:if contentcheck="true">
+			<div class="buttonGroup-buttonWrapper">
+				<xf:button class="menuTrigger" data-xf-click="menu" aria-expanded="false" aria-haspopup="true" title="{{ phrase('more_options') }}">&#8226;&#8226;&#8226;</xf:button>
+				<div class="menu" data-menu="menu" aria-hidden="true">
+					<div class="menu-content">
+						<h4 class="menu-header">{{ phrase('more_options') }}</h4>
+						<xf:contentcheck>
+							<xf:if is="$xf.visitor.Admin.advanced || $xf.debugMode">
+								<a href="{{ link('rpg/genre/rebuild-properties') }}" class="menu-linkRow" data-xf-click="overlay">{{ phrase('cv6_rpg_rebuild_genre_properties') }}</a>
+							</xf:if>
+						</xf:contentcheck>
+					</div>
+				</div>
+			</div>
+		</xf:if>
+	</div>
+</xf:pageaction>
+
+<xf:form action="{{ link('rpg/genre/toggle') }}" ajax="true" class="block">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:datalist data-xf-init="responsive-data-list">
+				<tbody class="dataList-rowGroup">
+					<xf:foreach loop="{$genres.genre}" key="$genre_id" value="$genre">
+						<xf:datarow>
+							<xf:cell class="dataList-cell--iconic">
+								<xf:if is="$genre.icon">
+									<xf:fa icon="{$genre.icon}" />
+								<xf:else />
+									<xf:fa icon="fa-dice-d20" />
+								</xf:if>
+							</xf:cell>
+							<xf:main href="{{ link('rpg/genre/edit', $genre) }}">
+								<xf:label>{$genre.title}</xf:label>
+								<xf:hint>{$genre.class}</xf:hint>
+							</xf:main>
+							<xf:cell class="dataList-cell--min dataList-cell--hint" title="{{ phrase('cv6_rpg_setting_count') }}" data-xf-init="tooltip">
+								<xf:fa icon="fa-id-card" /> {$genre.setting_count|number}
+							</xf:cell>
+							<xf:cell class="dataList-cell--min dataList-cell--hint" title="{{ phrase('cv6_rpg_map_count') }}" data-xf-init="tooltip">
+								<xf:fa icon="fa-map" /> {$genre.map_count|number}
+							</xf:cell>
+							<xf:cell class="dataList-cell--min dataList-cell--hint" title="{{ phrase('cv6_rpg_wireset_count') }}" data-xf-init="tooltip">
+								<xf:fa icon="fa-dice" /> {$genre.wireset_count|number}
+							</xf:cell>
+							<xf:cell class="dataList-cell--min dataList-cell--hint">
+								<xf:if is="$genre.Property">
+									{$genre.Property.title}
+								<xf:else />
+									<strong>{{ phrase('cv6_rpg_no_genre_property') }}</strong>
+								</xf:if>
+							</xf:cell>
+							<xf:cell class="dataList-cell dataList-cell--iconic">
+								<xf:if is="!$genre.Property">
+									<a href="{{ link('rpg/genre/property', $genre) }}">
+										<xf:fa icon="fa-plus-square" title="{{ phrase('create') }}" data-xf-init="tooltip" />
+									</a>
+								<xf:else />
+									<a href="{{ link('styles/style-properties/group', $style, {'group': $genre.Property.Group.group_name}) }}#sp-cv6Genre_{$genre.class}">
+										<xf:fa icon="fa-object-group" title="{{ phrase('edit') }}" data-xf-init="tooltip" />
+									</a>
+								</xf:if>
+							</xf:cell>
+							<xf:if is="$genre.canDelete()">
+								<xf:toggle name="active[{$genre.genre_id}]" selected="$genre.active" class="dataList-cell--separated" submit="true"
+									tooltip="{{ phrase('enable_disable_x', {'title': $genre.title}) }}" />
+								<xf:delete href="{{ link('rpg/genre/delete', $genre) }}" />
+							<xf:else />
+								<xf:cell class="dataList-cell dataList-cell--iconic dataList-cell--alt" colspan="2">
+									<xf:fa icon="fa-minus-octagon" class="cv6-icon-off" data-original-title="{{ phrase('cv6_rpg_default_cant_deleted') }}"
+										data-xf-init="tooltip" />
+								</xf:cell>
+							</xf:if>
+						</xf:datarow>
+					</xf:foreach>
+				</tbody>
+			</xf:datalist>
+		</div>
+	</div>
+</xf:form>

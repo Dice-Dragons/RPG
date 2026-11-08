@@ -38,7 +38,7 @@ class Publisher extends Entity implements LinkableInterface, ViewableInterface
 
 	public function canEdit(&$error = null)
 	{
-		return \XF::visitor()->hasAdminPermission('cv6ManagePublisher');
+		return \XF::visitor()->hasAdminPermission('cv6ManageRpg') || \XF::visitor()->hasAdminPermission('cv6ManagePublisher');
 	}
 
 	public function canReport(&$error = null, ?\XF\Entity\User $asUser = null)
@@ -71,7 +71,7 @@ class Publisher extends Entity implements LinkableInterface, ViewableInterface
 
 	public function getContentTitle(string $context = '')
 	{
-		return \XF::phrase('cv6_publisher_x', [
+		return \XF::phrase('cv6_rpg_publisher_x', [
 			'title' => $this->title,
 		]);
 	}
@@ -86,7 +86,7 @@ class Publisher extends Entity implements LinkableInterface, ViewableInterface
 
 		if ($name === strval(intval($name)) || $name === '-')
 		{
-			$this->error(\XF::phrase('cv6_url_slug_contain_more_numbers_hyphen'), 'url_slug');
+			$this->error(\XF::phrase('cv6_rpg_url_slug_contain_more_numbers_hyphen'), 'url_slug');
 			return false;
 		}
 
@@ -147,11 +147,11 @@ class Publisher extends Entity implements LinkableInterface, ViewableInterface
 				'maxLength' => 50,
 				'nullable' => true,
 				'default' => null,
-				'unique' => 'cv6_slug_must_be_unique',
+				'unique' => 'cv6_rpg_slug_must_be_unique',
 				'match' => self::MATCH_ALPHANUMERIC_HYPHEN,
 				'verify' => 'verifyUrlSlug',
 			],
-			'description' => ['type' => self::STR, 'required' => 'cv6_please_enter_valid_description', 'maxLength' => 10000],
+			'description' => ['type' => self::STR, 'required' => 'cv6_rpg_please_enter_valid_description', 'maxLength' => 10000],
 			'logo_url' => ['type' => self::STR, 'maxLength' => 250, 'default' => ''],
 			'url' => ['type' => self::STR, 'maxLength' => 250, 'default' => ''],
 			'license_notice' => ['type' => self::STR, 'nullable' => true, 'default' => null],
@@ -164,13 +164,16 @@ class Publisher extends Entity implements LinkableInterface, ViewableInterface
 			],
 		];
 		$structure->getters = [];
-		$structure->relations = [
-			'Settings' => [
+		$structure->relations = [];
+
+		if (\XF::isAddOnActive('cv6/CharEdit'))
+		{
+			$structure->relations['Settings'] = [
 				'entity' => 'cv6\CharEdit:Setting',
 				'type' => self::TO_MANY,
 				'conditions' => 'publisher_id',
-			],
-		];
+			];
+		}
 
 		return $structure;
 	}

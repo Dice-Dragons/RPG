@@ -76,6 +76,31 @@ class Setup extends AbstractSetup
 	public function postInstall(array &$stateChanges): void
 	{
 		$this->ensureDefaultWidgets();
+		$this->reassignGenreProperties();
+	}
+
+	public function postUpgrade($previousVersion, array &$stateChanges): void
+	{
+		$this->ensureDefaultWidgets();
+		$this->reassignGenreProperties();
+	}
+
+	protected function reassignGenreProperties(): void
+	{
+		if (!$this->tableExists('xf_cv6_genre'))
+		{
+			return;
+		}
+
+		try
+		{
+			/** @var \cv6\RPG\Service\Genre\PropertyService $propertyService */
+			$propertyService = \XF::service('cv6\RPG:Genre\PropertyService');
+			$propertyService->reassignProperties();
+		}
+		catch (\Exception $e)
+		{
+		}
 	}
 
 	public function uninstallStep1(): void
@@ -98,17 +123,19 @@ class Setup extends AbstractSetup
 		$this->installStep1();
 		$this->installStep2();
 		$this->ensureDefaultWidgets();
+		$this->reassignGenreProperties();
 	}
 
 	protected function ensureDefaultWidgets(): void
 	{
-		$defExists = $this->db()->fetchOne(
+		$db = $this->db();
+		$defExists = $db->fetchOne(
 			"SELECT definition_id FROM xf_widget_definition WHERE definition_id = 'cv6_rpg_genres'"
 		);
-		$posExists = $this->db()->fetchOne(
+		$posExists = $db->fetchOne(
 			"SELECT position_id FROM xf_widget_position WHERE position_id = 'cv6_rpg_dashboard_sidenav'"
 		);
-		$widgetExists = $this->db()->fetchOne(
+		$widgetExists = $db->fetchOne(
 			"SELECT widget_id FROM xf_widget WHERE widget_key = 'cv6_rpg_dashboard_genres'"
 		);
 
@@ -123,13 +150,66 @@ class Setup extends AbstractSetup
 					],
 					'options' => [
 						'layout' => 'sidenav',
-						'target_route' => 'char/setting/list',
-						'count_field' => 'setting_count',
+						'target_route' => 'rpg',
+						'count_field' => 'total_count',
 						'show_all' => true,
 					],
-				]
+				],
+				'Filter by genre'
 			);
 		}
+		elseif ($widgetExists)
+		{
+			/** @var \XF\Entity\Widget|null $genreWidget */
+			$genreWidget = $this->app()->em()->find('XF:Widget', $widgetExists);
+			if ($genreWidget)
+			{
+				$opts = $genreWidget->options;
+				if (($opts['target_route'] ?? '') === 'char/setting/list')
+				{
+					$opts['target_route'] = 'rpg';
+					$opts['count_field'] = 'total_count';
+					$genreWidget->options = $opts;
+					$genreWidget->save(false);
+				}
+			}
+		}
+
+		$defaultWidgetTitles = [
+			'widget.cv6_rpg_dashboard_genres' => 'Filter by genre',
+			'widget.cv6_rpg_dashboard_battlemaps' => 'BattleMaps',
+			'widget.cv6_rpg_dashboard_handouts' => 'Handouts',
+		];
+		/** @var \XF\Service\Phrase\CompileService $compileService */
+		$compileService = $this->app()->service('XF:Phrase\Compile');
+		foreach ($defaultWidgetTitles as $phraseTitle => $defaultText)
+		{
+			/** @var \XF\Entity\Phrase|null $phrase */
+			$phrase = $this->app()->finder('XF:Phrase')
+				->where('language_id', 0)
+				->where('title', $phraseTitle)
+				->fetchOne();
+			if ($phrase)
+			{
+				if ($phrase->phrase_text === '')
+				{
+					$phrase->phrase_text = $defaultText;
+					$phrase->save(false);
+				}
+				else
+				{
+					$compileService->recompile($phrase);
+				}
+			}
+		}
+
+		/** @var \XF\Service\Phrase\GroupService $groupService */
+		$groupService = $this->app()->service('XF:Phrase\Group');
+		$groupService->compilePhraseGroup('widget');
+
+		/** @var \XF\Repository\WidgetRepository $widgetRepo */
+		$widgetRepo = $this->app()->repository('XF:Widget');
+		$widgetRepo->rebuildWidgetCache();
 	}
 
 	protected function seedAndAlignGenres(): void
@@ -259,8 +339,16 @@ class Setup extends AbstractSetup
 			");
 		}
 
-		if ($this->tableExists('xf_cv6_wiresets') && $this->columnExists('xf_cv6_wiresets', 'genre_id'))
+		if ($this->tableExists('xf_cv6_wiresets'))
 		{
+			$this->addColumnIfMissing('xf_cv6_wiresets', 'genre_id', function (Alter $table): void
+			{
+				$table->addColumn('genre_id', 'int', 10)->unsigned()->setDefault(0)->after('description');
+				$table->addKey('genre_id');
+			});
+
+			$this->migrateLegacyWiresetGroups();
+
 			$db->query("
 				UPDATE xf_cv6_genre AS g
 				SET wireset_count = (
@@ -269,6 +357,130 @@ class Setup extends AbstractSetup
 					WHERE w.genre_id = g.genre_id AND w.active = 1
 				)
 			");
+		}
+	}
+
+	protected function migrateLegacyWiresetGroups(): void
+	{
+		$db = $this->db();
+		$sm = $this->schemaManager();
+
+		if (!$sm->tableExists('xf_cv6_wiresets') || !$sm->columnExists('xf_cv6_wiresets', 'genre_id'))
+		{
+			return;
+		}
+
+		$groupTable = null;
+		if ($sm->tableExists('xf_cv6_groups_wiresets'))
+		{
+			$groupTable = 'xf_cv6_groups_wiresets';
+		}
+		elseif ($sm->tableExists('xf_cv6_groups'))
+		{
+			$groupTable = 'xf_cv6_groups';
+		}
+
+		if ($groupTable !== null && $sm->columnExists('xf_cv6_wiresets', 'group_id'))
+		{
+			$groups = $db->fetchAll("SELECT * FROM {$groupTable} ORDER BY group_id ASC");
+			foreach ($groups as $group)
+			{
+				$groupId = (int)($group['group_id'] ?? 0);
+				if ($groupId <= 1)
+				{
+					continue;
+				}
+
+				$phraseText = (string)$db->fetchOne(
+					"SELECT phrase_text FROM xf_phrase WHERE language_id = 0 AND title = ?",
+					['cv6_wireset_group_title.' . $groupId]
+				);
+				$groupTitle = trim($phraseText !== '' ? $phraseText : (string)($group['title'] ?? ''));
+				if ($groupTitle === '' || strcasecmp($groupTitle, 'Default') === 0)
+				{
+					continue;
+				}
+
+				$slug = strtolower((string)preg_replace('/[^a-z0-9_]+/i', '_', $groupTitle));
+				$slug = trim($slug, '_');
+				if ($slug === '')
+				{
+					$slug = 'group_' . $groupId;
+				}
+				$slug = substr($slug, 0, 25);
+
+				$targetGenreId = (int)$db->fetchOne(
+					"SELECT genre_id FROM xf_cv6_genre WHERE LOWER(class) = ?",
+					[$slug]
+				);
+
+				if ($targetGenreId <= 0)
+				{
+					$matchedPhraseTitle = (string)$db->fetchOne(
+						"SELECT title FROM xf_phrase WHERE language_id = 0 AND title LIKE 'cv6_ce_genre_title_%' AND LOWER(phrase_text) = ?",
+						[strtolower($groupTitle)]
+					);
+					if ($matchedPhraseTitle !== '' && preg_match('/^cv6_ce_genre_title_(\d+)$/', $matchedPhraseTitle, $m))
+					{
+						$targetGenreId = (int)$m[1];
+					}
+				}
+
+				if ($targetGenreId <= 0)
+				{
+					$db->insert('xf_cv6_genre', [
+						'class' => $slug,
+						'icon' => 'fa-dice-d20 fad',
+						'active' => 1,
+						'property_id' => 0,
+						'display_order' => (int)($group['display_order'] ?? 50),
+						'setting_count' => 0,
+						'map_count' => 0,
+						'wireset_count' => 0,
+					]);
+					$targetGenreId = (int)$db->lastInsertId();
+
+					$db->query("
+						INSERT IGNORE INTO xf_phrase
+							(language_id, title, phrase_text, global_cache, addon_id, version_id, version_string)
+						VALUES
+							(0, ?, ?, 0, '', 0, '')
+					", ['cv6_ce_genre_title_' . $targetGenreId, $groupTitle]);
+				}
+
+				if ($targetGenreId > 0)
+				{
+					$db->update(
+						'xf_cv6_wiresets',
+						['genre_id' => $targetGenreId],
+						'group_id = ? AND genre_id = 0',
+						[$groupId]
+					);
+				}
+			}
+		}
+
+		$genreByClass = $db->fetchPairs("SELECT class, genre_id FROM xf_cv6_genre");
+		$mappingByClass = [
+			'fantasy' => ['dsa', 'dsa5', 'dnd', 'pathfinder_1e', 'sotdl', 'witcher'],
+			'cyberpunk' => ['sr5'],
+			'scifi' => ['Alien'],
+			'pa' => ['myz', 'heredium'],
+			'horror' => ['wod', 'nwod', 'ahnenblut', 'hexxen'],
+			'default' => ['sw', 'fate', 'ore'],
+		];
+
+		foreach ($mappingByClass as $class => $tags)
+		{
+			if (!empty($genreByClass[$class]))
+			{
+				$genreId = (int)$genreByClass[$class];
+				$db->update(
+					'xf_cv6_wiresets',
+					['genre_id' => $genreId],
+					'genre_id = 0 AND tag IN (' . $db->quote($tags) . ')'
+				);
+			}
 		}
 	}
 

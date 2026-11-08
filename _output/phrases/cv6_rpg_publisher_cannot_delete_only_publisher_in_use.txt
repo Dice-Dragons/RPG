@@ -1,0 +1,1 @@
+This publisher cannot be deleted because it is the only publisher in use.

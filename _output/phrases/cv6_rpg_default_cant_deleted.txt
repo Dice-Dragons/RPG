@@ -1,0 +1,1 @@
+Default genre cannot be deleted or disabled.

@@ -1,0 +1,64 @@
+<xf:if is="$genre.isInsert()">
+	<xf:title>{{ phrase('cv6_rpg_new_genre') }}</xf:title>
+<xf:else />
+	<xf:title>{{ phrase('cv6_rpg_edit_genre') }}: {$genre.title}</xf:title>
+</xf:if>
+
+<xf:pageaction if="$genre.isUpdate() && $genre.canDelete()">
+	<xf:button href="{{ link('rpg/genre/delete', $genre) }}" icon="delete" overlay="true" />
+</xf:pageaction>
+
+<xf:form action="{{ link('rpg/genre/save', $genre) }}" ajax="true" class="block">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:textboxrow name="title"
+				value="{$genre.MasterTitle.phrase_text}"
+				maxlength="50"
+				label="{{ phrase('cv6_rpg_genre_title') }}"
+				phrase="{$genre.getPhraseName('title')}" />
+
+			<xf:textboxrow name="class"
+				value="{$genre.class}"
+				maxlength="{{ max_length($genre, 'class') }}"
+				hint="{{ phrase('cv6_az') }}"
+				label="{{ phrase('cv6_rpg_genre_class') }}"
+				explain="{{ phrase('cv6_rpg_genre_class_explain') }}"
+				disabled="{{ !$genre.canDelete() && $genre.isUpdate() ? 'disabled' : '' }}" />
+
+			<xf:macro template="cv6_fa_icon" name="cv6_inputIcon"
+				arg-target="icon"
+				arg-name="icon"
+				arg-value="{$genre.icon}"
+				arg-label="{{ phrase('cv6_rpg_genre_icon') }}"
+				arg-explain="{{ phrase('cv6_rpg_genre_icon_explain') }}"
+				arg-autocomplete="{{ true }}" />
+
+			<xf:textarearow name="description"
+				value="{$genre.MasterDescription.phrase_text}"
+				autosize="true"
+				class="codeEditor--autoSize codeEditor--proportional"
+				label="{{ phrase('cv6_description') }}"
+				phrase="{$genre.getPhraseName('desc')}" />
+
+			<xf:formrow label="{{ phrase('style_property') }}">
+				<xf:if is="$genre.isInsert() || !$genre.Property">
+					{{ phrase('cv6_rpg_property_will_be_created_after_saving') }}
+				<xf:else />
+					<xf:button href="{{ link('styles/style-properties/group', $style, {'group': $genre.Property.Group.group_name}) }}#sp-cv6Genre_{$genre.class}" icon="edit" />
+				</xf:if>
+			</xf:formrow>
+
+			<hr class="formRowSep" />
+
+			<xf:macro id="display_order_macros::row"
+				arg-value="{$genre.display_order}" />
+
+			<xf:checkboxrow>
+				<xf:option name="active" selected="$genre.active" label="{{ phrase('cv6_active') }}"
+					hint="{{ phrase('cv6_rpg_genre_active_hint') }}" />
+			</xf:checkboxrow>
+		</div>
+
+		<xf:submitrow sticky="true" icon="save" />
+	</div>
+</xf:form>

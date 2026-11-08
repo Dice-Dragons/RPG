@@ -1,0 +1,64 @@
+<xf:title>{{ phrase('cv6_rpg_import_publishers') }}</xf:title>
+
+<xf:form action="{{ link('rpg/publisher/import') }}" ajax="true" class="block">
+	<div class="block-container">
+		<h2 class="block-header">{{ phrase('cv6_rpg_select_publishers_to_import') }}</h2>
+		<div class="block-body">
+			<xf:datalist data-xf-init="responsive-data-list">
+				<thead>
+					<xf:datarow rowtype="header">
+						<xf:cell class="dataList-cell--min">
+							<xf:checkbox standalone="true">
+								<xf:option check-all="< .block-container" data-xf-init="tooltip" title="{{ phrase('select_all') }}" />
+							</xf:checkbox>
+						</xf:cell>
+						<xf:cell>{{ phrase('title') }}</xf:cell>
+						<xf:cell>{{ phrase('description') }}</xf:cell>
+						<xf:cell>{{ phrase('url') }}</xf:cell>
+					</xf:datarow>
+				</thead>
+				<tbody class="dataList-rowGroup">
+				<xf:foreach loop="$publishers" key="$i" value="$publisher">
+					<xf:datarow>
+						<xf:toggle name="import[]" value="{$i}" selected="true" />
+						<xf:cell>
+							<strong>{$publisher.title}</strong>
+							<xf:if is="$publisher.url_slug">
+								<span class="u-muted">({$publisher.url_slug})</span>
+							</xf:if>
+							<xf:hiddenval name="publishers[{$i}][title]" value="{$publisher.title}" />
+							<xf:hiddenval name="publishers[{$i}][url_slug]" value="{$publisher.url_slug}" />
+							<xf:hiddenval name="publishers[{$i}][description]" value="{$publisher.description}" />
+							<xf:hiddenval name="publishers[{$i}][logo_url]" value="{$publisher.logo_url}" />
+							<xf:hiddenval name="publishers[{$i}][url]" value="{$publisher.url}" />
+							<xf:hiddenval name="publishers[{$i}][active]" value="{$publisher.active}" />
+							<xf:hiddenval name="publishers[{$i}][display_order]" value="{$publisher.display_order}" />
+						</xf:cell>
+						<xf:cell class="dataList-cell--snippet">
+							{{ snippet($publisher.description, 100) }}
+						</xf:cell>
+						<xf:cell>
+							<xf:if is="$publisher.url">
+								<a href="{$publisher.url}" target="_blank">{$publisher.url}</a>
+							<xf:else />
+								<span class="u-muted">{{ phrase('n_a') }}</span>
+							</xf:if>
+						</xf:cell>
+					</xf:datarow>
+				</xf:foreach>
+				</tbody>
+			</xf:datalist>
+		</div>
+		<div class="block-footer block-footer--split">
+			<span class="block-footer-select">
+				<xf:checkbox standalone="true">
+					<xf:option check-all="< .block-container" label="{{ phrase('select_all') }}" />
+				</xf:checkbox>
+			</span>
+			<span class="block-footer-controls">
+				<xf:hiddenval name="confirm" value="1" />
+				<xf:button type="submit" icon="import">{{ phrase('import') }}</xf:button>
+			</span>
+		</div>
+	</div>
+</xf:form>

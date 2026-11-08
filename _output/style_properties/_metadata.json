@@ -1,0 +1,26 @@
+{
+    "cv6Genre_cyberpunk.json": {
+        "hash": "45204eb20e492063f6df576cf817dd08"
+    },
+    "cv6Genre_default.json": {
+        "hash": "670aead1eece2ebe7d2f2fd1460be4f8"
+    },
+    "cv6Genre_fantasy.json": {
+        "hash": "23d6ed3d3535ce4f43bb070a99156312"
+    },
+    "cv6Genre_horror.json": {
+        "hash": "0487b708b4b68b2cf7b7d92d75195673"
+    },
+    "cv6Genre_pa.json": {
+        "hash": "e3dafbf2af0c439c89bf493b3c15f718"
+    },
+    "cv6Genre_pill.json": {
+        "hash": "ae307ae19bdc184030ebb6fd9766f0bd"
+    },
+    "cv6Genre_scifi.json": {
+        "hash": "54e75edbe0d8d6b1d9aa66057ba26675"
+    },
+    "cv6genre_base.json": {
+        "hash": "36be4aa5c4c066fbe7852bb16f23b075"
+    }
+}

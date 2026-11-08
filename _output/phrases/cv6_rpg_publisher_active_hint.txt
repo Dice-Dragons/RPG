@@ -1,0 +1,1 @@
+Only active publishers are displayed in public lists and details.

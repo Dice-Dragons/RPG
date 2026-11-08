@@ -1,0 +1,1 @@
+Include logos in export (ZIP package)

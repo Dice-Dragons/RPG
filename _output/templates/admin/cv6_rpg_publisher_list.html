@@ -1,0 +1,94 @@
+<xf:title>{{ phrase('cv6_rpg_publisher') }}</xf:title>
+
+<xf:pageaction>
+	<div class="buttonGroup">
+		<xf:button href="{{ link('rpg/publisher/add') }}" icon="add">{{ phrase('cv6_rpg_add_publisher') }}</xf:button>
+		<xf:button href="{{ link('rpg/publisher/sort') }}" icon="sort" overlay="true">{{ phrase('cv6_rpg_sort_manual') }}</xf:button>
+		<xf:button href="{{ link('rpg/publisher/abcSort') }}" fa="fa-sort-alpha-down">{{ phrase('cv6_sort_abc') }}</xf:button>
+		<div class="buttonGroup-buttonWrapper">
+			<xf:button class="menuTrigger" data-xf-click="menu" aria-expanded="false" aria-haspopup="true" title="{{ phrase('more_options') }}">&#8226;&#8226;&#8226;</xf:button>
+			<div class="menu" data-menu="menu" aria-hidden="true">
+				<div class="menu-content">
+					<h4 class="menu-header">{{ phrase('more_options') }}</h4>
+					<a href="{{ link('rpg/publisher/import') }}" class="menu-linkRow">{{ phrase('button.import') }}</a>
+					<a href="{{ link('rpg/publisher', {}, {'export': 1}) }}" class="menu-linkRow">{{ phrase('button.export') }}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</xf:pageaction>
+
+<xf:form action="{{ link(($exportView ? 'rpg/publisher/export' : 'rpg/publisher/toggle')) }}"
+	ajax="{{ $exportView ? false : true }}" class="block">
+
+	<div class="block-outer">
+		<xf:macro template="filter_macros" name="quick_filter" arg-key="publishers" arg-class="block-outer-opposite" />
+	</div>
+	<div class="block-container">
+
+		<h2 class="block-tabHeader tabs" role="tablist">
+			<!--[XF:tabs:start]-->
+			<a class="tabs-tab {{ $exportView ? '' : 'is-active' }}" role="tab" tabindex="0" aria-controls="publisher-list" href="{{ link('rpg/publisher') }}">{{ phrase('cv6_rpg_publishers') }}</a>
+			<a class="tabs-tab {{ $exportView ? 'is-active' : '' }}" role="tab" tabindex="0" aria-controls="export-mode" href="{{ link('rpg/publisher', {}, {'export': 1}) }}">{{ phrase('export') }}</a>
+			<!--[XF:tabs:end]-->
+		</h2>
+
+		<div class="block-body">
+			<xf:datalist data-xf-init="responsive-data-list">
+				<xf:if is="$exportView">
+					<thead>
+						<xf:datarow rowtype="header">
+							<xf:cell class="dataList-cell--min">
+								<xf:checkbox standalone="true">
+									<xf:option check-all="< .block-container" data-xf-init="tooltip" title="{{ phrase('select_all') }}" />
+								</xf:checkbox>
+							</xf:cell>
+							<xf:cell>{{ phrase('title') }}</xf:cell>
+						</xf:datarow>
+					</thead>
+				</xf:if>
+				<tbody class="dataList-rowGroup">
+				<xf:foreach loop="{$publisherData.publisher}" value="$publisher">
+					<xf:datarow>
+						<xf:if is="$exportView">
+							<xf:toggle name="export[]" value="{$publisher.publisher_id}" />
+						</xf:if>
+						<xf:main href="{{ link('rpg/publisher/edit', $publisher) }}">
+							<xf:label>{$publisher.title}</xf:label>
+							<xf:hint>{$publisher.url}</xf:hint>
+						</xf:main>
+						<xf:if is="!$exportView">
+							<xf:toggle name="active[{$publisher.publisher_id}]" selected="$publisher.active" class="dataList-cell--separated"
+								submit="true" tooltip="{{ phrase('enable_disable_x', {'title': $publisher.title}) }}" />
+							<xf:delete href="{{ link('rpg/publisher/delete', $publisher) }}" />
+						</xf:if>
+					</xf:datarow>
+				<xf:else />
+					<xf:datarow rowclass="dataList-row--noHover dataList-row--note">
+						<xf:cell colspan="{{ $exportView ? 2 : 3 }}" class="dataList-cell--noSearch">
+							{{ phrase('cv6_rpg_no_publishers_have_been_added_yet') }}
+							<a href="{{ link('rpg/publisher/add') }}">{{ phrase('cv6_rpg_create_your_first') }}</a>
+						</xf:cell>
+					</xf:datarow>
+				</xf:foreach>
+				</tbody>
+			</xf:datalist>
+		</div>
+		<div class="block-footer block-footer--split">
+			<span class="block-footer-counter">{{ display_totals($publisherData.totalpublisher) }}</span>
+			<xf:if is="$exportView">
+				<span class="block-footer-select">
+					<xf:checkbox standalone="true">
+						<xf:option check-all="< .block-container" label="{{ phrase('select_all') }}" />
+					</xf:checkbox>
+				</span>
+				<span class="block-footer-controls">
+					<xf:checkbox standalone="true" class="u-pullLeft cv6-export-checkbox">
+						<xf:option name="with_images" value="1" checked="checked" label="{{ phrase('cv6_rpg_include_images_in_export') }}" />
+					</xf:checkbox>
+					<xf:button type="submit" icon="export">{{ phrase('export') }}</xf:button>
+				</span>
+			</xf:if>
+		</div>
+	</div>
+</xf:form>

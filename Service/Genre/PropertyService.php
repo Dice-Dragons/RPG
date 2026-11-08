@@ -74,8 +74,8 @@ class PropertyService extends \XF\Service\AbstractService
 						$genre->save();
 					}
 
-					$property->title = \XF::phrase('cv6_genre_layout_property_title', ['title' => $genre->title]);
-					$property->description = \XF::phrase('cv6_genre_layout_property_description', ['tag' => $genre->class]);
+					$property->title = \XF::phrase('cv6_rpg_genre_layout_property_title', ['title' => $genre->title]);
+					$property->description = \XF::phrase('cv6_rpg_genre_layout_property_description', ['tag' => $genre->class]);
 					$property->property_name = Genre::PROPERTY . $genre->class;
 					$property->group_name = Genre::GROUP;
 					$property->display_order = 1000 + $genre->display_order;
@@ -93,7 +93,7 @@ class PropertyService extends \XF\Service\AbstractService
 		catch (\Exception $e)
 		{
 			$this->db()->rollback();
-			$error = \XF::phrase('cv6_db_error_x', ['error' => $e]);
+			$error = \XF::phrase('cv6_rpg_db_error_x', ['error' => $e]);
 		}
 		$this->clearCache();
 	}
@@ -157,14 +157,14 @@ class PropertyService extends \XF\Service\AbstractService
 
 		/** @var \XF\Entity\StyleProperty $property */
 		$property = \XF::em()->create('XF:StyleProperty');
-		$property->title = \XF::phrase('cv6_genre_layout_property_title', ['title' => $genre->title]);
+		$property->title = \XF::phrase('cv6_rpg_genre_layout_property_title', ['title' => $genre->title]);
 		$property->group_name = Genre::GROUP;
 		$property->style_id = 0;
 		$property->property_name = Genre::PROPERTY . $genre->class;
-		$property->description = \XF::phrase('cv6_genre_layout_property_description', ['tag' => $genre->class]);
+		$property->description = \XF::phrase('cv6_rpg_genre_layout_property_description', ['tag' => $genre->class]);
 		$property->property_type = 'css';
 		$property->css_components = ['text', 'background', 'border', 'border_radius', 'padding', 'extra'];
-		$property->addon_id = in_array((int)$genre->genre_id, Genre::DEFAULT_GENRE_IDS, true) ? 'cv6/CharEdit' : '';
+		$property->addon_id = in_array((int)$genre->genre_id, Genre::DEFAULT_GENRE_IDS, true) ? 'cv6/RPG' : '';
 		$property->display_order = 1000 + $genre->display_order;
 		$property->save();
 		$this->clearCache();

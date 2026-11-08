@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<options>
+  <option option_id="cv6RpgDefaultCampaignWiresets" edit_format="callback" data_type="array" advanced="0">
+    <default_value>[]</default_value>
+    <edit_format_params>cv6\RPG\Option\Wiresets::renderCheckbox</edit_format_params>
+    <sub_options>*</sub_options>
+    <relation group_id="cv6Rpg" display_order="10"/>
+  </option>
+  <option option_id="cv6RpgEnableThreadCompanion" edit_format="onoff" data_type="boolean" advanced="0">
+    <default_value>1</default_value>
+    <relation group_id="cv6Rpg" display_order="20"/>
+  </option>
+</options>

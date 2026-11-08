@@ -1,0 +1,35 @@
+<xf:title>{{ phrase('confirm_action') }}</xf:title>
+
+<xf:form action="{$confirmUrl}" ajax="true" class="block">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:inforow rowtype="confirm">
+				{{ phrase('cv6_rpg_please_confirm_that_you_want_to_delete_publisher') }}
+				<xf:if is="$contentUrl">
+					<strong><a href="{$contentUrl}">{$contentTitle}</a></strong>
+				<xf:else />
+					<strong>{$contentTitle}</strong>
+				</xf:if>
+				<xf:if is="$deletionImportantPhrase">
+					<div class="blockMessage blockMessage--important blockMessage--iconic">
+						{{ phrase_dynamic($deletionImportantPhrase) }}
+					</div>
+				</xf:if>
+			</xf:inforow>
+			<xf:if is="$used">
+				<xf:inforow>
+					<div class="blockMessage blockMessage--important blockMessage--iconic">
+						{{ phrase('cv6_rpg_publisher_in_use_with_x_settings', {'count': $used}) }}
+					</div>
+				</xf:inforow>
+				<xf:selectrow name="reassign_publisher_id" label="{{ phrase('cv6_rpg_reassign_items_to_publisher') }}" required="true">
+					<xf:option value="0">{{ phrase('none') }}</xf:option>
+					<xf:foreach loop="$other" value="$publisher">
+						<xf:option value="{$publisher.publisher_id}">{$publisher.title}</xf:option>
+					</xf:foreach>
+				</xf:selectrow>
+			</xf:if>
+		</div>
+		<xf:submitrow rowtype="simple" icon="delete" />
+	</div>
+</xf:form>

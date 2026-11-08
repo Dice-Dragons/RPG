@@ -33,20 +33,42 @@
 </xf:pageaction>
 
 <xf:widgetpos id="cv6_rpg_dashboard_sidenav" position="sidenav" context-genre_id="{$genreId}" />
+<xf:widgetpos id="cv6_rpg_dashboard_sidebar" position="sidenav" context-genre_id="{$genreId}" />
 <xf:sidenav>
 	<xf:ad position="cv6_rpg_dashboard_sidenav_below" />
-</xf:sidenav>
-
-<xf:widgetpos id="cv6_rpg_dashboard_sidebar" position="sidebar" context-genre_id="{$genreId}" />
-<xf:sidebar>
 	<xf:ad position="cv6_rpg_dashboard_sidebar_below" />
-</xf:sidebar>
+</xf:sidenav>
 
 <xf:ad position="cv6_rpg_dashboard_above" />
 
+<xf:if is="$selectedGenre">
+	<div class="block">
+		<div class="block-container">
+			<div class="block-filterBar">
+				<div class="filterBar">
+					<ul class="filterBar-filters">
+						<li>
+							<a href="{{ link('rpg') }}" class="filterBar-filterToggle" data-xf-init="tooltip" title="{{ phrase('remove_this_filter') }}">
+								<span class="filterBar-filterToggle-label">{{ phrase('cv6_rpg_genre') }}:</span>
+								<xf:if is="$selectedGenre.icon"><xf:fa icon="{{ cv6icon($selectedGenre.icon) }}" /> </xf:if>{$selectedGenre.title}
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</xf:if>
+
 <xf:widgetpos id="cv6_rpg_dashboard_above" context-genre_id="{$genreId}" />
 
-<xf:widgetpos id="cv6_rpg_dashboard_main" context-genre_id="{$genreId}" />
+<xf:if contentcheck="true">
+	<xf:contentcheck>
+		<xf:widgetpos id="cv6_rpg_dashboard_main" context-genre_id="{$genreId}" />
+	</xf:contentcheck>
+<xf:else />
+	<div class="blockMessage">{{ phrase('no_items_to_display') }}</div>
+</xf:if>
 
 <xf:widgetpos id="cv6_rpg_dashboard_below" context-genre_id="{$genreId}" />
 

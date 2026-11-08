@@ -1,0 +1,12 @@
+<xf:title>{{ phrase('cv6_rpg_rebuild_genre_properties_title') }}</xf:title>
+
+<xf:form action="{{ link('rpg/genre/rebuild-properties') }}" class="block" ajax="true">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:inforow rowtype="confirm">
+				{{ phrase('cv6_rpg_please_confirm_that_you_want_to_rebuild_genre_properties') }}
+			</xf:inforow>
+			<xf:submitrow submit="{{ phrase('yes') }}" fa="fa-object-group" />
+		</div>
+	</div>
+</xf:form>

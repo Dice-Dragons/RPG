@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<language title="Deutsch (dev)" date_format="M j, Y" date_short_format="M 'y" date_short_recent_format="M j" time_format="g:i A" currency_format="{symbol}{value}" week_start="0" decimal_point="." thousands_separator="," label_separator=":" comma_separator=", " ellipsis="..." parenthesis_open="(" parenthesis_close=")" language_code="de-DE" text_direction="LTR" user_selectable="1" addon_id="cv6/RPG" base_version_id="1000031" export_version="2">
+  <phrase title="ad_pos.cv6_rpg_dashboard_above" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite Dashboard: Über dem Inhalt]]></phrase>
+  <phrase title="ad_pos.cv6_rpg_dashboard_below" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite Dashboard: Unter dem Inhalt]]></phrase>
+  <phrase title="ad_pos.cv6_rpg_dashboard_sidebar_below" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite Dashboard: Sidebar (rechts) unten]]></phrase>
+  <phrase title="ad_pos.cv6_rpg_dashboard_sidenav_below" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite Dashboard: Seitennavigation (links) unten]]></phrase>
+  <phrase title="ad_pos_desc.cv6_rpg_dashboard_above" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Wird oberhalb des Hauptinhaltsbereichs auf dem RPG Suite Dashboard angezeigt.]]></phrase>
+  <phrase title="ad_pos_desc.cv6_rpg_dashboard_below" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Wird unterhalb des Hauptinhaltsbereichs auf dem RPG Suite Dashboard angezeigt.]]></phrase>
+  <phrase title="ad_pos_desc.cv6_rpg_dashboard_sidebar_below" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Wird am unteren Ende der rechten Sidebar auf dem RPG Suite Dashboard angezeigt.]]></phrase>
+  <phrase title="ad_pos_desc.cv6_rpg_dashboard_sidenav_below" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Wird am unteren Ende der linken Seitennavigation auf dem RPG Suite Dashboard angezeigt.]]></phrase>
+  <phrase title="admin_navigation.cv6Genre" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Genres]]></phrase>
+  <phrase title="admin_navigation.cv6Publisher" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Verlage]]></phrase>
+  <phrase title="admin_navigation.cv6Rpg" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite]]></phrase>
+  <phrase title="admin_navigation.cv6RpgManager" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Ökosystem & Add-ons]]></phrase>
+  <phrase title="admin_navigation.cv6RpgOptions" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite Optionen]]></phrase>
+  <phrase title="admin_permission.cv6ManageRpg" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite verwalten (Genres & Verlage)]]></phrase>
+  <phrase title="cv6_ce_genre_title_1" addon_id="cv6/RPG" version_id="0" version_string=""><![CDATA[Standard]]></phrase>
+  <phrase title="cv6_ce_genre_title_3" addon_id="cv6/RPG" version_id="1020011" version_string="1.2.0 Alpha 1"><![CDATA[Fantasy]]></phrase>
+  <phrase title="cv6_ce_genre_title_5" addon_id="cv6/RPG" version_id="1020011" version_string="1.2.0 Alpha 1"><![CDATA[Cyberpunk]]></phrase>
+  <phrase title="cv6_ce_genre_title_6" addon_id="cv6/RPG" version_id="1020011" version_string="1.2.0 Alpha 1"><![CDATA[Science-Fiction]]></phrase>
+  <phrase title="cv6_ce_genre_title_7" addon_id="cv6/RPG" version_id="1020031" version_string="1.2.0 Beta 1"><![CDATA[Postapokalypse]]></phrase>
+  <phrase title="cv6_ce_genre_title_8" addon_id="cv6/RPG" version_id="1020031" version_string="1.2.0 Beta 1"><![CDATA[Horror]]></phrase>
+  <phrase title="cv6_rpg_active_settings" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Aktive RPG-Settings]]></phrase>
+  <phrase title="cv6_rpg_add_publisher" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Verlag hinzufügen]]></phrase>
+  <phrase title="cv6_rpg_addon_desc_battlemaps" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Prozeduraler Dungeon- & Gebäudegenerator, interaktiver Viewer und Kartengalerie.]]></phrase>
+  <phrase title="cv6_rpg_addon_desc_charedit" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Charakterbögen, Settings, Archetypen, Fähigkeiten, Zauber und Kampagnen.]]></phrase>
+  <phrase title="cv6_rpg_addon_desc_core" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Gemeinsame UI-Komponenten, Icon-Auswahl, Operatoren und Basis-Hilfsfunktionen.]]></phrase>
+  <phrase title="cv6_rpg_addon_desc_customfields" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Erweiterte Benutzerfeld-Typen, Berechnungen und Feldabhängigkeiten (erforderlich für [DD] Character Database).]]></phrase>
+  <phrase title="cv6_rpg_addon_desc_diceroller" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Würfel-Engine, Regel-Pipelines, Wiresets und grafische Würfelsets.]]></phrase>
+  <phrase title="cv6_rpg_addon_desc_fontmanager" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Eigene Web- & RPG-Schriftarten für Handout-Layouts, Charakterbögen und Würfelsets.]]></phrase>
+  <phrase title="cv6_rpg_addon_desc_handout" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[In-Game-Briefe, Pergamente und geteilte Kampagnen-Handouts.]]></phrase>
+  <phrase title="cv6_rpg_addon_desc_iconsgame" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Über 4.000 Tabletop-RPG-Icons von Game-Icons.net für Genres, Fertigkeiten und Würfel.]]></phrase>
+  <phrase title="cv6_rpg_addon_desc_prefix" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Gestaltete Badges und Präfix-Verwaltung für RPG-Setting-Editionen.]]></phrase>
+  <phrase title="cv6_rpg_addon_desc_rpg" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Zentrale Genres, Verlage, Kampagnen-Inhaltsbrücke und RPG-Dashboard.]]></phrase>
+  <phrase title="cv6_rpg_addon_desc_timeline" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Interaktive Zeitlinien und Chroniken für RPG-Kampagnen und Welten.]]></phrase>
+  <phrase title="cv6_rpg_addon_group_foundation" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Fundament & Kern-Infrastruktur]]></phrase>
+  <phrase title="cv6_rpg_addon_group_modules" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite Module]]></phrase>
+  <phrase title="cv6_rpg_addon_group_recommended" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Empfohlene optionale Add-ons]]></phrase>
+  <phrase title="cv6_rpg_all_genres" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Alle Genres]]></phrase>
+  <phrase title="cv6_rpg_battlemap" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[BattleMap]]></phrase>
+  <phrase title="cv6_rpg_battlemap_count" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[BattleMaps]]></phrase>
+  <phrase title="cv6_rpg_battlemap_id" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[BattleMap-ID]]></phrase>
+  <phrase title="cv6_rpg_campaign_battlemaps" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Kampagnen-BattleMaps]]></phrase>
+  <phrase title="cv6_rpg_campaign_dice_log" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Aktuelle Kampagnen-Würfelwürfe]]></phrase>
+  <phrase title="cv6_rpg_campaign_handouts" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Kampagnen-Handouts]]></phrase>
+  <phrase title="cv6_rpg_character_dice_set" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Bevorzugtes Charakter-Würfelset]]></phrase>
+  <phrase title="cv6_rpg_character_dice_set_explain" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Wähle ein eigenes Grafik-Würfelset für Würfe, die mit diesem Charakter ausgeführt werden.]]></phrase>
+  <phrase title="cv6_rpg_class_must_be_unique" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Das CSS-Klassen-Suffix muss eindeutig sein.]]></phrase>
+  <phrase title="cv6_rpg_companion_bar" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG-Begleiter]]></phrase>
+  <phrase title="cv6_rpg_create_battlemap" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[BattleMap erstellen]]></phrase>
+  <phrase title="cv6_rpg_create_campaign" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Kampagne erstellen]]></phrase>
+  <phrase title="cv6_rpg_create_character" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Charakter erstellen]]></phrase>
+  <phrase title="cv6_rpg_create_handout" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Handout erstellen]]></phrase>
+  <phrase title="cv6_rpg_create_your_first" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Erstelle deinen ersten Eintrag hier]]></phrase>
+  <phrase title="cv6_rpg_db_error_x" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Datenbankfehler: {error}]]></phrase>
+  <phrase title="cv6_rpg_default_cant_deleted" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Das Standard-Genre kann weder gelöscht noch deaktiviert werden.]]></phrase>
+  <phrase title="cv6_rpg_default_genre_cannot_be_disabled" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Das Standard-Genre kann nicht deaktiviert werden.]]></phrase>
+  <phrase title="cv6_rpg_dice_rolling" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Würfeln]]></phrase>
+  <phrase title="cv6_rpg_edit_genre" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Genre bearbeiten]]></phrase>
+  <phrase title="cv6_rpg_edit_publisher" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Verlag bearbeiten]]></phrase>
+  <phrase title="cv6_rpg_field_is_rollable" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Feld ist würfelbar]]></phrase>
+  <phrase title="cv6_rpg_field_is_rollable_explain" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Wenn aktiviert, können Spieler dieses Attribut oder diese Fertigkeit direkt über den Dice Roller würfeln.]]></phrase>
+  <phrase title="cv6_rpg_filter_by_genre" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Nach Genre filtern]]></phrase>
+  <phrase title="cv6_rpg_genre" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Genre]]></phrase>
+  <phrase title="cv6_rpg_genre_active_hint" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Wenn deaktiviert, fallen verknüpfte Einträge auf das Standard-Genre-Design zurück.]]></phrase>
+  <phrase title="cv6_rpg_genre_cannot_delete_only_genre_in_use" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Dieses Genre kann nicht gelöscht werden, da es das einzige verwendete Genre ist.]]></phrase>
+  <phrase title="cv6_rpg_genre_class" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Klassen-Suffix]]></phrase>
+  <phrase title="cv6_rpg_genre_class_explain" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Wird als CSS-Klassen-Suffix und Style-Property-Bezeichner für dieses Genre verwendet.]]></phrase>
+  <phrase title="cv6_rpg_genre_counter_display" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Anzuzeigender Zähler]]></phrase>
+  <phrase title="cv6_rpg_genre_explain" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Wähle das Genre für die Layout-Gestaltung und die Genre-Filterung.]]></phrase>
+  <phrase title="cv6_rpg_genre_icon" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Genre-Icon]]></phrase>
+  <phrase title="cv6_rpg_genre_icon_explain" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[FontAwesome-5-Icon, das auf Genre-Pills, Filter-Buttons und Listen angezeigt wird.]]></phrase>
+  <phrase title="cv6_rpg_genre_in_use_with_x_items" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Dieses Genre ist aktuell {count} Eintrag/Einträgen zugewiesen.]]></phrase>
+  <phrase title="cv6_rpg_genre_layout_grid" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Icon-Kachel-Raster]]></phrase>
+  <phrase title="cv6_rpg_genre_layout_pills" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Horizontale Pills]]></phrase>
+  <phrase title="cv6_rpg_genre_layout_property_description" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Eigenes Label: {tag} - Automatisch erstellt]]></phrase>
+  <phrase title="cv6_rpg_genre_layout_property_title" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Layout für Genre <em>{title}</em>]]></phrase>
+  <phrase title="cv6_rpg_genre_layout_sidenav" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Seitennavigations-Liste]]></phrase>
+  <phrase title="cv6_rpg_genre_show_all_link" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA['Alle'-Zurücksetzen-Link anzeigen]]></phrase>
+  <phrase title="cv6_rpg_genre_target_route" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Ziel-Route der Verlinkung]]></phrase>
+  <phrase title="cv6_rpg_genre_title" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Genre-Titel]]></phrase>
+  <phrase title="cv6_rpg_genres" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Genres]]></phrase>
+  <phrase title="cv6_rpg_gm_notes" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[SL-Notizen]]></phrase>
+  <phrase title="cv6_rpg_handout" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Handout]]></phrase>
+  <phrase title="cv6_rpg_handout_id" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Handout-ID]]></phrase>
+  <phrase title="cv6_rpg_import_publishers" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Verlage importieren]]></phrase>
+  <phrase title="cv6_rpg_include_images_in_export" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Logos in den Export einschließen (ZIP-Paket)]]></phrase>
+  <phrase title="cv6_rpg_link_battlemap" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[BattleMap verknüpfen]]></phrase>
+  <phrase title="cv6_rpg_link_content_to_campaign" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Inhalt mit Kampagne verknüpfen]]></phrase>
+  <phrase title="cv6_rpg_link_handout" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Handout verknüpfen]]></phrase>
+  <phrase title="cv6_rpg_map_count" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[BattleMaps]]></phrase>
+  <phrase title="cv6_rpg_my_campaigns" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Meine Kampagnen]]></phrase>
+  <phrase title="cv6_rpg_my_characters" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Meine Charaktere]]></phrase>
+  <phrase title="cv6_rpg_my_maps_and_handouts" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Meine BattleMaps & Handouts]]></phrase>
+  <phrase title="cv6_rpg_new_genre" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Genre hinzufügen]]></phrase>
+  <phrase title="cv6_rpg_no_battlemaps_linked" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Dieser Kampagne wurden noch keine BattleMaps zugewiesen.]]></phrase>
+  <phrase title="cv6_rpg_no_genre_property" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Keine Style-Property]]></phrase>
+  <phrase title="cv6_rpg_no_handouts_linked" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Dieser Kampagne wurden noch keine Handouts zugewiesen.]]></phrase>
+  <phrase title="cv6_rpg_no_publishers_have_been_added_yet" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Es wurden noch keine Verlage hinzugefügt.]]></phrase>
+  <phrase title="cv6_rpg_not_installed" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Nicht installiert]]></phrase>
+  <phrase title="cv6_rpg_open_frontend_dashboard" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Frontend-Dashboard öffnen]]></phrase>
+  <phrase title="cv6_rpg_player" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Spieler]]></phrase>
+  <phrase title="cv6_rpg_please_confirm_that_you_want_to_delete_genre" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Bitte bestätige, dass du das folgende Genre löschen möchtest:]]></phrase>
+  <phrase title="cv6_rpg_please_confirm_that_you_want_to_delete_publisher" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Bitte bestätige, dass du den folgenden Verlag löschen möchtest:]]></phrase>
+  <phrase title="cv6_rpg_please_confirm_that_you_want_to_rebuild_genre_properties" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Bitte bestätige, dass du die Genre-Style-Properties synchronisieren und neu aufbauen möchtest.<br />Dadurch werden bestehende Style-Properties mit passenden Genres verknüpft und fehlende Properties bei Bedarf neu angelegt.]]></phrase>
+  <phrase title="cv6_rpg_please_enter_valid_cssclass" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Bitte gib ein gültiges CSS-Klassen-Suffix aus alphanumerischen Zeichen und Unterstrichen ein.]]></phrase>
+  <phrase title="cv6_rpg_please_enter_valid_description" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Bitte gib eine gültige Beschreibung ein.]]></phrase>
+  <phrase title="cv6_rpg_please_select_at_least_one_publisher_to_export" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Bitte wähle mindestens einen Verlag für den Export aus.]]></phrase>
+  <phrase title="cv6_rpg_please_select_at_least_one_publisher_to_import" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Bitte wähle mindestens einen Verlag für den Import aus.]]></phrase>
+  <phrase title="cv6_rpg_primary_wireset" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Primäres Würfel-Wireset]]></phrase>
+  <phrase title="cv6_rpg_primary_wireset_explain" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Wähle das primäre Würfelregel-Wireset für dieses RPG-Setting. Kampagnenforen, die für dieses Setting erstellt werden, aktivieren dieses Wireset automatisch.]]></phrase>
+  <phrase title="cv6_rpg_property_will_be_created_after_saving" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Die Style-Property wird nach dem Speichern automatisch erstellt.]]></phrase>
+  <phrase title="cv6_rpg_public_campaigns" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Öffentliche Kampagnen]]></phrase>
+  <phrase title="cv6_rpg_publisher" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Verlag]]></phrase>
+  <phrase title="cv6_rpg_publisher_active_hint" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Nur aktive Verlage werden in öffentlichen Listen und Detailansichten angezeigt.]]></phrase>
+  <phrase title="cv6_rpg_publisher_cannot_delete_only_publisher_in_use" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Dieser Verlag kann nicht gelöscht werden, da er der einzige verwendete Verlag ist.]]></phrase>
+  <phrase title="cv6_rpg_publisher_image_explain" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Lade ein Logo für diesen Verlag hoch (idealerweise mit transparentem Hintergrund).]]></phrase>
+  <phrase title="cv6_rpg_publisher_import_file_explain" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Wähle eine JSON- oder ZIP-Exportdatei (inkl. Bildern) mit Verlagsdefinitionen für den Import aus.]]></phrase>
+  <phrase title="cv6_rpg_publisher_in_use_with_x_settings" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Dieser Verlag ist aktuell {count} Setting(s) zugewiesen.]]></phrase>
+  <phrase title="cv6_rpg_publisher_license_notice" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Lizenz- & Community-Hinweis des Verlags]]></phrase>
+  <phrase title="cv6_rpg_publisher_license_notice_explain" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Optionaler verlagsspezifischer Urheberrechtshinweis, Community-Use-Richtlinie oder Markenrechts-Disclaimer (z. B. Paizo Community Use Policy).]]></phrase>
+  <phrase title="cv6_rpg_publisher_title" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Verlagsname]]></phrase>
+  <phrase title="cv6_rpg_publisher_title_explain" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Der Name des RPG-Verlags.]]></phrase>
+  <phrase title="cv6_rpg_publisher_x" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Verlag {title}]]></phrase>
+  <phrase title="cv6_rpg_publishers" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Verlage]]></phrase>
+  <phrase title="cv6_rpg_publishers_imported_successfully" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[{count} Verlag/Verlage wurden erfolgreich importiert.]]></phrase>
+  <phrase title="cv6_rpg_reassign_items_to_genre" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Einträge folgendem Genre zuweisen]]></phrase>
+  <phrase title="cv6_rpg_reassign_items_to_publisher" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Settings folgendem Verlag zuweisen]]></phrase>
+  <phrase title="cv6_rpg_rebuild_genre_counters" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG-Genre-Zähler neu aufbauen]]></phrase>
+  <phrase title="cv6_rpg_rebuild_genre_properties" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Style-Properties neu aufbauen]]></phrase>
+  <phrase title="cv6_rpg_rebuild_genre_properties_title" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Genre-Style-Properties synchronisieren & neu aufbauen]]></phrase>
+  <phrase title="cv6_rpg_resource_page" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Ressourcen-Seite]]></phrase>
+  <phrase title="cv6_rpg_roll_as_character" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Als Charakter würfeln]]></phrase>
+  <phrase title="cv6_rpg_roll_x" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[{field} würfeln]]></phrase>
+  <phrase title="cv6_rpg_rollable_field" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Würfelbares Attribut / Fertigkeit]]></phrase>
+  <phrase title="cv6_rpg_select_publishers_to_import" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Zu importierende Verlage auswählen]]></phrase>
+  <phrase title="cv6_rpg_setting_count" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Settings]]></phrase>
+  <phrase title="cv6_rpg_settings" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Settings]]></phrase>
+  <phrase title="cv6_rpg_slug_must_be_unique" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Der URL-Slug muss eindeutig sein.]]></phrase>
+  <phrase title="cv6_rpg_sort_genres" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Genres sortieren]]></phrase>
+  <phrase title="cv6_rpg_sort_manual" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Manuell sortieren]]></phrase>
+  <phrase title="cv6_rpg_sort_publishers" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Verlage sortieren]]></phrase>
+  <phrase title="cv6_rpg_suite" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite]]></phrase>
+  <phrase title="cv6_rpg_suite_ecosystem_overview" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite Ökosystem- & Add-on-Übersicht]]></phrase>
+  <phrase title="cv6_rpg_target_parameter" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Ziel-Wurfparameter]]></phrase>
+  <phrase title="cv6_rpg_title_override" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Eigener Kampagnentitel]]></phrase>
+  <phrase title="cv6_rpg_toggle_player_visibility" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Spieler-Sichtbarkeit umschalten]]></phrase>
+  <phrase title="cv6_rpg_url" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Website-URL]]></phrase>
+  <phrase title="cv6_rpg_url_explain" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Bitte gib die URL der Website des Verlags ein.]]></phrase>
+  <phrase title="cv6_rpg_url_slug_contain_more_numbers_hyphen" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Ein URL-Slug muss mehr als nur Zahlen oder Bindestriche enthalten.]]></phrase>
+  <phrase title="cv6_rpg_use_account_default_dice_set" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Standard-Würfelset des Benutzerkontos verwenden]]></phrase>
+  <phrase title="cv6_rpg_use_setting_wireset" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Primäres Wireset des Settings verwenden]]></phrase>
+  <phrase title="cv6_rpg_visibility" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Sichtbarkeit]]></phrase>
+  <phrase title="cv6_rpg_visibility_gm_only" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Nur SL (Privat)]]></phrase>
+  <phrase title="cv6_rpg_visibility_gm_only_explain" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Nur die Spielleitung kann diesen Eintrag in der Kampagne sehen.]]></phrase>
+  <phrase title="cv6_rpg_visibility_players" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Sichtbar für Gruppenmitglieder]]></phrase>
+  <phrase title="cv6_rpg_visibility_players_explain" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Alle Kampagnenmitglieder können diesen Eintrag sehen und öffnen.]]></phrase>
+  <phrase title="cv6_rpg_wireset_count" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Wiresets]]></phrase>
+  <phrase title="cv6_rpg_your_recent_rolls" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Deine letzten Würfelwürfe]]></phrase>
+  <phrase title="nav.cv6Rpg" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite]]></phrase>
+  <phrase title="option.cv6RpgDefaultCampaignWiresets" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Standard-Wiresets für Kampagnenforen]]></phrase>
+  <phrase title="option.cv6RpgEnableThreadCompanion" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[In-Thread RPG-Begleiterleiste aktivieren]]></phrase>
+  <phrase title="option_explain.cv6RpgDefaultCampaignWiresets" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Wähle zusätzliche Wiresets aus, die beim Erstellen eines neuen Kampagnenforums automatisch neben dem primären Wireset des Settings aktiviert werden.]]></phrase>
+  <phrase title="option_explain.cv6RpgEnableThreadCompanion" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Zeigt in Themen von Kampagnenforen eine einklappbare RPG-Begleiterleiste für Schnellzugriff auf Charaktere, Fertigkeitswürfe, BattleMaps und Handouts an.]]></phrase>
+  <phrase title="option_group.cv6Rpg" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[[DD] RPG Suite]]></phrase>
+  <phrase title="option_group_description.cv6Rpg" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Einstellungen und Integrationsoptionen für die [DD] RPG Suite.]]></phrase>
+  <phrase title="style_prop.cv6Genre_cyberpunk" addon_id="cv6/RPG" version_id="1000051" version_string="1.0.0 Release Candidate 1"><![CDATA[Layout für Genre <em>Cyberpunk</em>]]></phrase>
+  <phrase title="style_prop.cv6Genre_default" addon_id="cv6/RPG" version_id="1010070" version_string="1.1.0"><![CDATA[Genre-Layout für: Standard-Genre]]></phrase>
+  <phrase title="style_prop.cv6Genre_fantasy" addon_id="cv6/RPG" version_id="1000051" version_string="1.0.0 Release Candidate 1"><![CDATA[Layout für Genre <em>Fantasy</em>]]></phrase>
+  <phrase title="style_prop.cv6Genre_horror" addon_id="cv6/RPG" version_id="1020031" version_string="1.2.0 Beta 1"><![CDATA[Layout für Genre <em>Horror</em>]]></phrase>
+  <phrase title="style_prop.cv6Genre_pa" addon_id="cv6/RPG" version_id="1020031" version_string="1.2.0 Beta 1"><![CDATA[Layout für Genre <em>Postapokalypse</em>]]></phrase>
+  <phrase title="style_prop.cv6Genre_scifi" addon_id="cv6/RPG" version_id="1000051" version_string="1.0.0 Release Candidate 1"><![CDATA[Layout für Genre <em>Science-Fiction</em>]]></phrase>
+  <phrase title="style_prop.cv6genre_base" addon_id="cv6/RPG" version_id="1000051" version_string="1.0.0 Release Candidate 1"><![CDATA[Basis-Genre-Layout]]></phrase>
+  <phrase title="style_prop_desc.cv6Genre_cyberpunk" addon_id="cv6/RPG" version_id="1000051" version_string="1.0.0 Release Candidate 1"><![CDATA[Eigenes Label: cyberpunk - Automatisch erstellt]]></phrase>
+  <phrase title="style_prop_desc.cv6Genre_default" addon_id="cv6/RPG" version_id="1000051" version_string="1.0.0 Release Candidate 1"><![CDATA[Eigenes Label: default - Automatisch erstellt]]></phrase>
+  <phrase title="style_prop_desc.cv6Genre_fantasy" addon_id="cv6/RPG" version_id="1000051" version_string="1.0.0 Release Candidate 1"><![CDATA[Eigenes Label: fantasy - Automatisch erstellt]]></phrase>
+  <phrase title="style_prop_desc.cv6Genre_horror" addon_id="cv6/RPG" version_id="1020031" version_string="1.2.0 Beta 1"><![CDATA[Eigenes Label: horror - Automatisch erstellt]]></phrase>
+  <phrase title="style_prop_desc.cv6Genre_pa" addon_id="cv6/RPG" version_id="1020031" version_string="1.2.0 Beta 1"><![CDATA[Eigenes Label: pa - Automatisch erstellt]]></phrase>
+  <phrase title="style_prop_desc.cv6Genre_scifi" addon_id="cv6/RPG" version_id="1000051" version_string="1.0.0 Release Candidate 1"><![CDATA[Eigenes Label: scifi - Automatisch erstellt]]></phrase>
+  <phrase title="style_prop_desc.cv6genre_base" addon_id="cv6/RPG" version_id="1000051" version_string="1.0.0 Release Candidate 1"><![CDATA[Basis-Layout für Genre-Labels und -Pills über alle Genres hinweg.]]></phrase>
+  <phrase title="style_prop_group.cv6Genre" addon_id="cv6/RPG" version_id="1000051" version_string="1.0.0 Release Candidate 1"><![CDATA[RPG Suite: Genres]]></phrase>
+  <phrase title="style_prop_group_desc.cv6Genre" addon_id="cv6/RPG" version_id="1000051" version_string="1.0.0 Beta 1"><![CDATA[Stileinstellungen für Genres.]]></phrase>
+  <phrase title="widget.cv6_rpg_dashboard_genres" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Nach Genre filtern]]></phrase>
+  <phrase title="widget_def.cv6_rpg_genres" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[[DD] RPG Suite: Genres]]></phrase>
+  <phrase title="widget_def_desc.cv6_rpg_genres" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Zeigt eine Liste, ein Kachel-Raster oder eine Pill-Leiste aktiver RPG-Genres mit Icons und Zählern an.]]></phrase>
+  <phrase title="widget_pos.cv6_rpg_dashboard_above" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite Dashboard: Über dem Inhalt]]></phrase>
+  <phrase title="widget_pos.cv6_rpg_dashboard_below" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite Dashboard: Unter dem Inhalt]]></phrase>
+  <phrase title="widget_pos.cv6_rpg_dashboard_main" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite Dashboard: Hauptinhalt]]></phrase>
+  <phrase title="widget_pos.cv6_rpg_dashboard_sidebar" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite Dashboard: Sidebar (rechts)]]></phrase>
+  <phrase title="widget_pos.cv6_rpg_dashboard_sidenav" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite Dashboard: Seitennavigation (links)]]></phrase>
+  <phrase title="widget_pos_desc.cv6_rpg_dashboard_above" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Zeigt Widgets oberhalb des Hauptinhaltsbereichs auf dem RPG Suite Dashboard an.]]></phrase>
+  <phrase title="widget_pos_desc.cv6_rpg_dashboard_below" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Zeigt Widgets unterhalb des Hauptinhaltsbereichs auf dem RPG Suite Dashboard an.]]></phrase>
+  <phrase title="widget_pos_desc.cv6_rpg_dashboard_main" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Zeigt Widgets in der zentralen Hauptspalte auf dem RPG Suite Dashboard an.]]></phrase>
+  <phrase title="widget_pos_desc.cv6_rpg_dashboard_sidebar" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Zeigt Widgets in der rechten Sidebar-Spalte auf dem RPG Suite Dashboard an.]]></phrase>
+  <phrase title="widget_pos_desc.cv6_rpg_dashboard_sidenav" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Zeigt Widgets in der linken Seitennavigations-Spalte auf dem RPG Suite Dashboard an.]]></phrase>
+</language>

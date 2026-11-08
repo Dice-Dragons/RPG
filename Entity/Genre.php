@@ -23,6 +23,7 @@ use XF\Mvc\Entity\Structure;
  * GETTERS
  * @property-read \XF\Phrase|string $title
  * @property-read \XF\Phrase|string $description
+ * @property-read int $total_count
  *
  * RELATIONS
  * @property-read AbstractCollection<\cv6\CharEdit\Entity\Setting> $Settings
@@ -84,7 +85,7 @@ class Genre extends Entity
 			$phrase->title = $this->getPhraseName($type);
 			$phrase->language_id = 0;
 			$phrase->addon_id = ($type === 'title' && in_array((int)$this->genre_id, self::DEFAULT_GENRE_IDS, true))
-				? 'cv6/CharEdit'
+				? 'cv6/RPG'
 				: '';
 		}
 
@@ -104,6 +105,11 @@ class Genre extends Entity
 	public function canDelete(): bool
 	{
 		return ((int)$this->genre_id > self::BLOCKED);
+	}
+
+	public function getTotalCount(): int
+	{
+		return (int)$this->setting_count + (int)$this->map_count + (int)$this->wireset_count;
 	}
 
 	public function updateSettingCount(int $amount = 1, bool $save = true): void
@@ -294,8 +300,8 @@ class Genre extends Entity
 			'class' => [
 				'type' => self::STR,
 				'maxLength' => 25,
-				'required' => 'cv6_please_enter_valid_cssclass',
-				'unique' => 'cv6_class_must_be_unique',
+				'required' => 'cv6_rpg_please_enter_valid_cssclass',
+				'unique' => 'cv6_rpg_class_must_be_unique',
 				'match' => 'alphanumeric',
 			],
 			'icon' => [
@@ -313,13 +319,9 @@ class Genre extends Entity
 		$structure->getters = [
 			'title' => true,
 			'description' => true,
+			'total_count' => true,
 		];
 		$structure->relations = [
-			'Settings' => [
-				'entity' => 'cv6\CharEdit:Setting',
-				'type' => self::TO_MANY,
-				'conditions' => 'genre_id',
-			],
 			'Property' => [
 				'entity' => 'XF:StyleProperty',
 				'type' => self::TO_ONE,
@@ -343,6 +345,15 @@ class Genre extends Entity
 				],
 			],
 		];
+
+		if (\XF::isAddOnActive('cv6/CharEdit'))
+		{
+			$structure->relations['Settings'] = [
+				'entity' => 'cv6\CharEdit:Setting',
+				'type' => self::TO_MANY,
+				'conditions' => 'genre_id',
+			];
+		}
 
 		return $structure;
 	}

@@ -1,0 +1,12 @@
+<xf:title>{{ phrase('cv6_rpg_import_publishers') }}</xf:title>
+
+<xf:form action="{{ link('rpg/publisher/import') }}" upload="true" class="block">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:uploadrow name="upload" accept=".json,.zip"
+				label="{{ phrase('upload_file') }}"
+				explain="{{ phrase('cv6_rpg_publisher_import_file_explain') }}" />
+		</div>
+		<xf:submitrow submit="{{ phrase('proceed...') }}" />
+	</div>
+</xf:form>

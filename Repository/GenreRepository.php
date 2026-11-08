@@ -118,6 +118,11 @@ class GenreRepository extends Repository
 		$db = $this->db();
 		$sm = $db->getSchemaManager();
 
+		if ($sm->tableExists('xf_cv6_setting') && $sm->columnExists('xf_cv6_setting', 'genre_id'))
+		{
+			$db->update('xf_cv6_setting', ['genre_id' => $newGenreId], 'genre_id = ?', [$oldGenreId]);
+		}
+
 		if ($sm->tableExists('xf_cv6_bm_map') && $sm->columnExists('xf_cv6_bm_map', 'genre_id'))
 		{
 			$db->update('xf_cv6_bm_map', ['genre_id' => $newGenreId], 'genre_id = ?', [$oldGenreId]);

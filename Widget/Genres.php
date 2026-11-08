@@ -13,8 +13,8 @@ class Genres extends AbstractWidget
 {
 	protected $defaultOptions = [
 		'layout' => 'sidenav',
-		'target_route' => 'char/setting/list',
-		'count_field' => 'setting_count',
+		'target_route' => 'rpg',
+		'count_field' => 'total_count',
 		'show_all' => true,
 	];
 
@@ -30,20 +30,37 @@ class Genres extends AbstractWidget
 		}
 
 		$options = $this->options;
-		$targetRoute = $options['target_route'] ?? 'char/setting/list';
-		if ($targetRoute === 'char/setting/list' && !\XF::isAddOnActive('cv6/CharEdit') && \XF::isAddOnActive('cv6/BattleMaps'))
+		$positions = $this->widgetConfig->positions;
+		$isDashboardWidget = (
+			$this->widgetConfig->widgetKey === 'cv6_rpg_dashboard_genres'
+			|| isset($positions['cv6_rpg_dashboard_sidenav'])
+			|| isset($positions['cv6_rpg_dashboard_sidebar'])
+		);
+
+		$targetRoute = $options['target_route'] ?? 'rpg';
+		if ($isDashboardWidget)
+		{
+			$targetRoute = 'rpg';
+		}
+		elseif ($targetRoute === 'char/setting/list' && !\XF::isAddOnActive('cv6/CharEdit') && \XF::isAddOnActive('cv6/BattleMaps'))
 		{
 			$targetRoute = 'battle-maps';
+		}
+
+		$countField = $options['count_field'] ?? 'total_count';
+		if ($isDashboardWidget && $countField === 'setting_count')
+		{
+			$countField = 'total_count';
 		}
 
 		$selectedGenreId = (int)($this->contextParams['genre_id'] ?? 0);
 
 		$viewParams = [
-			'title' => $this->getTitle(),
+			'title' => $this->getTitle() ?: \XF::phrase('cv6_rpg_filter_by_genre'),
 			'genres' => $genres,
 			'layout' => $options['layout'] ?? 'sidenav',
 			'targetRoute' => $targetRoute,
-			'countField' => $options['count_field'] ?? 'setting_count',
+			'countField' => $countField,
 			'showAll' => (bool)($options['show_all'] ?? true),
 			'selectedGenreId' => $selectedGenreId,
 		];
@@ -65,14 +82,14 @@ class Genres extends AbstractWidget
 			$options['layout'] = 'sidenav';
 		}
 
-		if (!in_array($options['count_field'], ['setting_count', 'map_count', 'wireset_count', ''], true))
+		if (!in_array($options['count_field'], ['total_count', 'setting_count', 'map_count', 'wireset_count', ''], true))
 		{
-			$options['count_field'] = 'setting_count';
+			$options['count_field'] = 'total_count';
 		}
 
 		if ($options['target_route'] === '')
 		{
-			$options['target_route'] = 'char/setting/list';
+			$options['target_route'] = 'rpg';
 		}
 
 		return true;

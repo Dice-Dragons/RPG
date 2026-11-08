@@ -1,0 +1,1 @@
+This genre is currently assigned to {count} item(s).
