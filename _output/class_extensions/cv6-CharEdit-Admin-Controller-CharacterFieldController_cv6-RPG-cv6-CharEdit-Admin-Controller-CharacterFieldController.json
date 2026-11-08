@@ -1,0 +1,6 @@
+{
+    "from_class": "cv6\\CharEdit\\Admin\\Controller\\CharacterFieldController",
+    "to_class": "cv6\\RPG\\cv6\\CharEdit\\Admin\\Controller\\CharacterFieldController",
+    "execute_order": 10,
+    "active": true
+}

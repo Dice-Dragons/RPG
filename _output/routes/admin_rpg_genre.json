@@ -1,0 +1,11 @@
+{
+    "route_type": "admin",
+    "route_prefix": "rpg",
+    "sub_name": "genre",
+    "format": "genre/:int<genre_id,title>",
+    "build_class": "",
+    "build_method": "",
+    "controller": "cv6\\RPG:Genre",
+    "context": "cv6Genre",
+    "action_prefix": ""
+}

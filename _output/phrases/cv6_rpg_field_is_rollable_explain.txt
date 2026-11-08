@@ -1,0 +1,1 @@
+If enabled, players can roll this attribute or skill directly via the Dice Roller.

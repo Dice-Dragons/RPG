@@ -1,0 +1,11 @@
+{
+    "route_type": "admin",
+    "route_prefix": "rpg",
+    "sub_name": "publisher",
+    "format": "publisher/:int<publisher_id,title>",
+    "build_class": "",
+    "build_method": "",
+    "controller": "cv6\\RPG:Publisher",
+    "context": "cv6Publisher",
+    "action_prefix": ""
+}

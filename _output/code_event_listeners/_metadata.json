@@ -1,0 +1,17 @@
+{
+    "addon_post_install_4eeca0e2595ce864caf7f13269247e4a.json": {
+        "hash": "06e44ec730160e71a79cf36634e970ab"
+    },
+    "addon_post_rebuild_1532b2447833d2da6ca60da57b155a95.json": {
+        "hash": "eaa2a8c3d1f12514a41f0b6e6a6acda7"
+    },
+    "addon_post_upgrade_fa3a4ee3b180c7f40cb3d8860e859338.json": {
+        "hash": "8700a9f6eaaba1b65961a2933b4c4cb4"
+    },
+    "diceroller_context_wiresets_1a0602bd7bfeb71f92b91e7981210641.json": {
+        "hash": "bc757fed4f0afe58ab7c6c82632a1f0b"
+    },
+    "templater_template_pre_render_71b32df555ee1040a41b0f77f58e2367.json": {
+        "hash": "aea0f8900ed963e26a87161303954a27"
+    }
+}

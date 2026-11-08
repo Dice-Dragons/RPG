@@ -1,0 +1,12 @@
+name: Publish Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  xenforo-publish:
+    uses: Dice-Dragons/.github/.github/workflows/xenforo-release-publisher.yml@main
+    secrets:
+      XENFORO_API_KEY: ${{ secrets.XENFORO_API_KEY }}
+      XENFORO_API_USER_ID: ${{ secrets.XENFORO_API_USER_ID }}

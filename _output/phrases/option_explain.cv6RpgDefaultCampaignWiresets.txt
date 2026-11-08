@@ -1,0 +1,1 @@
+Select additional Wiresets that are automatically enabled alongside the Setting's primary wireset when a new Campaign Forum is created.

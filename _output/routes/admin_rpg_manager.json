@@ -1,0 +1,11 @@
+{
+    "route_type": "admin",
+    "route_prefix": "rpg",
+    "sub_name": "manager",
+    "format": "manager",
+    "build_class": "",
+    "build_method": "",
+    "controller": "cv6\\RPG:Manager",
+    "context": "cv6Rpg",
+    "action_prefix": ""
+}

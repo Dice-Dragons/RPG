@@ -1,0 +1,9 @@
+{
+    "template": "cv6_setting_edit",
+    "description": "Adds Primary Wireset selector to Setting edit form",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:selectrow name=\"setting_node_id\" value=\"{$setting.setting_node_id}\" id=\"js-cv6SettingNodeList\"",
+    "replace": "<xf:if is=\"$rpgWiresetPairs is not empty\">\n\t<xf:selectrow name=\"cv6_rpg_wireset\" value=\"{$setting.cv6_rpg_wireset}\"\n\t\tlabel=\"{{ phrase('cv6_rpg_primary_wireset') }}\"\n\t\texplain=\"{{ phrase('cv6_rpg_primary_wireset_explain') }}\">\n\t\t<xf:option value=\"\">{{ phrase('(none)') }}</xf:option>\n\t\t<xf:foreach loop=\"$rpgWiresetPairs\" key=\"$wsTag\" value=\"$wsTitle\">\n\t\t\t<xf:option value=\"{$wsTag}\">{$wsTitle}</xf:option>\n\t\t</xf:foreach>\n\t</xf:selectrow>\n</xf:if>\n\n$0"
+}

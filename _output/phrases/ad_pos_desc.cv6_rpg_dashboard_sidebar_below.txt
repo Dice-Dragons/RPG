@@ -1,0 +1,1 @@
+Displays at the bottom of the right sidebar on the RPG Suite dashboard.

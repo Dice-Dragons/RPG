@@ -1,0 +1,52 @@
+{
+    "admin/cv6_rpg_admin.less": {
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "1f18018dc73c86cb2e003ada5ac2b183"
+    },
+    "admin/cv6_rpg_manager.html": {
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "56aa6300a6e6817ca03bc9a85354ff08"
+    },
+    "admin/widget_def_options_cv6_rpg_genres.html": {
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "7b3fb210a9072b05d2c127750b0b7360"
+    },
+    "public/cv6_rpg.less": {
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "c8d9f35fcb34052394b7ff72fa108572"
+    },
+    "public/cv6_rpg_campaign_link_content.html": {
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "0ebb3faaaa1e8da0bab4ae67ffa0ce25"
+    },
+    "public/cv6_rpg_campaign_macros.html": {
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "148ac19b75a63c25e9440ea51c693930"
+    },
+    "public/cv6_rpg_dashboard.html": {
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "7de923e72644e7c1840044ad499d1ad8"
+    },
+    "public/cv6_rpg_genre_macros.html": {
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "00e80062d9c5b4e9f6c6d7fe3d146e61"
+    },
+    "public/cv6_rpg_thread_companion.html": {
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "a8ed301c9e868be874184a5c3e3c121a"
+    },
+    "public/cv6_rpg_widget_genres.html": {
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "0882782b212eb2c1433fce382913225d"
+    }
+}

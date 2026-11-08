@@ -1,0 +1,9 @@
+{
+    "template": "cv6_genre_edit",
+    "description": "Add Core Icon chooser to Genre edit form",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "\t\t\t<xf:textarearow name=\"description\"",
+    "replace": "\t\t\t<xf:macro template=\"cv6_fa_icon\" name=\"cv6_inputIcon\"\n\t\t\t\targ-target=\"genreIcon\"\n\t\t\t\targ-name=\"icon\"\n\t\t\t\targ-value=\"{$genre.icon}\"\n\t\t\t\targ-label=\"{{ phrase('icon') }}\"\n\t\t\t\targ-explain=\"{{ phrase('cv6_icon_explain') }}\"\n\t\t\t\targ-autocomplete=\"{{ true }}\" />\n\n\t\t\t<xf:textarearow name=\"description\""
+}

@@ -1,0 +1,6 @@
+{
+    "from_class": "cv6\\DiceRoller\\ControllerPlugin\\Roller",
+    "to_class": "cv6\\RPG\\cv6\\DiceRoller\\ControllerPlugin\\Roller",
+    "execute_order": 10,
+    "active": true
+}

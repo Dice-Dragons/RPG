@@ -1,0 +1,1 @@
+Displays widgets inside the left side navigation column on the RPG Suite dashboard.

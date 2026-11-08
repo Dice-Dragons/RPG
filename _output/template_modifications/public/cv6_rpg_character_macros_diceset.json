@@ -1,0 +1,9 @@
+{
+    "template": "cv6_character_macros",
+    "description": "Adds Character DiceSet selector to step_globalbasics",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:if is=\"$char.canSetNpcMode()\">",
+    "replace": "<xf:if is=\"$rpgSelectableDiceSets is not empty\">\n\t<xf:selectrow name=\"{$fieldname}[cv6_rpg_dice_set]\"\n\t\tvalue=\"{{ $char.cv6_rpg_dice_set ?: '' }}\"\n\t\tlabel=\"{{ phrase('cv6_rpg_character_dice_set') }}\"\n\t\texplain=\"{{ phrase('cv6_rpg_character_dice_set_explain') }}\">\n\t\t<xf:option value=\"\">{{ phrase('cv6_rpg_use_account_default_dice_set') }}</xf:option>\n\t\t<xf:foreach loop=\"$rpgSelectableDiceSets\" value=\"$dSet\">\n\t\t\t<xf:option value=\"{$dSet.set_key}\">{$dSet.title}</xf:option>\n\t\t</xf:foreach>\n\t</xf:selectrow>\n</xf:if>\n\n$0"
+}

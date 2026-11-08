@@ -1,0 +1,11 @@
+{
+    "route_type": "public",
+    "route_prefix": "rpg",
+    "sub_name": "",
+    "format": "",
+    "build_class": "",
+    "build_method": "",
+    "controller": "cv6\\RPG:Index",
+    "context": "cv6Rpg",
+    "action_prefix": ""
+}

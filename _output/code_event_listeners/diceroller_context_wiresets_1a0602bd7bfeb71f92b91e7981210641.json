@@ -1,0 +1,9 @@
+{
+    "event_id": "diceroller_context_wiresets",
+    "execute_order": 10,
+    "callback_class": "cv6\\RPG\\Listener",
+    "callback_method": "dicerollerContextWiresets",
+    "active": true,
+    "hint": "",
+    "description": "Inject Setting wireset into DiceRoller context"
+}

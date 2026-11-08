@@ -1,0 +1,53 @@
+<xf:title>{{ phrase('cv6_rpg_suite') }}</xf:title>
+<xf:h1>{{ phrase('cv6_rpg_suite') }}</xf:h1>
+
+<xf:css src="structured_list.less" />
+<xf:css src="cv6_rpg.less" />
+<xf:if is="is_addon_active('cv6/CharEdit')">
+	<xf:css src="cv6_charedit.less" />
+	<xf:css src="cv6_character_tooltip.less" />
+	<xf:js src="cv6/ce/tooltip.js" min="1" addon="cv6/CharEdit" />
+</xf:if>
+
+<xf:pageaction>
+	<xf:if is="is_addon_active('cv6/CharEdit') && $xf.visitor.canCreateCharacter()">
+		<xf:button href="{{ link('char/wizard/step', {'step': 1}) }}" fa="fa-magic" overlay="true" class="button--cta">
+			{{ phrase('cv6_add_new_char') }}
+		</xf:button>
+	</xf:if>
+	<xf:if is="is_addon_active('cv6/CharEdit') && $xf.visitor.hasPermission('cv6Character', 'requestCampaign')">
+		<xf:button href="{{ link('char/campaigns/add') }}" fa="fa-shield-alt" overlay="true">
+			{{ phrase('cv6_rpg_create_campaign') }}
+		</xf:button>
+	</xf:if>
+	<xf:if is="is_addon_active('cv6/BattleMaps') && $xf.visitor.hasPermission('cv6_bm', 'generate')">
+		<xf:button href="{{ link('battle-maps/generator') }}" fa="fa-map">
+			{{ phrase('cv6_rpg_create_battlemap') }}
+		</xf:button>
+	</xf:if>
+	<xf:if is="is_addon_active('cv6/Handout') && $xf.visitor.canCreateHandout()">
+		<xf:button href="{{ link('handouts/add') }}" fa="fa-scroll">
+			{{ phrase('cv6_rpg_create_handout') }}
+		</xf:button>
+	</xf:if>
+</xf:pageaction>
+
+<xf:widgetpos id="cv6_rpg_dashboard_sidenav" position="sidenav" context-genre_id="{$genreId}" />
+<xf:sidenav>
+	<xf:ad position="cv6_rpg_dashboard_sidenav_below" />
+</xf:sidenav>
+
+<xf:widgetpos id="cv6_rpg_dashboard_sidebar" position="sidebar" context-genre_id="{$genreId}" />
+<xf:sidebar>
+	<xf:ad position="cv6_rpg_dashboard_sidebar_below" />
+</xf:sidebar>
+
+<xf:ad position="cv6_rpg_dashboard_above" />
+
+<xf:widgetpos id="cv6_rpg_dashboard_above" context-genre_id="{$genreId}" />
+
+<xf:widgetpos id="cv6_rpg_dashboard_main" context-genre_id="{$genreId}" />
+
+<xf:widgetpos id="cv6_rpg_dashboard_below" context-genre_id="{$genreId}" />
+
+<xf:ad position="cv6_rpg_dashboard_below" />

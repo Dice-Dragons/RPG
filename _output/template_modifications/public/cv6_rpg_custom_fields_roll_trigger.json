@@ -1,0 +1,9 @@
+{
+    "template": "custom_fields_macros",
+    "description": "Adds rollable badge / trigger icon next to rollable character custom fields",
+    "execution_order": 30,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<dd>{$fieldValue}",
+    "replace": "$0\n\t<xf:if is=\"$type == 'characters' && $fieldDefinition.cv6_rpg_rollable && is_addon_active('cv6/DiceRoller')\">\n\t\t<xf:set var=\"$rpgChar\" value=\"{$set.getEntity()}\" />\n\t\t<xf:if is=\"$rpgChar && $rpgChar.hasViewableThread() && $rpgChar.Thread.canRollDice()\">\n\t\t\t<a href=\"{{ link('dice-roller/roll', $rpgChar.Thread, {'character_id': $rpgChar.character_id, 'rpg_field': $fieldId}) }}\"\n\t\t\t\tclass=\"cv6-rpg-field-roll-trigger\"\n\t\t\t\tdata-xf-click=\"overlay\"\n\t\t\t\tdata-xf-init=\"tooltip\"\n\t\t\t\ttitle=\"{{ phrase('cv6_rpg_roll_x', {'field': $fieldDefinition.title}) }}\"><xf:fa icon=\"fa-dice-d20\" /></a>\n\t\t<xf:else />\n\t\t\t<span class=\"cv6-rpg-field-roll-trigger\" data-xf-init=\"tooltip\" title=\"{{ phrase('cv6_rpg_rollable_field') }}\"><xf:fa icon=\"fa-dice-d20\" /></span>\n\t\t</xf:if>\n\t</xf:if>"
+}

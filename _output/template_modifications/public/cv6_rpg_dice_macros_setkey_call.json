@@ -1,0 +1,9 @@
+{
+    "template": "cv6_dice_macros",
+    "description": "Passes rollItem EffectiveDiceSetKey to dice_all_results and dice_result_display",
+    "execution_order": 20,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:macro id=\"dice_all_results\" \n\t\t\t\t\targ-roll=\"{$rollItem.RollData}\"\n\t\t\t\t\targ-user=\"{$rollItem.User}\"\n\t\t\t\t/>",
+    "replace": "<xf:macro id=\"dice_all_results\" \n\t\t\t\t\targ-roll=\"{$rollItem.RollData}\"\n\t\t\t\t\targ-user=\"{$rollItem.User}\"\n\t\t\t\t\targ-setKey=\"{$rollItem.EffectiveDiceSetKey}\"\n\t\t\t\t/>"
+}

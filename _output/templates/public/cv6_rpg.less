@@ -1,0 +1,420 @@
+.cv6-rpg-dashboard-grid
+{
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: @xf-paddingLarge;
+	padding: @xf-paddingLarge;
+}
+
+.cv6-rpg-card
+{
+	border: @xf-borderSize solid @xf-borderColor;
+	border-radius: @xf-borderRadiusMedium;
+	background: @xf-contentBg;
+	padding: @xf-paddingMedium;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: @xf-paddingSmall;
+}
+
+.cv6-rpg-card__header
+{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: @xf-paddingSmall;
+}
+
+.cv6-rpg-card__title
+{
+	font-weight: @xf-fontWeightHeavy;
+	font-size: @xf-fontSizeNormal;
+}
+
+.cv6-rpg-card__meta
+{
+	font-size: @xf-fontSizeSmaller;
+	color: @xf-textColorMuted;
+}
+
+.cv6-rpg-card__actions
+{
+	display: flex;
+	align-items: center;
+	gap: @xf-paddingSmall;
+	margin-top: @xf-paddingSmall;
+}
+
+.cv6-rpg-skill-chips
+{
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-top: @xf-paddingSmall;
+}
+
+.cv6-rpg-skill-chip
+{
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	border: @xf-borderSize solid @xf-borderColor;
+	border-radius: @xf-borderRadiusSmall;
+	padding: 2px 8px;
+	background: @xf-contentAltBg;
+
+	&.is-selected
+	{
+		border-color: @xf-borderColorFeature;
+		background: @xf-inlineModHighlightColor;
+		font-weight: @xf-fontWeightHeavy;
+	}
+}
+
+.cv6-rpg-skill-chip__val
+{
+	font-weight: @xf-fontWeightHeavy;
+	color: @xf-textColorFeature;
+}
+
+.cv6-rpg-roll-character-badge
+{
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	margin-right: 6px;
+	vertical-align: middle;
+
+	.avatar
+	{
+		width: 20px;
+		height: 20px;
+		font-size: 12px;
+	}
+}
+
+.cv6-rpg-field-roll-trigger
+{
+	margin-left: 6px;
+	color: @xf-textColorFeature;
+	text-decoration: none;
+
+	&:hover
+	{
+		color: @xf-linkHoverColor;
+	}
+}
+
+.cv6-rpg-companion
+{
+	margin-bottom: @xf-elementSpacer;
+
+	.cv6-rpg-companion__section
+	{
+		padding: @xf-paddingMedium @xf-paddingLarge;
+		border-bottom: @xf-borderSize solid @xf-borderColorLight;
+
+		&:last-child
+		{
+			border-bottom: none;
+		}
+	}
+
+	.cv6-rpg-companion__charRow
+	{
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: @xf-paddingMedium;
+	}
+
+	.cv6-rpg-companion__charIdentity
+	{
+		display: flex;
+		align-items: center;
+		gap: @xf-paddingSmall;
+	}
+}
+
+// =========================================================================
+// RPG Suite Genre Picker Grid, Pills & Sidenav Filter
+// =========================================================================
+
+.cv6-rpg-genreGrid
+{
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: @xf-paddingSmall;
+
+	&--2col
+	{
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	&--4col
+	{
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+}
+
+.cv6-rpg-genreBtn
+{
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 54px;
+	padding: @xf-paddingSmall;
+	border: @xf-borderSize solid @xf-borderColor;
+	border-radius: @xf-borderRadiusMedium;
+	background: @xf-contentBg;
+	color: @xf-textColor;
+	font-size: @xf-fontSizeSmaller;
+	font-weight: @xf-fontWeightHeavy;
+	text-align: center;
+	text-decoration: none;
+	overflow: hidden;
+	cursor: pointer;
+	transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+
+	.cv6-rpg-genreBtn__icon
+	{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: opacity 0.22s ease, transform 0.22s ease;
+
+		svg, i, .fa--xf
+		{
+			font-size: 1.65rem;
+			color: @xf-textColorMuted;
+			transition: color 0.2s ease;
+		}
+	}
+
+	.cv6-rpg-genreBtn__title
+	{
+		position: relative;
+		z-index: 2;
+		line-height: 1.2;
+		transition: opacity 0.22s ease, transform 0.22s ease;
+	}
+
+	.cv6-rpg-genreBtn__badge
+	{
+		position: absolute;
+		top: 4px;
+		right: 4px;
+		z-index: 3;
+	}
+
+	&.has-icon:not(.cv6-rpg-genreBtn--inline)
+	{
+		.cv6-rpg-genreBtn__icon
+		{
+			position: absolute;
+			inset: 0;
+			z-index: 1;
+			opacity: 1;
+			transform: scale(1);
+		}
+
+		.cv6-rpg-genreBtn__title
+		{
+			opacity: 0;
+			transform: translateY(4px);
+			pointer-events: none;
+		}
+
+		&:hover,
+		&:focus-visible
+		{
+			.cv6-rpg-genreBtn__icon
+			{
+				opacity: 0.16;
+				transform: scale(0.88);
+			}
+
+			.cv6-rpg-genreBtn__title
+			{
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+	}
+
+	&--inline
+	{
+		flex-direction: row;
+		gap: 6px;
+		min-height: 38px;
+
+		.cv6-rpg-genreBtn__icon
+		{
+			svg, i, .fa--xf
+			{
+				font-size: 1.15rem;
+			}
+		}
+	}
+
+	&:hover
+	{
+		background: @xf-contentHighlightBg;
+		border-color: @xf-borderColorHeavy;
+		text-decoration: none;
+	}
+
+	&.is-active
+	{
+		background: @xf-buttonPrimaryBg;
+		border-color: @xf-buttonPrimaryBg;
+		color: @xf-buttonPrimaryTextColor;
+		font-weight: @xf-fontWeightHeavy;
+
+		.cv6-rpg-genreBtn__icon
+		{
+			svg, i, .fa--xf
+			{
+				color: @xf-buttonPrimaryTextColor;
+			}
+		}
+	}
+}
+
+.cv6-rpg-genrePills
+{
+	display: flex;
+	flex-wrap: wrap;
+	gap: @xf-paddingSmall;
+}
+
+.cv6-rpg-genrePill
+{
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 4px 10px;
+	border: @xf-borderSize solid @xf-borderColor;
+	border-radius: 999px;
+	background: @xf-contentBg;
+	color: @xf-textColor;
+	font-size: @xf-fontSizeSmaller;
+	text-decoration: none;
+	transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+	&:hover
+	{
+		background: @xf-contentHighlightBg;
+		border-color: @xf-borderColorHeavy;
+		text-decoration: none;
+	}
+
+	&.is-active
+	{
+		background: @xf-buttonPrimaryBg;
+		border-color: @xf-buttonPrimaryBg;
+		color: @xf-buttonPrimaryTextColor;
+		font-weight: @xf-fontWeightHeavy;
+	}
+
+	&__count
+	{
+		font-size: @xf-fontSizeSmallest;
+		opacity: 0.75;
+	}
+}
+
+.cv6-rpg-genreFilterLink
+{
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.cv6-rpg-genreMenuRow
+{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: @xf-paddingSmall;
+
+	&__label
+	{
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+	}
+}
+
+.cv6-rpg-genreColorDot
+{
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: @xf-textColorMuted;
+	border: 1px solid @xf-borderColorHeavy;
+	flex-shrink: 0;
+}
+
+<xf:if is="$genres is not empty">
+	<xf:foreach loop="$genres" key="$key" value="$class">
+		.cv6-rpg-genreColorDot.genre--{$class},
+		.cv6-rpg-genreColorDot.cv6-genre--{$class}
+		{
+			<xf:if is="property('cv6Genre_' . $class . '--background-color')">
+				background-color: @xf-cv6Genre_{$class}--background-color;
+			<xf:elseif is="property('cv6Genre_' . $class . '--color')" />
+				background-color: @xf-cv6Genre_{$class}--color;
+			</xf:if>
+			<xf:if is="property('cv6Genre_' . $class . '--border-color')">
+				border-color: @xf-cv6Genre_{$class}--border-color;
+			<xf:elseif is="property('cv6Genre_' . $class . '--color')" />
+				border-color: @xf-cv6Genre_{$class}--color;
+			</xf:if>
+		}
+
+		.cv6-rpg-genreBtn.no-icon.genre--{$class}
+		{
+			<xf:if is="property('cv6Genre_' . $class . '--color')">color: @xf-cv6Genre_{$class}--color;</xf:if>
+			<xf:if is="property('cv6Genre_' . $class . '--background-color')">background-color: fade(@xf-cv6Genre_{$class}--background-color, 85%);</xf:if>
+			<xf:if is="property('cv6Genre_' . $class . '--border-color')">
+				border-color: @xf-cv6Genre_{$class}--border-color;
+			<xf:elseif is="property('cv6Genre_' . $class . '--background-color')" />
+				border-color: @xf-cv6Genre_{$class}--background-color;
+			</xf:if>
+		}
+
+		.cv6-rpg-genrePill.no-icon.genre--{$class},
+		.cv6-rpg-genreFilterLink.no-icon.genre--{$class}
+		{
+			<xf:if is="property('cv6Genre_' . $class . '--border-color')">
+				border-left: 3px solid @xf-cv6Genre_{$class}--border-color;
+			<xf:elseif is="property('cv6Genre_' . $class . '--background-color')" />
+				border-left: 3px solid @xf-cv6Genre_{$class}--background-color;
+			<xf:elseif is="property('cv6Genre_' . $class . '--color')" />
+				border-left: 3px solid @xf-cv6Genre_{$class}--color;
+			</xf:if>
+		}
+
+		.cv6-rpg-genreBtn.genre--{$class}.is-active,
+		.cv6-rpg-genrePill.genre--{$class}.is-active
+		{
+			<xf:if is="property('cv6Genre_' . $class . '--color')">color: @xf-cv6Genre_{$class}--color;</xf:if>
+			<xf:if is="property('cv6Genre_' . $class . '--background-color')">background-color: @xf-cv6Genre_{$class}--background-color;</xf:if>
+			<xf:if is="property('cv6Genre_' . $class . '--border-color')">
+				border-color: @xf-cv6Genre_{$class}--border-color;
+			<xf:elseif is="property('cv6Genre_' . $class . '--background-color')" />
+				border-color: @xf-cv6Genre_{$class}--background-color;
+			</xf:if>
+
+			svg, i, .fa--xf
+			{
+				<xf:if is="property('cv6Genre_' . $class . '--color')">color: @xf-cv6Genre_{$class}--color;</xf:if>
+			}
+		}
+	</xf:foreach>
+</xf:if>

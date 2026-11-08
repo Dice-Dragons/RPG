@@ -1,0 +1,12 @@
+# Exclude build releases & temporary build artifacts
+/_releases/
+/_build/
+/vendor/
+
+# Editor and system files
+/.vscode/
+/.cursorrules
+/.phpunit.result.cache
+.DS_Store
+Thumbs.db
+*.bak

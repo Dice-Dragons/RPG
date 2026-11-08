@@ -1,0 +1,6 @@
+{
+    "from_class": "cv6\\DiceRoller\\Entity\\Rolls",
+    "to_class": "cv6\\RPG\\cv6\\DiceRoller\\Entity\\Rolls",
+    "execute_order": 10,
+    "active": true
+}

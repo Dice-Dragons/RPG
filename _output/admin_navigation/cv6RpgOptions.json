@@ -1,0 +1,11 @@
+{
+    "parent_navigation_id": "cv6Rpg",
+    "display_order": 10,
+    "link": "options/groups/cv6Rpg",
+    "icon": "fa-cogs fad",
+    "admin_permission_id": "option",
+    "debug_only": false,
+    "development_only": false,
+    "super_admin_only": false,
+    "hide_no_children": false
+}

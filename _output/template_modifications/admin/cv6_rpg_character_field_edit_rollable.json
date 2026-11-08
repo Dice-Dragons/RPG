@@ -1,0 +1,9 @@
+{
+    "template": "cv6_character_field_edit",
+    "description": "Adds RPG rollable field options to CharacterField edit form",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:checkboxrow label=\"{{ phrase('cv6_visibility') }}\">",
+    "replace": "<xf:if is=\"is_addon_active('cv6/DiceRoller')\">\n\t<xf:checkboxrow label=\"{{ phrase('cv6_rpg_dice_rolling') }}\">\n\t\t<xf:option name=\"cv6_rpg_rollable\" selected=\"$field.cv6_rpg_rollable\"\n\t\t\tlabel=\"{{ phrase('cv6_rpg_field_is_rollable') }}\"\n\t\t\thint=\"{{ phrase('cv6_rpg_field_is_rollable_explain') }}\"\n\t\t\tdata-hide=\"true\">\n\t\t\t<xf:dependent>\n\t\t\t\t<div class=\"inputGroup\">\n\t\t\t\t\t<span class=\"inputGroup-text\">{{ phrase('cv6_rpg_target_parameter') }}:</span>\n\t\t\t\t\t<xf:textbox name=\"cv6_rpg_roll_config[param_target]\"\n\t\t\t\t\t\tvalue=\"{{ $field.cv6_rpg_roll_config.param_target ?: 'modifier' }}\"\n\t\t\t\t\t\tplaceholder=\"modifier\" />\n\t\t\t\t\t<xf:if is=\"$rpgWiresetPairs is not empty\">\n\t\t\t\t\t\t<span class=\"inputGroup-splitter\"></span>\n\t\t\t\t\t\t<xf:select name=\"cv6_rpg_roll_config[wireset_override]\"\n\t\t\t\t\t\t\tvalue=\"{{ $field.cv6_rpg_roll_config.wireset_override ?: '' }}\">\n\t\t\t\t\t\t\t<xf:option value=\"\">{{ phrase('cv6_rpg_use_setting_wireset') }}</xf:option>\n\t\t\t\t\t\t\t<xf:foreach loop=\"$rpgWiresetPairs\" key=\"$wsTag\" value=\"$wsTitle\">\n\t\t\t\t\t\t\t\t<xf:option value=\"{$wsTag}\">{$wsTitle}</xf:option>\n\t\t\t\t\t\t\t</xf:foreach>\n\t\t\t\t\t\t</xf:select>\n\t\t\t\t\t</xf:if>\n\t\t\t\t</div>\n\t\t\t</xf:dependent>\n\t\t</xf:option>\n\t</xf:checkboxrow>\n</xf:if>\n\n$0"
+}

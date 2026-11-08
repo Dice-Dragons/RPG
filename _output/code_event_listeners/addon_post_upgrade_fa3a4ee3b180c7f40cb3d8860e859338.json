@@ -1,0 +1,9 @@
+{
+    "event_id": "addon_post_upgrade",
+    "execute_order": 10,
+    "callback_class": "cv6\\RPG\\Listener",
+    "callback_method": "addonPostUpgrade",
+    "active": true,
+    "hint": "",
+    "description": "Synchronize RPG Suite bridge columns and genre counters when an RPG module is upgraded"
+}

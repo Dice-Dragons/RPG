@@ -1,0 +1,6 @@
+{
+    "from_class": "cv6\\CharEdit\\Entity\\Setting",
+    "to_class": "cv6\\RPG\\cv6\\CharEdit\\Entity\\Setting",
+    "execute_order": 10,
+    "active": true
+}

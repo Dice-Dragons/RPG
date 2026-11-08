@@ -1,0 +1,9 @@
+{
+    "event_id": "addon_post_install",
+    "execute_order": 10,
+    "callback_class": "cv6\\RPG\\Listener",
+    "callback_method": "addonPostInstall",
+    "active": true,
+    "hint": "",
+    "description": ""
+}

@@ -1,0 +1,90 @@
+<xf:title>{$title}</xf:title>
+<xf:css src="cv6_rpg_admin.less" />
+
+<xf:pageaction>
+	<xf:button href="{{ link_type('public', 'rpg') }}" target="_blank" fa="fa-external-link-alt">
+		{{ phrase('cv6_rpg_open_frontend_dashboard') }}
+	</xf:button>
+	<xf:button href="{{ link('add-ons') }}" fa="fa-puzzle-piece">
+		{{ phrase('add_ons') }}
+	</xf:button>
+</xf:pageaction>
+
+<div class="block">
+	<div class="block-container">
+		<h2 class="block-header">
+			<xf:fa icon="fa-dice-d20" /> {{ phrase('cv6_rpg_suite_ecosystem_overview') }}
+		</h2>
+		<div class="block-body">
+			<xf:datalist data-xf-init="responsive-data-list">
+				<xf:foreach loop="$addonGroups" key="$groupKey" value="$group">
+					<tbody class="dataList-rowGroup">
+						<xf:datarow rowtype="subsection" rowclass="dataList-row--noHover">
+							<xf:cell colspan="4">{{ phrase_dynamic($group.title_phrase) }}</xf:cell>
+						</xf:datarow>
+						<xf:foreach loop="$group.items" key="$addOnId" value="$item">
+							<xf:datarow>
+								<xf:if is="$item.addOn && $item.addOn.hasIcon()">
+									<xf:cell class="dataList-cell--min dataList-cell--image dataList-cell--imageSmall{{ !$item.is_active ? ' cv6-rpg-addonIcon--inactive' : '' }}">
+										<img src="{$item.addOn.getIconUri()}" alt="{$item.title}" />
+									</xf:cell>
+								<xf:elseif is="$item.addOn && $item.addOn.hasFaIcon()" />
+									<xf:cell class="dataList-cell--iconic{{ !$item.is_active ? ' cv6-rpg-addonIcon--inactive' : '' }}">
+										<xf:fa icon="{$item.addOn.icon}" />
+									</xf:cell>
+								<xf:else />
+									<xf:cell class="dataList-cell--iconic{{ !$item.is_active ? ' cv6-rpg-addonIcon--inactive' : '' }}">
+										<xf:fa icon="{$item.icon}" />
+									</xf:cell>
+								</xf:if>
+								<xf:main
+									label="{$item.title}"
+									hint="{$item.addon_id}{{ $item.version_string ? ' • ' . $item.version_string : '' }} — {{ phrase_dynamic($item.desc_phrase) }}" />
+								<xf:cell class="dataList-cell--min">
+									<xf:if is="$item.resource_url">
+										<a href="{$item.resource_url}" target="_blank" rel="noopener">
+											<xf:fa icon="fa-external-link-alt" /> {{ phrase('cv6_rpg_resource_page') }}
+										</a>
+									</xf:if>
+								</xf:cell>
+								<xf:cell class="dataList-cell--min">
+									<xf:if is="$item.is_active">
+										<span class="label label--primary">
+											<xf:fa icon="fa-check-circle" /> {{ phrase('installed') }}
+										</span>
+									<xf:elseif is="$item.is_installed" />
+										<a href="{{ link('rpg/manager/toggle', null, {'addon_id': $item.addon_id, 't': csrf_token()}) }}"
+											class="label label--warning cv6-rpg-statusAction"
+											data-xf-init="tooltip"
+											title="{{ phrase('enable')|for_attr }}">
+											<xf:fa icon="fa-pause-circle" /> {{ phrase('disabled') }} &bull; {{ phrase('enable') }}
+										</a>
+									<xf:elseif is="$item.is_available_on_disk && $item.addOn && $item.addOn.canInstall()" />
+										<a href="{{ link('add-ons/install', $item.addOn) }}"
+											data-xf-click="overlay"
+											data-cache="0"
+											class="label label--accent cv6-rpg-statusAction"
+											data-xf-init="tooltip"
+											title="{{ phrase('install')|for_attr }}">
+											<xf:fa icon="fa-box-open" /> {{ phrase('installable') }} &bull; {{ phrase('install') }}
+										</a>
+									<xf:elseif is="$item.is_available_on_disk" />
+										<span class="label label--accent">
+											<xf:fa icon="fa-box-open" /> {{ phrase('installable') }}
+										</span>
+									<xf:else />
+										<span class="label label--subtle">
+											<xf:fa icon="fa-times-circle" /> {{ phrase('cv6_rpg_not_installed') }}
+										</span>
+									</xf:if>
+								</xf:cell>
+							</xf:datarow>
+						</xf:foreach>
+					</tbody>
+				</xf:foreach>
+			</xf:datalist>
+		</div>
+	</div>
+</div>
+
+<xf:macro template="section_nav_macros" name="section_nav" arg-section="{$entry.navigation_id}" />

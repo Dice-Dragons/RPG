@@ -1,0 +1,9 @@
+{
+    "template": "thread_view",
+    "description": "Adds collapsible In-Thread RPG Companion Bar in Campaign Forum threads",
+    "execution_order": 15,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<!--[XF:content_top]-->",
+    "replace": "$0\n<xf:if is=\"$rpgThreadCampaign\">\n\t<xf:macro template=\"cv6_rpg_thread_companion\" name=\"companion_bar\"\n\t\targ-campaign=\"{$rpgThreadCampaign}\"\n\t\targ-thread=\"{$thread}\"\n\t\targ-characters=\"{$rpgThreadCharacters}\"\n\t\targ-battlemapLinks=\"{$rpgThreadBattlemapLinks}\"\n\t\targ-handoutLinks=\"{$rpgThreadHandoutLinks}\"\n\t\targ-isGm=\"{$rpgThreadIsGm}\" />\n</xf:if>"
+}

@@ -1,0 +1,1 @@
+Displays a list, grid, or pill bar of active RPG genres with icons and counters.

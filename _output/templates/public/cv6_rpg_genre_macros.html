@@ -1,0 +1,312 @@
+<xf:macro name="genre_filter_sidenav"
+	arg-genres="!"
+	arg-route="!"
+	arg-data="{{ null }}"
+	arg-params="{{ [] }}"
+	arg-selectedGenreId="{{ 0 }}"
+	arg-selectedGenreClass=""
+	arg-countField=""
+	arg-layout="sidenav"
+	arg-title="{{ phrase('cv6_rpg_filter_by_genre') }}"
+	arg-allLabel="{{ phrase('all') }}"
+	arg-showAll="{{ true }}"
+	arg-showBlock="{{ true }}">
+
+	<xf:if is="$genres is not empty">
+		<xf:css src="cv6_rpg.less" />
+
+		<xf:set var="$resetParams" value="{$params}" />
+		<xf:set var="$innerContent">
+			<xf:if is="$layout == 'pills'">
+				<div class="cv6-rpg-genrePills">
+					<xf:if is="$showAll">
+						<a href="{{ link($route, $data, $resetParams + {'genre_id': null, 'genre': null}) }}"
+							class="cv6-rpg-genrePill {{ (!$selectedGenreId && !$selectedGenreClass) ? 'is-active' : '' }}">
+							<span>{$allLabel}</span>
+						</a>
+					</xf:if>
+					<xf:foreach loop="$genres" key="$gKey" value="$genre">
+						<xf:set var="$gId" value="{{ $genre.genre_id ?: $gKey }}" />
+						<xf:set var="$isActive" value="{{ ($selectedGenreId && $selectedGenreId == $gId) || (!$selectedGenreId && $selectedGenreClass && $selectedGenreClass == $genre.class) }}" />
+						<a href="{{ link($route, $data, $params + {'genre_id': $gId}) }}"
+							class="cv6-rpg-genrePill genre--{$genre.class} cv6-genre--{$genre.class} {{ $genre.icon ? 'has-icon' : 'no-icon' }} {{ $isActive ? 'is-active' : '' }}">
+							<xf:if is="$genre.icon">
+								<xf:fa icon="{{ cv6icon($genre.icon) }}" />
+							<xf:else />
+								<span class="cv6-rpg-genreColorDot genre--{$genre.class} cv6-genre--{$genre.class}"></span>
+							</xf:if>
+							<span class="cv6-rpg-genrePill__title">{$genre.title}</span>
+							<xf:if is="$countField == 'setting_count' && $genre.setting_count !== null">
+								<span class="cv6-rpg-genrePill__count">{$genre.setting_count|number}</span>
+							<xf:elseif is="$countField == 'map_count' && $genre.map_count !== null" />
+								<span class="cv6-rpg-genrePill__count">{$genre.map_count|number}</span>
+							<xf:elseif is="$countField == 'wireset_count' && $genre.wireset_count !== null" />
+								<span class="cv6-rpg-genrePill__count">{$genre.wireset_count|number}</span>
+							</xf:if>
+						</a>
+					</xf:foreach>
+				</div>
+			<xf:elseif is="$layout == 'dropdown'" />
+				<xf:macro name="genre_filter_dropdown"
+					arg-genres="{$genres}"
+					arg-route="{$route}"
+					arg-data="{$data}"
+					arg-params="{$params}"
+					arg-selectedGenreId="{$selectedGenreId}"
+					arg-selectedGenreClass="{$selectedGenreClass}"
+					arg-countField="{$countField}"
+					arg-allLabel="{$allLabel}" />
+			<xf:elseif is="$layout == 'grid'" />
+				<div class="cv6-rpg-genreGrid">
+					<xf:if is="$showAll">
+						<a href="{{ link($route, $data, $resetParams + {'genre_id': null, 'genre': null}) }}"
+							class="cv6-rpg-genreBtn has-icon {{ (!$selectedGenreId && !$selectedGenreClass) ? 'is-active' : '' }}">
+							<span class="cv6-rpg-genreBtn__icon">
+								<xf:fa icon="fa-layer-group" />
+							</span>
+							<span class="cv6-rpg-genreBtn__title">{$allLabel}</span>
+						</a>
+					</xf:if>
+					<xf:foreach loop="$genres" key="$gKey" value="$genre">
+						<xf:set var="$gId" value="{{ $genre.genre_id ?: $gKey }}" />
+						<xf:set var="$isActive" value="{{ ($selectedGenreId && $selectedGenreId == $gId) || (!$selectedGenreId && $selectedGenreClass && $selectedGenreClass == $genre.class) }}" />
+						<a href="{{ link($route, $data, $params + {'genre_id': $gId}) }}"
+							class="cv6-rpg-genreBtn genre--{$genre.class} cv6-genre--{$genre.class} {{ $genre.icon ? 'has-icon' : 'no-icon' }} {{ $isActive ? 'is-active' : '' }}">
+							<xf:if is="$genre.icon">
+								<span class="cv6-rpg-genreBtn__icon">
+									<xf:fa icon="{{ cv6icon($genre.icon) }}" />
+								</span>
+							</xf:if>
+							<span class="cv6-rpg-genreBtn__title">{$genre.title}</span>
+							<xf:if is="$countField == 'setting_count' && $genre.setting_count !== null">
+								<span class="cv6-rpg-genreBtn__badge label label--subtle label--smallest">{$genre.setting_count|number}</span>
+							<xf:elseif is="$countField == 'map_count' && $genre.map_count !== null" />
+								<span class="cv6-rpg-genreBtn__badge label label--subtle label--smallest">{$genre.map_count|number}</span>
+							<xf:elseif is="$countField == 'wireset_count' && $genre.wireset_count !== null" />
+								<span class="cv6-rpg-genreBtn__badge label label--subtle label--smallest">{$genre.wireset_count|number}</span>
+							</xf:if>
+						</a>
+					</xf:foreach>
+				</div>
+			<xf:else />
+				<ol class="categoryList toggleTarget is-active cv6-rpg-genreSidenav">
+					<xf:if is="$showAll">
+						<li class="categoryList-item">
+							<div class="categoryList-itemRow">
+								<a href="{{ link($route, $data, $resetParams + {'genre_id': null, 'genre': null}) }}"
+									class="categoryList-link {{ (!$selectedGenreId && !$selectedGenreClass) ? 'is-selected' : '' }}">
+									{$allLabel}
+								</a>
+							</div>
+						</li>
+					</xf:if>
+					<xf:foreach loop="$genres" key="$gKey" value="$genre">
+						<xf:set var="$gId" value="{{ $genre.genre_id ?: $gKey }}" />
+						<xf:set var="$isActive" value="{{ ($selectedGenreId && $selectedGenreId == $gId) || (!$selectedGenreId && $selectedGenreClass && $selectedGenreClass == $genre.class) }}" />
+						<li class="categoryList-item">
+							<div class="categoryList-itemRow">
+								<a href="{{ link($route, $data, $params + {'genre_id': $gId}) }}"
+									class="categoryList-link cv6-rpg-genreFilterLink genre--{$genre.class} cv6-genre--{$genre.class} {{ $genre.icon ? 'has-icon' : 'no-icon' }} {{ $isActive ? 'is-selected' : '' }}">
+									<xf:if is="$genre.icon">
+										<xf:fa icon="{{ cv6icon($genre.icon) }}" />
+									<xf:else />
+										<span class="cv6-rpg-genreColorDot genre--{$genre.class} cv6-genre--{$genre.class}"></span>
+									</xf:if>
+									<span class="cv6-rpg-genreFilterLink__title">{$genre.title}</span>
+								</a>
+								<xf:if is="$countField == 'setting_count' && $genre.setting_count !== null">
+									<span class="categoryList-label">
+										<span class="label label--subtle label--smallest">{$genre.setting_count|number}</span>
+									</span>
+								<xf:elseif is="$countField == 'map_count' && $genre.map_count !== null" />
+									<span class="categoryList-label">
+										<span class="label label--subtle label--smallest">{$genre.map_count|number}</span>
+									</span>
+								<xf:elseif is="$countField == 'wireset_count' && $genre.wireset_count !== null" />
+									<span class="categoryList-label">
+										<span class="label label--subtle label--smallest">{$genre.wireset_count|number}</span>
+									</span>
+								</xf:if>
+							</div>
+						</li>
+					</xf:foreach>
+				</ol>
+			</xf:if>
+		</xf:set>
+
+		<xf:if is="$showBlock && $layout != 'dropdown'">
+			<div class="block">
+				<div class="block-container">
+					<xf:if is="$title">
+						<h3 class="block-minorHeader">{$title}</h3>
+					</xf:if>
+					<div class="block-body {{ ($layout == 'grid' || $layout == 'pills') ? 'block-row' : '' }}">
+						{$innerContent|raw}
+					</div>
+				</div>
+			</div>
+		<xf:else />
+			{$innerContent|raw}
+		</xf:if>
+	</xf:if>
+</xf:macro>
+
+<xf:macro name="genre_filter_dropdown"
+	arg-genres="!"
+	arg-route="!"
+	arg-data="{{ null }}"
+	arg-params="{{ [] }}"
+	arg-selectedGenreId="{{ 0 }}"
+	arg-selectedGenreClass=""
+	arg-countField="setting_count"
+	arg-allLabel="{{ phrase('cv6_all_genres') }}"
+	arg-buttonClass=""
+	arg-icon="fa-filter"
+	arg-resetValue="{{ 0 }}">
+
+	<xf:if is="$genres is not empty">
+		<xf:css src="cv6_rpg.less" />
+
+		<xf:set var="$selectedGenre" value="{{ null }}" />
+		<xf:foreach loop="$genres" key="$gKey" value="$genreItem">
+			<xf:set var="$gId" value="{{ $genreItem.genre_id ?: $gKey }}" />
+			<xf:if is="($selectedGenreId && $selectedGenreId == $gId) || (!$selectedGenreId && $selectedGenreClass && $selectedGenreClass == $genreItem.class)">
+				<xf:set var="$selectedGenre" value="{$genreItem}" />
+			</xf:if>
+		</xf:foreach>
+
+		<xf:button class="menuTrigger {$buttonClass}" data-xf-click="menu" aria-expanded="false" aria-haspopup="true">
+			<xf:if is="$selectedGenre && $selectedGenre.icon">
+				<xf:fa icon="{{ cv6icon($selectedGenre.icon) }}" />
+			<xf:elseif is="$icon" />
+				<xf:fa icon="{$icon}" />
+			</xf:if>
+			<xf:if is="$selectedGenre">{$selectedGenre.title}<xf:else />{$allLabel}</xf:if>
+		</xf:button>
+		<div class="menu" data-menu="menu" aria-hidden="true">
+			<div class="menu-content">
+				<xf:if is="$selectedGenreId > 0 || $selectedGenreClass">
+					<a href="{{ link($route, $data, $params + {'genre_id': $resetValue, 'genre': null}) }}" class="menu-linkRow cv6-rpg-genreMenuRow">
+						<span class="cv6-rpg-genreMenuRow__label">
+							<xf:if is="$icon"><xf:fa icon="{$icon}" /></xf:if>
+							<span>{$allLabel}</span>
+						</span>
+					</a>
+				</xf:if>
+				<xf:foreach loop="$genres" key="$gKey" value="$genre">
+					<xf:set var="$gId" value="{{ $genre.genre_id ?: $gKey }}" />
+					<xf:set var="$isActive" value="{{ ($selectedGenreId && $selectedGenreId == $gId) || (!$selectedGenreId && $selectedGenreClass && $selectedGenreClass == $genre.class) }}" />
+					<xf:set var="$rowContent">
+						<span class="cv6-rpg-genreMenuRow__label">
+							<xf:if is="$genre.icon">
+								<xf:fa icon="{{ cv6icon($genre.icon) }}" />
+							<xf:elseif is="$genre.class" />
+								<span class="cv6-rpg-genreColorDot genre--{$genre.class} cv6-genre--{$genre.class}"></span>
+							</xf:if>
+							<span>{$genre.title}</span>
+						</span>
+						<xf:if is="$countField == 'setting_count' && $genre.setting_count !== null">
+							<span class="u-pullRight">{$genre.setting_count|number}</span>
+						<xf:elseif is="$countField == 'map_count' && $genre.map_count !== null" />
+							<span class="u-pullRight">{$genre.map_count|number}</span>
+						<xf:elseif is="$countField == 'wireset_count' && $genre.wireset_count !== null" />
+							<span class="u-pullRight">{$genre.wireset_count|number}</span>
+						</xf:if>
+					</xf:set>
+					<xf:if is="$isActive">
+						<span class="menu-linkRow cv6-rpg-genreMenuRow is-selected">
+							{$rowContent|raw}
+						</span>
+					<xf:else />
+						<a href="{{ link($route, $data, $params + {'genre_id': $gId}) }}" class="menu-linkRow cv6-rpg-genreMenuRow">
+							{$rowContent|raw}
+						</a>
+					</xf:if>
+				</xf:foreach>
+			</div>
+		</div>
+	</xf:if>
+</xf:macro>
+
+<xf:macro name="genre_select_row"
+	arg-genres="!"
+	arg-value="{{ 0 }}"
+	arg-name="genre_id"
+	arg-label="{{ phrase('cv6_genre') }}"
+	arg-explain="{{ phrase('cv6_genre_explain') }}"
+	arg-hint=""
+	arg-includeNone="{{ false }}"
+	arg-noneLabel="{{ phrase('(none)') }}"
+	arg-checkOption="{{ true }}">
+
+	<xf:if is="(!$checkOption || $xf.options.cv6EnableGenre) && $genres is not empty">
+		<xf:selectrow name="{$name}" value="{$value}" label="{$label}" explain="{$explain}" hint="{$hint}">
+			<xf:if is="$includeNone">
+				<xf:option value="0">{$noneLabel}</xf:option>
+			</xf:if>
+			<xf:foreach loop="$genres" key="$gKey" value="$genre">
+				<xf:if is="is_scalar($genre) || is_phrase($genre)">
+					<xf:option value="{$gKey}">{$genre}</xf:option>
+				<xf:else />
+					<xf:option value="{{ $genre.genre_id ?: $gKey }}">{$genre.title}</xf:option>
+				</xf:if>
+			</xf:foreach>
+		</xf:selectrow>
+	<xf:else />
+		<xf:hiddenval name="{$name}" value="{$value}" />
+	</xf:if>
+</xf:macro>
+
+<xf:macro name="genre_select"
+	arg-genres="!"
+	arg-value="{{ 0 }}"
+	arg-name="genre_id"
+	arg-class=""
+	arg-includeNone="{{ false }}"
+	arg-noneLabel="{{ phrase('(none)') }}">
+
+	<xf:select name="{$name}" value="{$value}" class="{$class}">
+		<xf:if is="$includeNone">
+			<xf:option value="0">{$noneLabel}</xf:option>
+		</xf:if>
+		<xf:foreach loop="$genres" key="$gKey" value="$genre">
+			<xf:if is="is_scalar($genre) || is_phrase($genre)">
+				<xf:option value="{$gKey}">{$genre}</xf:option>
+			<xf:else />
+				<xf:option value="{{ $genre.genre_id ?: $gKey }}">{$genre.title}</xf:option>
+			</xf:if>
+		</xf:foreach>
+	</xf:select>
+</xf:macro>
+
+<xf:macro name="genre_picker_grid"
+	arg-genres="!"
+	arg-selectedGenreId="{{ 0 }}"
+	arg-selectedGenreClass=""
+	arg-buttonClass="js-bmGenreBtn"
+	arg-gridClass=""
+	arg-iconPosition="top">
+
+	<xf:css src="cv6_rpg.less" />
+
+	<div class="cv6-rpg-genreGrid {$gridClass}">
+		<xf:if is="$genres is not empty">
+			<xf:foreach loop="$genres" key="$gKey" value="$genre">
+				<xf:set var="$gId" value="{{ $genre.genre_id ?: $gKey }}" />
+				<xf:set var="$isActive" value="{{ ($selectedGenreId && $selectedGenreId == $gId) || (!$selectedGenreId && $selectedGenreClass && $selectedGenreClass == $genre.class) }}" />
+				<button type="button"
+					class="cv6-rpg-genreBtn cv6-bm-pickerBtn genre--{$genre.class} cv6-genre--{$genre.class} {{ $genre.icon ? 'has-icon' : 'no-icon' }} {{ $iconPosition == 'inline' ? 'cv6-rpg-genreBtn--inline' : '' }} {{ $isActive ? 'is-active' : '' }} {$buttonClass}"
+					data-genre-id="{$gId}"
+					data-genre-class="{$genre.class}"
+					data-genre="{$genre.class}">
+					<xf:if is="$genre.icon">
+						<span class="cv6-rpg-genreBtn__icon">
+							<xf:fa icon="{{ cv6icon($genre.icon) }}" />
+						</span>
+					</xf:if>
+					<span class="cv6-rpg-genreBtn__title">{$genre.title}</span>
+				</button>
+			</xf:foreach>
+		</xf:if>
+	</div>
+</xf:macro>

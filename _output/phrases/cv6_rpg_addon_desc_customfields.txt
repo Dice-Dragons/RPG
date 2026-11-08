@@ -1,0 +1,1 @@
+Extended custom field types, calculations, and field dependencies (required for [DD] Character Database).

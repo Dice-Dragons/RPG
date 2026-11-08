@@ -1,0 +1,38 @@
+<xf:title>{{ phrase('cv6_rpg_link_content_to_campaign') }}: {$campaign.title}</xf:title>
+
+<xf:form action="{{ link('char/campaigns/rpg-link-content', $campaign) }}" ajax="true" class="block">
+	<div class="block-container">
+		<div class="block-body">
+			<xf:hiddenval name="content_type">{$contentType}</xf:hiddenval>
+
+			<xf:if is="$availableItems is not empty">
+				<xf:selectrow name="content_id" label="{{ $contentType == 'handout' ? phrase('cv6_rpg_handout') : phrase('cv6_rpg_battlemap') }}" required="required">
+					<xf:foreach loop="$availableItems" key="$id" value="$title">
+						<xf:option value="{$id}">{$title}</xf:option>
+					</xf:foreach>
+				</xf:selectrow>
+			<xf:else />
+				<xf:numberboxrow name="content_id" min="1" required="required"
+					label="{{ $contentType == 'handout' ? phrase('cv6_rpg_handout_id') : phrase('cv6_rpg_battlemap_id') }}" />
+			</xf:if>
+
+			<xf:radiorow name="visibility" value="gm_only" label="{{ phrase('cv6_visibility') }}">
+				<xf:option value="gm_only" label="{{ phrase('cv6_rpg_visibility_gm_only') }}"
+					hint="{{ phrase('cv6_rpg_visibility_gm_only_explain') }}" />
+				<xf:option value="players" label="{{ phrase('cv6_rpg_visibility_players') }}"
+					hint="{{ phrase('cv6_rpg_visibility_players_explain') }}" />
+			</xf:radiorow>
+
+			<xf:textboxrow name="title_override" maxlength="150"
+				label="{{ phrase('cv6_rpg_title_override') }}"
+				hint="{{ phrase('optional') }}" />
+
+			<xf:textarearow name="notes" rows="2" autosize="true"
+				label="{{ phrase('cv6_rpg_gm_notes') }}"
+				hint="{{ phrase('optional') }}" />
+
+			<xf:macro template="public:display_order_macros" name="row" arg-value="10" />
+		</div>
+		<xf:submitrow icon="save" />
+	</div>
+</xf:form>

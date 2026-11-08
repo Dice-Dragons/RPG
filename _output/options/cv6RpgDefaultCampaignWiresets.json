@@ -1,0 +1,15 @@
+{
+    "edit_format": "callback",
+    "edit_format_params": "cv6\\RPG\\Option\\Wiresets::renderCheckbox",
+    "data_type": "array",
+    "sub_options": [
+        "*"
+    ],
+    "validation_class": "",
+    "validation_method": "",
+    "advanced": false,
+    "default_value": "[]",
+    "relations": {
+        "cv6Rpg": 10
+    }
+}

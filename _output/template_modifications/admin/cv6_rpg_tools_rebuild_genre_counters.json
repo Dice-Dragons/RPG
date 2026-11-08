@@ -1,0 +1,9 @@
+{
+    "template": "tools_rebuild",
+    "description": "Adds RPG Suite genre counter rebuild job to Tools -> Rebuild caches",
+    "execution_order": 40,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<!--[XF:after_reaction_status]-->",
+    "replace": "$0\n<xf:if is=\"!is_addon_active('cv6/CharEdit')\">\n\t<xf:macro name=\"rebuild_job\"\n\t\targ-header=\"{{ phrase('cv6_rpg_rebuild_genre_counters') }}\"\n\t\targ-job=\"cv6\\RPG:GenreCounterRebuild\" />\n</xf:if>"
+}

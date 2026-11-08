@@ -1,0 +1,9 @@
+{
+    "template": "cv6_dice_macros",
+    "description": "Displays Character identity in roll headers and uses Character DiceSet graphics",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:if is=\"{$rollItem.comment}\">",
+    "replace": "<xf:if is=\"$rollItem.hasCharacter()\">\n\t<xf:css src=\"cv6_rpg.less\" />\n\t<span class=\"cv6-rpg-roll-character-badge\">\n\t\t{{ character_portrait($rollItem.Character, 'xxs', link('char', $rollItem.Character), true) }}\n\t\t<a href=\"{{ link('char', $rollItem.Character) }}\"\n\t\t\t<xf:if is=\"$rollItem.Character.Setting && $rollItem.Character.Setting.idcard\">data-xf-init=\"cv6-character-tooltip\" data-character-id=\"{$rollItem.Character.character_id}\"</xf:if>\n\t\t><strong>{$rollItem.Character.name}</strong></a>:\n\t</span>\n</xf:if>\n$0"
+}

@@ -1,0 +1,9 @@
+{
+    "template": "cv6_dice_roll_interface",
+    "description": "Adds Character selector and Quick-Skill Chips to the Dice Roller dialog",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<ul class=\"tabPanes js-diceTabPanes\">",
+    "replace": "<xf:if is=\"$rpgCharacters is not empty\">\n\t<xf:css src=\"cv6_rpg.less\" />\n\t<xf:js src=\"cv6/rpg/suite.js\" min=\"1\" addon=\"cv6/RPG\" />\n\t<div class=\"block-row\"\n\t\tdata-xf-init=\"cv6-rpg-roll-character\"\n\t\tdata-rollables=\"{$rpgCharacterRollablesJson|for_attr}\"\n\t\tdata-prefill-field=\"{$rpgPrefill.field_id|for_attr}\"\n\t\tdata-prefill-comment=\"{$rpgPrefill.comment|for_attr}\"\n\t\tdata-prefill-modifier=\"{$rpgPrefill.modifier|for_attr}\"\n\t\tdata-prefill-wireset=\"{$rpgPrefill.wireset|for_attr}\"\n\t\tdata-prefill-target=\"{$rpgPrefill.target|for_attr}\">\n\t\t<xf:selectrow name=\"cv6_character_id\"\n\t\t\tvalue=\"{$rpgSelectedCharacterId}\"\n\t\t\tclass=\"js-cv6RpgCharacterSelect\"\n\t\t\tlabel=\"{{ phrase('cv6_rpg_roll_as_character') }}\">\n\t\t\t<xf:option value=\"0\">{{ phrase('(none)') }}</xf:option>\n\t\t\t<xf:foreach loop=\"$rpgCharacters\" value=\"$rpgChar\">\n\t\t\t\t<xf:option value=\"{$rpgChar.character_id}\">{$rpgChar.name}</xf:option>\n\t\t\t</xf:foreach>\n\t\t</xf:selectrow>\n\t\t<div class=\"cv6-rpg-skill-chips js-cv6RpgSkillChips u-hidden\"></div>\n\t</div>\n</xf:if>\n$0"
+}

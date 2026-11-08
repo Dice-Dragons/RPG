@@ -1,0 +1,23 @@
+{
+    "name": "dice-dragons/rpg",
+    "description": "[DD] RPG Suite",
+    "type": "xenforo-addon",
+    "license": "proprietary",
+    "homepage": "https://forum.dice-dragons.de",
+    "authors": [
+        {
+            "name": "Hoffi",
+            "homepage": "https://forum.dice-dragons.de"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Dice-Dragons/Core"
+        }
+    ],
+    "require": {
+        "php": ">=8.2.0",
+        "dice-dragons/core": "^1.6.3"
+    }
+}

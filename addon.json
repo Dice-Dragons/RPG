@@ -1,0 +1,29 @@
+{
+    "legacy_addon_id": "",
+    "title": "[DD] RPG Suite",
+    "description": "Core RPG domain platform (Genres, Publishers, Dashboard) and modular integration bridge for Character Database, Dice Roller, BattleMaps, and Handouts.",
+    "version_id": 1000031,
+    "version_string": "1.0.0 Beta 1",
+    "dev": "Hoffi",
+    "dev_url": "https://forum.dice-dragons.de/mitglieder/hoffi.1/",
+    "faq_url": "https://forum.dice-dragons.de/downloads/",
+    "support_url": "https://forum.dice-dragons.de/forum/",
+    "extra_urls": {
+        "Hoffi@XenForo": "https://xenforo.com/community/members/hoffi.214/"
+    },
+    "require": {
+        "XF": [
+            2030010,
+            "XenForo 2.3.0+"
+        ],
+        "php": [
+            "8.2.0",
+            "PHP 8.2.0+"
+        ],
+        "cv6/Core": [
+            1060370,
+            "[DD] - Core Library 1.6.3+"
+        ]
+    },
+    "icon": "icon-rpg.png"
+}

@@ -1,0 +1,1 @@
+Displays widgets in the central main content column on the RPG Suite dashboard.

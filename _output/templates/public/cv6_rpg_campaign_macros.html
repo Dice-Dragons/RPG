@@ -1,0 +1,203 @@
+<xf:macro name="campaign_assets"
+	arg-campaign="!"
+	arg-battlemapLinks="{{ [] }}"
+	arg-handoutLinks="{{ [] }}"
+	arg-recentRolls="{{ [] }}"
+	arg-isGm="{{ false }}">
+
+	<xf:css src="cv6_rpg.less" />
+
+	<xf:if is="is_addon_active('cv6/BattleMaps') && ($battlemapLinks is not empty || $isGm)">
+		<div class="block">
+			<div class="block-container">
+				<h2 class="block-header cv6-campaign-block-header">
+					<span class="cv6-campaign-block-headerTitle">
+						<xf:fa icon="fa-map" /> {{ phrase('cv6_rpg_campaign_battlemaps') }} ({{ $battlemapLinks is not empty ? $battlemapLinks|count : 0 }})
+					</span>
+					<xf:if is="$isGm">
+						<span class="cv6-campaign-block-headerControls">
+							<a href="{{ link('char/campaigns/rpg-link-content', $campaign, {'content_type': 'battlemap'}) }}"
+								class="button button--link button--small"
+								data-xf-click="overlay">
+								<xf:fa icon="fa-link" /> {{ phrase('cv6_rpg_link_battlemap') }}
+							</a>
+							<xf:if is="$xf.visitor.hasPermission('cv6_bm', 'add')">
+								<a href="{{ link('battle-maps/add', null, {'genre_id': $campaign.Setting ? $campaign.Setting.genre_id : 0}) }}"
+									class="button button--link button--small">
+									<xf:fa icon="fa-plus" /> {{ phrase('cv6_rpg_create_battlemap') }}
+								</a>
+							</xf:if>
+						</span>
+					</xf:if>
+				</h2>
+				<div class="block-body">
+					<xf:if is="$battlemapLinks is not empty">
+						<xf:datalist>
+							<xf:foreach loop="$battlemapLinks" value="$link">
+								<xf:set var="$map" value="{$link.Content}" />
+								<xf:datarow>
+									<xf:cell>
+										<xf:if is="$map">
+											<a href="{{ link('battle-maps', $map) }}"><strong>{$link.effective_title}</strong></a>
+										<xf:else />
+											<strong>{$link.effective_title}</strong>
+										</xf:if>
+										<xf:if is="$link.isVisibleToPlayers()">
+											<span class="label label--green label--smallest"><xf:fa icon="fa-users" /> {{ phrase('cv6_rpg_visibility_players') }}</span>
+										<xf:else />
+											<span class="label label--subtle label--smallest"><xf:fa icon="fa-eye-slash" /> {{ phrase('cv6_rpg_visibility_gm_only') }}</span>
+										</xf:if>
+										<xf:if is="$isGm && $link.notes">
+											<div class="u-muted u-smaller">{$link.notes}</div>
+										</xf:if>
+									</xf:cell>
+									<xf:if is="$isGm">
+										<xf:cell class="dataList-cell--min">
+											<a href="{{ link('char/campaigns/rpg-toggle-visibility', $campaign, {'link_id': $link.link_id, 't': csrf_token()}) }}"
+												class="button button--link button--smaller"
+												title="{{ phrase('cv6_rpg_toggle_player_visibility') }}"
+												data-xf-init="tooltip">
+												<xf:fa icon="{{ $link.isVisibleToPlayers() ? 'fa-eye-slash' : 'fa-eye' }}" />
+											</a>
+										</xf:cell>
+										<xf:cell class="dataList-cell--min">
+											<a href="{{ link('char/campaigns/rpg-unlink-content', $campaign, {'link_id': $link.link_id, 't': csrf_token()}) }}"
+												class="button button--link button--smaller"
+												title="{{ phrase('remove') }}"
+												data-xf-init="tooltip">
+												<xf:fa icon="fa-unlink" />
+											</a>
+										</xf:cell>
+									</xf:if>
+								</xf:datarow>
+							</xf:foreach>
+						</xf:datalist>
+					<xf:else />
+						<div class="block-row u-muted">{{ phrase('cv6_rpg_no_battlemaps_linked') }}</div>
+					</xf:if>
+				</div>
+			</div>
+		</div>
+	</xf:if>
+
+	<xf:if is="is_addon_active('cv6/Handout') && ($handoutLinks is not empty || $isGm)">
+		<div class="block">
+			<div class="block-container">
+				<h2 class="block-header cv6-campaign-block-header">
+					<span class="cv6-campaign-block-headerTitle">
+						<xf:fa icon="fa-scroll" /> {{ phrase('cv6_rpg_campaign_handouts') }} ({{ $handoutLinks is not empty ? $handoutLinks|count : 0 }})
+					</span>
+					<xf:if is="$isGm">
+						<span class="cv6-campaign-block-headerControls">
+							<a href="{{ link('char/campaigns/rpg-link-content', $campaign, {'content_type': 'handout'}) }}"
+								class="button button--link button--small"
+								data-xf-click="overlay">
+								<xf:fa icon="fa-link" /> {{ phrase('cv6_rpg_link_handout') }}
+							</a>
+							<xf:if is="$xf.visitor.hasPermission('cv6_handouts', 'create')">
+								<a href="{{ link('handouts/create') }}"
+									class="button button--link button--small"
+									data-xf-click="overlay">
+									<xf:fa icon="fa-plus" /> {{ phrase('cv6_rpg_create_handout') }}
+								</a>
+							</xf:if>
+						</span>
+					</xf:if>
+				</h2>
+				<div class="block-body">
+					<xf:if is="$handoutLinks is not empty">
+						<xf:datalist>
+							<xf:foreach loop="$handoutLinks" value="$link">
+								<xf:set var="$handout" value="{$link.Content}" />
+								<xf:datarow>
+									<xf:cell>
+										<xf:if is="$handout">
+											<a href="{{ link('handouts/view', $handout) }}" data-xf-click="overlay"><strong>{$link.effective_title}</strong></a>
+										<xf:else />
+											<strong>{$link.effective_title}</strong>
+										</xf:if>
+										<xf:if is="$link.isVisibleToPlayers()">
+											<span class="label label--green label--smallest"><xf:fa icon="fa-users" /> {{ phrase('cv6_rpg_visibility_players') }}</span>
+										<xf:else />
+											<span class="label label--subtle label--smallest"><xf:fa icon="fa-eye-slash" /> {{ phrase('cv6_rpg_visibility_gm_only') }}</span>
+										</xf:if>
+										<xf:if is="$isGm && $link.notes">
+											<div class="u-muted u-smaller">{$link.notes}</div>
+										</xf:if>
+									</xf:cell>
+									<xf:if is="$isGm">
+										<xf:cell class="dataList-cell--min">
+											<a href="{{ link('char/campaigns/rpg-toggle-visibility', $campaign, {'link_id': $link.link_id, 't': csrf_token()}) }}"
+												class="button button--link button--smaller"
+												title="{{ phrase('cv6_rpg_toggle_player_visibility') }}"
+												data-xf-init="tooltip">
+												<xf:fa icon="{{ $link.isVisibleToPlayers() ? 'fa-eye-slash' : 'fa-eye' }}" />
+											</a>
+										</xf:cell>
+										<xf:cell class="dataList-cell--min">
+											<a href="{{ link('char/campaigns/rpg-unlink-content', $campaign, {'link_id': $link.link_id, 't': csrf_token()}) }}"
+												class="button button--link button--smaller"
+												title="{{ phrase('remove') }}"
+												data-xf-init="tooltip">
+												<xf:fa icon="fa-unlink" />
+											</a>
+										</xf:cell>
+									</xf:if>
+								</xf:datarow>
+							</xf:foreach>
+						</xf:datalist>
+					<xf:else />
+						<div class="block-row u-muted">{{ phrase('cv6_rpg_no_handouts_linked') }}</div>
+					</xf:if>
+				</div>
+			</div>
+		</div>
+	</xf:if>
+
+	<xf:if is="is_addon_active('cv6/DiceRoller') && $recentRolls is not empty">
+		<div class="block">
+			<div class="block-container">
+				<h2 class="block-header">
+					<xf:fa icon="fa-dice-d20" /> {{ phrase('cv6_rpg_campaign_dice_log') }}
+				</h2>
+				<div class="block-body">
+					<xf:datalist>
+						<xf:foreach loop="$recentRolls" value="$roll">
+							<xf:datarow>
+								<xf:cell>
+									<xf:if is="$roll.hasCharacter()">
+										<a href="{{ link('char', $roll.Character) }}"><strong>{$roll.Character.name}</strong></a>
+										<span class="u-muted">({{ $roll.User ? $roll.User.username : '' }})</span>
+									<xf:elseif is="$roll.User" />
+										<xf:username user="{$roll.User}" />
+									</xf:if>
+									—
+									<strong>{{ $roll.Wireset ? $roll.Wireset.title : $roll.wireset }}</strong>
+									<xf:if is="$roll.comment">
+										<span class="u-muted">({$roll.comment})</span>
+									</xf:if>
+									<xf:if is="$roll.Thread">
+										<div class="u-muted u-smaller">
+											<a href="{{ link('threads', $roll.Thread) }}">{$roll.Thread.title}</a> • <xf:date time="{$roll.roll_time}" />
+										</div>
+									</xf:if>
+								</xf:cell>
+								<xf:cell class="dataList-cell--min">
+									<xf:if is="$roll.RuleResult">
+										<span class="label label--{{ $roll.RuleResult.isSuccess() ? 'green' : 'red' }}">
+											{$roll.RuleResult.getBadgeText()}
+										</span>
+									<xf:elseif is="$roll.result_sum !== null" />
+										<strong>{$roll.result_sum}</strong>
+									<xf:elseif is="$roll.wins" />
+										<strong>{$roll.wins}</strong>
+									</xf:if>
+								</xf:cell>
+							</xf:datarow>
+						</xf:foreach>
+					</xf:datalist>
+				</div>
+			</div>
+		</div>
+	</xf:if>
+</xf:macro>

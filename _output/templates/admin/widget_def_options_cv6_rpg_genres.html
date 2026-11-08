@@ -1,0 +1,23 @@
+<hr class="formRowSep" />
+
+<xf:radiorow name="options[layout]" value="{$options.layout}" label="{{ phrase('display_style') }}">
+	<xf:option value="sidenav" label="{{ phrase('cv6_rpg_genre_layout_sidenav') }}" />
+	<xf:option value="grid" label="{{ phrase('cv6_rpg_genre_layout_grid') }}" />
+	<xf:option value="pills" label="{{ phrase('cv6_rpg_genre_layout_pills') }}" />
+</xf:radiorow>
+
+<xf:selectrow name="options[target_route]" value="{$options.target_route}" label="{{ phrase('cv6_rpg_genre_target_route') }}">
+	<xf:option value="char/setting/list">{{ phrase('cv6_settings') }} (char/setting/list)</xf:option>
+	<xf:option value="battle-maps">{{ phrase('cv6_rpg_battlemap_count') }} (battle-maps)</xf:option>
+</xf:selectrow>
+
+<xf:selectrow name="options[count_field]" value="{$options.count_field}" label="{{ phrase('cv6_rpg_genre_counter_display') }}">
+	<xf:option value="setting_count">{{ phrase('cv6_settings') }}</xf:option>
+	<xf:option value="map_count">{{ phrase('cv6_rpg_battlemap_count') }}</xf:option>
+	<xf:option value="wireset_count">{{ phrase('cv6_rpg_wireset_count') }}</xf:option>
+	<xf:option value="">{{ phrase('(none)') }}</xf:option>
+</xf:selectrow>
+
+<xf:checkboxrow>
+	<xf:option name="options[show_all]" selected="$options.show_all" label="{{ phrase('cv6_rpg_genre_show_all_link') }}" />
+</xf:checkboxrow>

@@ -1,0 +1,1 @@
+Styled badges and prefix management for RPG setting editions.

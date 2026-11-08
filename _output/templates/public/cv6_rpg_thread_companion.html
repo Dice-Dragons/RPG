@@ -1,0 +1,94 @@
+<xf:macro name="companion_bar"
+	arg-campaign="!"
+	arg-thread="!"
+	arg-characters="{{ [] }}"
+	arg-battlemapLinks="{{ [] }}"
+	arg-handoutLinks="{{ [] }}"
+	arg-isGm="{{ false }}">
+
+	<xf:if is="$campaign && ($characters is not empty || $battlemapLinks is not empty || $handoutLinks is not empty)">
+		<xf:css src="cv6_rpg.less" />
+		<xf:js src="cv6/rpg/suite.js" min="1" addon="cv6/RPG" />
+
+		<div class="block cv6-rpg-companion">
+			<div class="block-container">
+				<h3 class="block-formSectionHeader">
+					<span class="collapseTrigger collapseTrigger--block is-active" data-xf-click="toggle" data-target="< :up:next">
+						<span class="block-formSectionHeader-aligner">
+							<xf:fa icon="fa-dice-d20" /> {{ phrase('cv6_rpg_companion_bar') }}: {$campaign.title}
+						</span>
+					</span>
+				</h3>
+				<div class="block-body block-body--collapsible is-active">
+					<xf:if is="$characters is not empty">
+						<div class="cv6-rpg-companion__section">
+							<xf:foreach loop="$characters" value="$char">
+								<div class="cv6-rpg-companion__charRow">
+									<div class="cv6-rpg-companion__charIdentity">
+										{{ character_portrait($char, 'xs', link('char', $char), true) }}
+										<div>
+											<a href="{{ link('char', $char) }}"
+												<xf:if is="$char.Setting && $char.Setting.idcard">data-xf-init="cv6-character-tooltip" data-character-id="{$char.character_id}"</xf:if>
+											><strong>{$char.name}</strong></a>
+											<xf:if is="$char.archetypes_title">
+												<div class="u-muted u-smaller">{$char.archetypes_title}</div>
+											</xf:if>
+										</div>
+									</div>
+
+									<xf:set var="$rollables" value="{$char.rollable_fields}" />
+									<xf:if is="$rollables is not empty && is_addon_active('cv6/DiceRoller') && $thread.canRollDice()">
+										<div class="cv6-rpg-skill-chips">
+											<xf:foreach loop="$rollables" key="$fId" value="$fData">
+												<a href="{{ link('dice-roller/roll', $thread, {'character_id': $char.character_id, 'rpg_field': $fId, 'rpg_comment': $fData.title, 'rpg_modifier': $fData.value, 'rpg_wireset': $fData.wireset, 'rpg_target': $fData.param_target}) }}"
+													class="button button--link button--smaller cv6-rpg-skill-chip"
+													data-xf-click="cv6-rpg-quick-roll"
+													data-character-id="{$char.character_id}"
+													data-field-id="{$fId}"
+													data-comment="{$fData.title}"
+													data-modifier="{$fData.value}"
+													data-wireset="{$fData.wireset}"
+													data-target="{$fData.param_target}">
+													<xf:fa icon="fa-dice-d20" />
+													<span class="cv6-rpg-skill-chip__label">{$fData.title}</span>
+													<span class="cv6-rpg-skill-chip__val">{$fData.formatted_value}</span>
+												</a>
+											</xf:foreach>
+										</div>
+									</xf:if>
+								</div>
+							</xf:foreach>
+						</div>
+					</xf:if>
+
+					<xf:if is="$battlemapLinks is not empty || $handoutLinks is not empty">
+						<div class="cv6-rpg-companion__section">
+							<ul class="listInline listInline--bullet">
+								<xf:foreach loop="$battlemapLinks" value="$bmLink">
+									<xf:set var="$bm" value="{$bmLink.Content}" />
+									<xf:if is="$bm">
+										<li>
+											<a href="{{ link('battle-maps', $bm) }}">
+												<xf:fa icon="fa-map" /> {$bmLink.effective_title}
+											</a>
+										</li>
+									</xf:if>
+								</xf:foreach>
+								<xf:foreach loop="$handoutLinks" value="$hoLink">
+									<xf:set var="$ho" value="{$hoLink.Content}" />
+									<xf:if is="$ho">
+										<li>
+											<a href="{{ link('handouts/view', $ho) }}" data-xf-click="overlay">
+												<xf:fa icon="fa-scroll" /> {$hoLink.effective_title}
+											</a>
+										</li>
+									</xf:if>
+								</xf:foreach>
+							</ul>
+						</div>
+					</xf:if>
+				</div>
+			</div>
+		</div>
+	</xf:if>
+</xf:macro>

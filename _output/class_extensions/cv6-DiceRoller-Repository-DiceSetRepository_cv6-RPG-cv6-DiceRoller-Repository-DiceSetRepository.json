@@ -1,0 +1,6 @@
+{
+    "from_class": "cv6\\DiceRoller\\Repository\\DiceSetRepository",
+    "to_class": "cv6\\RPG\\cv6\\DiceRoller\\Repository\\DiceSetRepository",
+    "execute_order": 10,
+    "active": true
+}

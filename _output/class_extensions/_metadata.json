@@ -1,0 +1,50 @@
+{
+    "XF-Pub-Controller-ThreadController_cv6-RPG-XF-Pub-Controller-ThreadController.json": {
+        "hash": "a5cd4b9f39de1dcba905c5193a93ef29"
+    },
+    "XF-Service-Post-PreparerService_cv6-RPG-XF-Service-Post-PreparerService.json": {
+        "hash": "5e676b4da0e57d3995781b4a39e70ea7"
+    },
+    "cv6-CharEdit-Admin-Controller-CharacterFieldController_cv6-RPG-cv6-CharEdit-Admin-Controller-CharacterFieldController.json": {
+        "hash": "6a1b8be22714633f6bd96be4c9723d88"
+    },
+    "cv6-CharEdit-Admin-Controller-GenreController_cv6-RPG-cv6-CharEdit-Admin-Controller-GenreController.json": {
+        "hash": "702efb081cbcc2773c8f188321d210de"
+    },
+    "cv6-CharEdit-Admin-Controller-SettingController_cv6-RPG-cv6-CharEdit-Admin-Controller-SettingController.json": {
+        "hash": "2662a75fa26a930d88cc48575503a3cb"
+    },
+    "cv6-CharEdit-Entity-CharacterField_cv6-RPG-cv6-CharEdit-Entity-CharacterField.json": {
+        "hash": "023bc44ebb790cfbf55e54f2a60bf25a"
+    },
+    "cv6-CharEdit-Entity-Character_cv6-RPG-cv6-CharEdit-Entity-Character.json": {
+        "hash": "c7d432ed28745454e163de66bdc0ba44"
+    },
+    "cv6-CharEdit-Entity-Setting_cv6-RPG-cv6-CharEdit-Entity-Setting.json": {
+        "hash": "f77991d01183264b55a3957d66e8a239"
+    },
+    "cv6-CharEdit-Pub-Controller-CampaignController_cv6-RPG-cv6-CharEdit-Pub-Controller-CampaignController.json": {
+        "hash": "c60a0f5bded467fe06391db6d5d9deab"
+    },
+    "cv6-CharEdit-Pub-Controller-CharacterController_cv6-RPG-cv6-CharEdit-Pub-Controller-CharacterController.json": {
+        "hash": "ed4262d3d33bd33d7fee09c61ef93788"
+    },
+    "cv6-CharEdit-Service-Campaign-NodeManager_cv6-RPG-cv6-CharEdit-Service-Campaign-NodeManager.json": {
+        "hash": "d3a6a218da8935abbbd0733f15ad3062"
+    },
+    "cv6-DiceRoller-ControllerPlugin-Roller_cv6-RPG-cv6-DiceRoller-ControllerPlugin-Roller.json": {
+        "hash": "c08b73b857ba70aada684f5fc141d716"
+    },
+    "cv6-DiceRoller-Entity-Dice_cv6-RPG-cv6-DiceRoller-Entity-Dice.json": {
+        "hash": "00bc90abe1e2ad6edbb1777ca3f4078c"
+    },
+    "cv6-DiceRoller-Entity-Rolls_cv6-RPG-cv6-DiceRoller-Entity-Rolls.json": {
+        "hash": "bc1ecd202b53ce527b2ad26d2504e30a"
+    },
+    "cv6-DiceRoller-Repository-DiceSetRepository_cv6-RPG-cv6-DiceRoller-Repository-DiceSetRepository.json": {
+        "hash": "2c2197a95300df864c19324a75f61fe4"
+    },
+    "cv6-Handout-Entity-Handout_cv6-RPG-cv6-Handout-Entity-Handout.json": {
+        "hash": "ca3c7e07669f788ec7551967be8c2c51"
+    }
+}

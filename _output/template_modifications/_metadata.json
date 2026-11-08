@@ -1,0 +1,44 @@
+{
+    "admin/cv6_rpg_character_field_edit_rollable.json": {
+        "hash": "731526ef41f00aa1cff5b93247a08268"
+    },
+    "admin/cv6_rpg_genre_edit_generator_type.json": {
+        "hash": "450287c253d29dd4cfb0c5795e7f2db0"
+    },
+    "admin/cv6_rpg_genre_list_icon.json": {
+        "hash": "1dbfd3fd3e1c872ed56ee0649c12dc1d"
+    },
+    "admin/cv6_rpg_setting_edit_wireset.json": {
+        "hash": "73e38c44041febd761595dc2dee17222"
+    },
+    "admin/cv6_rpg_tools_rebuild_genre_counters.json": {
+        "hash": "c3eb3967a2d806791d5d9406d374f53c"
+    },
+    "public/cv6_rpg_campaign_view_assets.json": {
+        "hash": "a5656c912f72d6029db7a18db5e0d846"
+    },
+    "public/cv6_rpg_character_macros_diceset.json": {
+        "hash": "bafdad74f2e4af20ad581daa0598d992"
+    },
+    "public/cv6_rpg_custom_fields_roll_trigger.json": {
+        "hash": "334801fda06555036fead3c5af12701a"
+    },
+    "public/cv6_rpg_dice_macros_character.json": {
+        "hash": "33683caa3ad1ba4b2db9c1a95a731372"
+    },
+    "public/cv6_rpg_dice_macros_setkey_call.json": {
+        "hash": "80191dde17544f53302de80d247221ab"
+    },
+    "public/cv6_rpg_dice_macros_setkey_def.json": {
+        "hash": "c2eddba0f0a13eef16ee3adcc414dee7"
+    },
+    "public/cv6_rpg_dice_roll_interface.json": {
+        "hash": "2be349aa1cceb76e41685b486f6f47dc"
+    },
+    "public/cv6_rpg_settings_wrapper_genre_filter.json": {
+        "hash": "83ce2aa7a718fbe5798189dae87aa1e1"
+    },
+    "public/cv6_rpg_thread_view_companion.json": {
+        "hash": "68f86f318ac614d7a7eeb3a03832eb81"
+    }
+}

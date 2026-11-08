@@ -1,0 +1,6 @@
+{
+    "from_class": "XF\\Service\\Post\\PreparerService",
+    "to_class": "cv6\\RPG\\XF\\Service\\Post\\PreparerService",
+    "execute_order": 20,
+    "active": true
+}

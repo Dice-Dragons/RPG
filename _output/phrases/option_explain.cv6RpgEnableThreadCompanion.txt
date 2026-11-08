@@ -1,0 +1,1 @@
+Displays a collapsible quick-access RPG Companion bar in Campaign Forum threads for characters, skill rolls, battlemaps, and handouts.

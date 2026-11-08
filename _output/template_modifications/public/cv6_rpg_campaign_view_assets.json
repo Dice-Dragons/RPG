@@ -1,0 +1,9 @@
+{
+    "template": "cv6_campaign_view",
+    "description": "Adds BattleMaps, Handouts, and Dice Roll Log blocks to Campaign Hub",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<div class=\"block\">\n\t<div class=\"block-container\">\n\t\t<h2 class=\"block-header\">\n\t\t\t<xf:fa icon=\"fa-shield-alt\" /> {{ phrase('cv6_ce_party_characters') }}",
+    "replace": "<xf:macro template=\"cv6_rpg_campaign_macros\" name=\"campaign_assets\"\n\targ-campaign=\"{$campaign}\"\n\targ-battlemapLinks=\"{$rpgBattlemapLinks}\"\n\targ-handoutLinks=\"{$rpgHandoutLinks}\"\n\targ-recentRolls=\"{$rpgRecentRolls}\"\n\targ-isGm=\"{$rpgIsGm}\" />\n\n$0"
+}

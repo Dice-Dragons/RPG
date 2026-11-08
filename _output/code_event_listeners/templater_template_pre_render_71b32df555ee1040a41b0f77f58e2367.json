@@ -1,0 +1,9 @@
+{
+    "event_id": "templater_template_pre_render",
+    "execute_order": 10,
+    "callback_class": "cv6\\RPG\\Listener",
+    "callback_method": "preRenderCssLayouts",
+    "active": true,
+    "hint": "public:cv6_rpg.less",
+    "description": "Inject active genre classes into cv6_rpg.less"
+}
