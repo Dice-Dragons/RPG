@@ -1,7 +1,7 @@
 # [DD] RPG Suite
 *This documentation is also available in: [Deutsch](README.de.md)*
 
-![Version](https://img.shields.io/badge/version-1.0.0%20Beta%201-blue.svg) ![XenForo](https://img.shields.io/badge/XenForo-2.3%2B-orange.svg) ![PHP](https://img.shields.io/badge/PHP-8.2%2B-qt.svg)
+![Version](https://img.shields.io/badge/version-1.0.0_Beta_1-blue.svg) ![XenForo](https://img.shields.io/badge/XenForo-2.3%2B-orange.svg) ![PHP](https://img.shields.io/badge/PHP-8.2%2B-qt.svg)
 
 Core RPG domain platform (Genres, Publishers, Dashboard) and modular integration bridge connecting **[DD] Character Database**, **[DD] Dice Roller**, **[DD] BattleMap Generator**, and **[DD] Handout Generator**.
 
