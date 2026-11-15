@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<language title="Deutsch (dev)" date_format="M j, Y" date_short_format="M 'y" date_short_recent_format="M j" time_format="g:i A" currency_format="{symbol}{value}" week_start="0" decimal_point="." thousands_separator="," label_separator=":" comma_separator=", " ellipsis="..." parenthesis_open="(" parenthesis_close=")" language_code="de-DE" text_direction="LTR" user_selectable="1" addon_id="cv6/RPG" base_version_id="1000032" export_version="2">
+<language title="Deutsch (dev)" date_format="M j, Y" date_short_format="M 'y" date_short_recent_format="M j" time_format="g:i A" currency_format="{symbol}{value}" week_start="0" decimal_point="." thousands_separator="," label_separator=":" comma_separator=", " ellipsis="..." parenthesis_open="(" parenthesis_close=")" language_code="de-DE" text_direction="LTR" user_selectable="1" addon_id="cv6/RPG" base_version_id="1000033" export_version="2">
   <phrase title="ad_pos.cv6_rpg_dashboard_above" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite Dashboard: Über dem Inhalt]]></phrase>
   <phrase title="ad_pos.cv6_rpg_dashboard_below" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite Dashboard: Unter dem Inhalt]]></phrase>
   <phrase title="ad_pos.cv6_rpg_dashboard_sidebar_below" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite Dashboard: Sidebar (rechts) unten]]></phrase>
@@ -12,7 +12,6 @@
   <phrase title="admin_navigation.cv6Publisher" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Verlage]]></phrase>
   <phrase title="admin_navigation.cv6Rpg" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite]]></phrase>
   <phrase title="admin_navigation.cv6RpgManager" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Ökosystem & Add-ons]]></phrase>
-  <phrase title="admin_navigation.cv6RpgOptions" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite Optionen]]></phrase>
   <phrase title="admin_permission.cv6ManageRpg" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite verwalten (Genres & Verlage)]]></phrase>
   <phrase title="cv6_ce_genre_title_1" addon_id="cv6/RPG" version_id="0" version_string=""><![CDATA[Standard]]></phrase>
   <phrase title="cv6_ce_genre_title_3" addon_id="cv6/RPG" version_id="1020011" version_string="1.2.0 Alpha 1"><![CDATA[Fantasy]]></phrase>
@@ -37,6 +36,7 @@
   <phrase title="cv6_rpg_addon_group_modules" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite Module]]></phrase>
   <phrase title="cv6_rpg_addon_group_recommended" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Empfohlene optionale Add-ons]]></phrase>
   <phrase title="cv6_rpg_all_genres" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Alle Genres]]></phrase>
+  <phrase title="cv6_rpg_available" addon_id="cv6/RPG" version_id="1000033" version_string="1.0.0 Beta 3"><![CDATA[Verfügbar]]></phrase>
   <phrase title="cv6_rpg_battlemap" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[BattleMap]]></phrase>
   <phrase title="cv6_rpg_battlemap_count" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[BattleMaps]]></phrase>
   <phrase title="cv6_rpg_battlemap_id" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[BattleMap-ID]]></phrase>
@@ -86,6 +86,9 @@
   <phrase title="cv6_rpg_handout_id" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Handout-ID]]></phrase>
   <phrase title="cv6_rpg_import_publishers" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Verlage importieren]]></phrase>
   <phrase title="cv6_rpg_include_images_in_export" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Logos in den Export einschließen (ZIP-Paket)]]></phrase>
+  <phrase title="cv6_rpg_installable" addon_id="cv6/RPG" version_id="1000033" version_string="1.0.0 Beta 3"><![CDATA[Installierbar]]></phrase>
+  <phrase title="cv6_rpg_installed" addon_id="cv6/RPG" version_id="1000033" version_string="1.0.0 Beta 3"><![CDATA[Installiert]]></phrase>
+  <phrase title="cv6_rpg_last_update_check_x" addon_id="cv6/RPG" version_id="1000033" version_string="1.0.0 Beta 3"><![CDATA[Letzte Update-Prüfung: {time}]]></phrase>
   <phrase title="cv6_rpg_latest_version_x" addon_id="cv6/RPG" version_id="1000032" version_string="1.0.0 Beta 2"><![CDATA[Aktuell: {version}]]></phrase>
   <phrase title="cv6_rpg_link_battlemap" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[BattleMap verknüpfen]]></phrase>
   <phrase title="cv6_rpg_link_content_to_campaign" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Inhalt mit Kampagne verknüpfen]]></phrase>
@@ -148,6 +151,7 @@
   <phrase title="cv6_rpg_title_override" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Eigener Kampagnentitel]]></phrase>
   <phrase title="cv6_rpg_toggle_player_visibility" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Spieler-Sichtbarkeit umschalten]]></phrase>
   <phrase title="cv6_rpg_up_to_date" addon_id="cv6/RPG" version_id="1000032" version_string="1.0.0 Beta 2"><![CDATA[Aktuell]]></phrase>
+  <phrase title="cv6_rpg_update_available" addon_id="cv6/RPG" version_id="1000033" version_string="1.0.0 Beta 3"><![CDATA[Update verfügbar]]></phrase>
   <phrase title="cv6_rpg_update_available_x" addon_id="cv6/RPG" version_id="1000032" version_string="1.0.0 Beta 2"><![CDATA[Update verfügbar: {version}]]></phrase>
   <phrase title="cv6_rpg_url" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Website-URL]]></phrase>
   <phrase title="cv6_rpg_url_explain" addon_id="cv6/RPG" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Bitte gib die URL der Website des Verlags ein.]]></phrase>

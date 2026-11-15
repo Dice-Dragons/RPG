@@ -132,15 +132,19 @@ class ManagerController extends AbstractController
 					: ($addOnObj ? (string)$addOnObj->title : $meta['default_title']);
 
 				$versionString = $installedEntity
-					? (string)$installedEntity->version_string
-					: ($addOnObj ? (string)$addOnObj->version_string : '');
+					? $this->formatVersionString((string)$installedEntity->version_string)
+					: '';
 				$installedVersionId = $installedEntity
 					? (int)$installedEntity->version_id
-					: ($addOnObj ? (int)$addOnObj->version_id : 0);
+					: 0;
 
 				$remote = is_array($remoteData[$addOnId] ?? null) ? $remoteData[$addOnId] : null;
 				$remoteVersionId = $remote ? (int)($remote['version_id'] ?? 0) : 0;
-				$remoteVersionString = $remote ? (string)($remote['version_string'] ?? '') : '';
+				$remoteVersionString = $this->formatVersionString(
+					$remote
+						? (string)($remote['version_string'] ?? '')
+						: ($addOnObj ? (string)$addOnObj->version_string : '')
+				);
 
 				$resourceUrl = $this->resolveResourceUrl(
 					$addOnObj ? (string)($addOnObj->faq_url ?? '') : '',
@@ -181,6 +185,20 @@ class ManagerController extends AbstractController
 			'addonGroups' => $addonGroups,
 			'lastVersionCheck' => (int)($remoteInfo['fetched_at'] ?? 0),
 		]);
+	}
+
+	/**
+	 * Formats a version string concisely for AdminCP tables (e.g. "Release Candidate" -> "RC").
+	 */
+	protected function formatVersionString(string $version): string
+	{
+		$version = trim($version);
+		if ($version === '')
+		{
+			return '';
+		}
+
+		return (string)preg_replace('/\bRelease\s+Candidate\b/i', 'RC', $version);
 	}
 
 	/**

@@ -2,6 +2,12 @@
 
 All notable changes to **[DD] RPG Suite** (`cv6/RPG`) are documented in this file.
 
+## [1.0.0 Beta 3] - 2026-11-15
+
+### Changed
+- Redesigned the AdminCP RPG Suite Ecosystem & Add-on Overview (`admin.php?rpg/manager`) with dedicated `Installed` and `Available` version columns, concise `RC` version abbreviations, compact icon-only Resource links, unified status badges, and a block footer showing the last update check timestamp.
+- Removed the redundant `RPG Suite options` link from the AdminCP side navigation.
+
 ## [1.0.0 Beta 2] - 2026-11-15
 
 ### Added

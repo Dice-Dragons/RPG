@@ -1,8 +1,8 @@
 {
     "admin/cv6_rpg_admin.less": {
-        "version_id": 1000031,
-        "version_string": "1.0.0 Beta 1",
-        "hash": "1f18018dc73c86cb2e003ada5ac2b183"
+        "version_id": 1000032,
+        "version_string": "1.0.0 Beta 2",
+        "hash": "78d69330417d0bbf273e3445641432b4"
     },
     "admin/cv6_rpg_genre_delete.html": {
         "version_id": 1000031,
@@ -30,9 +30,9 @@
         "hash": "cadb33adb7510b3b4fcef0ae53b5b19a"
     },
     "admin/cv6_rpg_manager.html": {
-        "version_id": 1000031,
-        "version_string": "1.0.0 Beta 1",
-        "hash": "d44793d42daf80722ab72eb597e2e1c1"
+        "version_id": 1000032,
+        "version_string": "1.0.0 Beta 2",
+        "hash": "aba5f86a9135f934ccdd6f64f89d140f"
     },
     "admin/cv6_rpg_publisher_delete.html": {
         "version_id": 1000031,

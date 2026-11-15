@@ -12,7 +12,6 @@
   <phrase title="admin_navigation.cv6Publisher" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Publishers]]></phrase>
   <phrase title="admin_navigation.cv6Rpg" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite]]></phrase>
   <phrase title="admin_navigation.cv6RpgManager" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Ecosystem & add-ons]]></phrase>
-  <phrase title="admin_navigation.cv6RpgOptions" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite options]]></phrase>
   <phrase title="admin_permission.cv6ManageRpg" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Manage RPG Suite (genres & publishers)]]></phrase>
   <phrase title="cv6_ce_genre_title_1" version_id="1020031" version_string="1.2.0 Beta 1"><![CDATA[Generic]]></phrase>
   <phrase title="cv6_ce_genre_title_3" version_id="1020011" version_string="1.2.0 Alpha 1"><![CDATA[Fantasy]]></phrase>
@@ -38,6 +37,7 @@
   <phrase title="cv6_rpg_addon_group_modules" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[RPG Suite modules]]></phrase>
   <phrase title="cv6_rpg_addon_group_recommended" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Recommended optional add-ons]]></phrase>
   <phrase title="cv6_rpg_all_genres" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[All genres]]></phrase>
+  <phrase title="cv6_rpg_available" version_id="1000032" version_string="1.0.0 Beta 2"><![CDATA[Available]]></phrase>
   <phrase title="cv6_rpg_battlemap" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[BattleMap]]></phrase>
   <phrase title="cv6_rpg_battlemap_count" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[BattleMaps]]></phrase>
   <phrase title="cv6_rpg_battlemap_id" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[BattleMap ID]]></phrase>
@@ -87,6 +87,9 @@
   <phrase title="cv6_rpg_handout_id" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Handout ID]]></phrase>
   <phrase title="cv6_rpg_import_publishers" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Import publishers]]></phrase>
   <phrase title="cv6_rpg_include_images_in_export" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Include logos in export (ZIP package)]]></phrase>
+  <phrase title="cv6_rpg_installable" version_id="1000032" version_string="1.0.0 Beta 2"><![CDATA[Installable]]></phrase>
+  <phrase title="cv6_rpg_installed" version_id="1000032" version_string="1.0.0 Beta 2"><![CDATA[Installed]]></phrase>
+  <phrase title="cv6_rpg_last_update_check_x" version_id="1000032" version_string="1.0.0 Beta 2"><![CDATA[Last update check: {time}]]></phrase>
   <phrase title="cv6_rpg_latest_version_x" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Latest: {version}]]></phrase>
   <phrase title="cv6_rpg_link_battlemap" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Link BattleMap]]></phrase>
   <phrase title="cv6_rpg_link_content_to_campaign" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Link content to campaign]]></phrase>
@@ -149,6 +152,7 @@
   <phrase title="cv6_rpg_title_override" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Custom campaign title]]></phrase>
   <phrase title="cv6_rpg_toggle_player_visibility" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Toggle player visibility]]></phrase>
   <phrase title="cv6_rpg_up_to_date" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Up to date]]></phrase>
+  <phrase title="cv6_rpg_update_available" version_id="1000032" version_string="1.0.0 Beta 2"><![CDATA[Update available]]></phrase>
   <phrase title="cv6_rpg_update_available_x" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Update available: {version}]]></phrase>
   <phrase title="cv6_rpg_url" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Website URL]]></phrase>
   <phrase title="cv6_rpg_url_explain" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[Please enter the URL of the publisher's website.]]></phrase>

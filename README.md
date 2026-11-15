@@ -1,7 +1,7 @@
 # [DD] RPG Suite
 *This documentation is also available in: [Deutsch](README.de.md)*
 
-![Version](https://img.shields.io/badge/version-1.0.0_Beta_2-blue.svg) ![XenForo](https://img.shields.io/badge/XenForo-2.3%2B-orange.svg) ![PHP](https://img.shields.io/badge/PHP-8.2%2B-qt.svg) ![Edition](https://img.shields.io/badge/Edition-RPG%20Suite%20(Free)-success.svg)
+![Version](https://img.shields.io/badge/version-1.0.0_Beta_3-blue.svg) ![XenForo](https://img.shields.io/badge/XenForo-2.3%2B-orange.svg) ![PHP](https://img.shields.io/badge/PHP-8.2%2B-qt.svg) ![Edition](https://img.shields.io/badge/Edition-RPG%20Suite%20(Free)-success.svg)
 
 Core RPG domain platform (Genres, Publishers, Dashboard) and modular integration bridge connecting **[DD] Character Database**, **[DD] Dice Roller**, **[DD] BattleMap Generator**, and **[DD] Handout Generator**. *(Free core foundation of the **[DD] RPG Suite**.)*
 
@@ -19,4 +19,4 @@ Core RPG domain platform (Genres, Publishers, Dashboard) and modular integration
 * Optional [Icon Interfaces](https://forum.dice-dragons.de/downloads/categories/icon-interfaces.61/) (such as `[DD] Icon: Game-Icons`) for extended RPG genre icons
 
 ## Configuration / Usage
-Configure RPG Suite options, Genres, Publishers, and inspect module status in the AdminCP under **RPG Suite**. A German language pack is included in `_output/language/lang-cv6-RPG-de-de.xml` (`language/RPG-1000032-de.xml`).
+Configure RPG Suite options, Genres, Publishers, and inspect module status in the AdminCP under **RPG Suite**. A German language pack is included in `_output/language/lang-cv6-RPG-de-de.xml` (`language/RPG-1000033-de.xml`).

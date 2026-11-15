@@ -71,12 +71,6 @@
         "version_string": "1.0.0 Beta 1",
         "hash": "65b9bb89670503a9dac9381996eb79bf"
     },
-    "admin_navigation.cv6RpgOptions.txt": {
-        "global_cache": false,
-        "version_id": 1000031,
-        "version_string": "1.0.0 Beta 1",
-        "hash": "eef11ffbdf943cb4a19d245e48d75f3e"
-    },
     "admin_permission.cv6ManageRpg.txt": {
         "global_cache": false,
         "version_id": 1000031,
@@ -220,6 +214,12 @@
         "version_id": 1000031,
         "version_string": "1.0.0 Beta 1",
         "hash": "3615ab0d7a589e4a55e0f01cfcf73a32"
+    },
+    "cv6_rpg_available.txt": {
+        "global_cache": false,
+        "version_id": 1000032,
+        "version_string": "1.0.0 Beta 2",
+        "hash": "78945de8de090e90045d299651a68a9b"
     },
     "cv6_rpg_battlemap.txt": {
         "global_cache": false,
@@ -514,6 +514,24 @@
         "version_id": 1000031,
         "version_string": "1.0.0 Beta 1",
         "hash": "d66298efeb2386f2689a5c74924c0cee"
+    },
+    "cv6_rpg_installable.txt": {
+        "global_cache": false,
+        "version_id": 1000032,
+        "version_string": "1.0.0 Beta 2",
+        "hash": "7f06e3b112ddf0d7f1369c6c8b35f4b6"
+    },
+    "cv6_rpg_installed.txt": {
+        "global_cache": false,
+        "version_id": 1000032,
+        "version_string": "1.0.0 Beta 2",
+        "hash": "98dd43dfae05b11befe1f140e0ec787a"
+    },
+    "cv6_rpg_last_update_check_x.txt": {
+        "global_cache": false,
+        "version_id": 1000032,
+        "version_string": "1.0.0 Beta 2",
+        "hash": "bde161cbcc930413f8ed73ce60959cf2"
     },
     "cv6_rpg_latest_version_x.txt": {
         "global_cache": false,
@@ -886,6 +904,12 @@
         "version_id": 1000031,
         "version_string": "1.0.0 Beta 1",
         "hash": "092671d6fbcfa9171424fcc805c6ac4a"
+    },
+    "cv6_rpg_update_available.txt": {
+        "global_cache": false,
+        "version_id": 1000032,
+        "version_string": "1.0.0 Beta 2",
+        "hash": "217b4168969fa53f433f7f6da261a262"
     },
     "cv6_rpg_update_available_x.txt": {
         "global_cache": false,

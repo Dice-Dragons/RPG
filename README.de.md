@@ -1,7 +1,7 @@
 # [DD] RPG Suite
 *Diese Dokumentation ist auch verf체gbar auf: [English](README.md)*
 
-![Version](https://img.shields.io/badge/version-1.0.0_Beta_2-blue.svg) ![XenForo](https://img.shields.io/badge/XenForo-2.3%2B-orange.svg) ![PHP](https://img.shields.io/badge/PHP-8.2%2B-qt.svg) ![Edition](https://img.shields.io/badge/Edition-RPG%20Suite%20(Free)-success.svg)
+![Version](https://img.shields.io/badge/version-1.0.0_Beta_3-blue.svg) ![XenForo](https://img.shields.io/badge/XenForo-2.3%2B-orange.svg) ![PHP](https://img.shields.io/badge/PHP-8.2%2B-qt.svg) ![Edition](https://img.shields.io/badge/Edition-RPG%20Suite%20(Free)-success.svg)
 
 Zentrale RPG-Plattform (Genres, Verlage, Dashboard) und modulare Integrationsbr체cke zwischen **[DD] Character Database**, **[DD] Dice Roller**, **[DD] BattleMap Generator** und **[DD] Handout Generator**. *(Kostenlose Basis der **[DD] RPG Suite**.)*
 
@@ -19,4 +19,4 @@ Zentrale RPG-Plattform (Genres, Verlage, Dashboard) und modulare Integrationsbr�
 * Optionale [Icon Interfaces](https://forum.dice-dragons.de/downloads/categories/icon-interfaces.61/) (z. B. `[DD] Icon: Game-Icons`) f체r erweiterte RPG-Genre-Icons
 
 ## Konfiguration / Nutzung
-Die Verwaltung von Optionen, Genres, Verlagen und der Modul체bersicht erfolgt im AdminCP unter **RPG Suite**. Ein deutsches Sprachpaket liegt unter `_output/language/lang-cv6-RPG-de-de.xml` (`language/RPG-1000032-de.xml`) bei.
+Die Verwaltung von Optionen, Genres, Verlagen und der Modul체bersicht erfolgt im AdminCP unter **RPG Suite**. Ein deutsches Sprachpaket liegt unter `_output/language/lang-cv6-RPG-de-de.xml` (`language/RPG-1000033-de.xml`) bei.

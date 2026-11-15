@@ -3,7 +3,7 @@
 ## 1. Metadata & Architecture
 - **Add-on ID**: `cv6/RPG`
 - **Title**: `[DD] RPG Suite`
-- **Version**: `1.0.0 Beta 2` (`1000032`)
+- **Version**: `1.0.0 Beta 3` (`1000033`)
 - **Public Route**: `rpg/`
 - **Admin Routes**: `rpg/manager`, `rpg/genre`, `rpg/publisher`
 - **CLI Prefix**: `dd-rpg:*` (`dd-rpg:sync-schema`)

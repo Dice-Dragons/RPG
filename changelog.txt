@@ -1,3 +1,8 @@
+1.0.0 Beta 3 (2026-11-15)
+=========================
+* Redesigned the AdminCP RPG Suite Ecosystem & Add-on Overview (admin.php?rpg/manager) with dedicated Installed and Available version columns, concise RC version abbreviations, icon-only Resource links, unified status badges, and a last update check timestamp footer.
+* Removed the redundant RPG Suite options link from the AdminCP side navigation.
+
 1.0.0 Beta 2 (2026-11-15)
 =========================
 * Added zero-credential remote version check on the AdminCP RPG Suite Ecosystem & Add-on Overview (admin.php?rpg/manager) with a 6-hour cache, update badges, and manual refresh button.

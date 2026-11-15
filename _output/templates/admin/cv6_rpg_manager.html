@@ -20,19 +20,21 @@
 		</h2>
 		<div class="block-body">
 			<xf:datalist data-xf-init="responsive-data-list">
+				<thead>
+					<xf:datarow rowtype="header">
+						<xf:cell colspan="2">{{ phrase('add_on') }}</xf:cell>
+						<xf:cell class="dataList-cell--min">{{ phrase('cv6_rpg_installed') }}</xf:cell>
+						<xf:cell class="dataList-cell--min">{{ phrase('cv6_rpg_available') }}</xf:cell>
+						<xf:cell class="dataList-cell--min"></xf:cell>
+						<xf:cell class="dataList-cell--min">{{ phrase('status') }}</xf:cell>
+					</xf:datarow>
+				</thead>
 				<xf:foreach loop="$addonGroups" key="$groupKey" value="$group">
 					<tbody class="dataList-rowGroup">
 						<xf:datarow rowtype="subsection" rowclass="dataList-row--noHover">
-							<xf:cell colspan="4">{{ phrase_dynamic($group.title_phrase) }}</xf:cell>
+							<xf:cell colspan="6">{{ phrase_dynamic($group.title_phrase) }}</xf:cell>
 						</xf:datarow>
 						<xf:foreach loop="$group.items" key="$addOnId" value="$item">
-							<xf:if is="$item.version_string">
-								<xf:set var="$versionText" value="{$item.version_string}" />
-							<xf:elseif is="$item.remote_version_string" />
-								<xf:set var="$versionText">{{ phrase('cv6_rpg_latest_version_x', {'version': $item.remote_version_string}) }}</xf:set>
-							<xf:else />
-								<xf:set var="$versionText" value="" />
-							</xf:if>
 							<xf:datarow>
 								<xf:if is="$item.addOn && $item.addOn.hasIcon()">
 									<xf:cell class="dataList-cell--min dataList-cell--image dataList-cell--imageSmall{{ !$item.is_active ? ' cv6-rpg-addonIcon--inactive' : '' }}">
@@ -49,36 +51,67 @@
 								</xf:if>
 								<xf:main
 									label="{$item.title}"
-									hint="{$item.addon_id}{{ $versionText ? ' • ' . $versionText : '' }} — {{ phrase_dynamic($item.desc_phrase) }}" />
+									hint="{$item.addon_id} — {{ phrase_dynamic($item.desc_phrase) }}" />
+								<xf:cell class="dataList-cell--min">
+									<xf:if is="$item.version_string">
+										<span class="cv6-rpg-version">{$item.version_string}</span>
+									<xf:else />
+										<span class="u-muted">&mdash;</span>
+									</xf:if>
+								</xf:cell>
+								<xf:cell class="dataList-cell--min">
+									<xf:if is="$item.remote_version_string">
+										<span class="cv6-rpg-version{{ $item.is_update_available ? ' cv6-rpg-version--update' : '' }}">
+											{$item.remote_version_string}
+										</span>
+									<xf:else />
+										<span class="u-muted">&mdash;</span>
+									</xf:if>
+								</xf:cell>
 								<xf:cell class="dataList-cell--min">
 									<xf:if is="$item.resource_url">
-										<a href="{$item.resource_url}" target="_blank" rel="noopener">
-											<xf:fa icon="fa-external-link-alt" /> {{ phrase('cv6_rpg_resource_page') }}
+										<a href="{$item.resource_url}"
+											target="_blank"
+											rel="noopener"
+											data-xf-init="tooltip"
+											title="{{ phrase('cv6_rpg_resource_page')|for_attr }}"
+											aria-label="{{ phrase('cv6_rpg_resource_page')|for_attr }}">
+											<xf:fa icon="fa-external-link-alt" />
 										</a>
 									</xf:if>
 								</xf:cell>
 								<xf:cell class="dataList-cell--min">
-									<xf:if is="$item.is_update_available">
+									<xf:if is="$item.addOn && $item.addOn.canUpgrade()">
+										<a href="{{ link('add-ons/upgrade', $item.addOn) }}"
+											data-xf-click="overlay"
+											data-cache="0"
+											class="label label--orange cv6-rpg-statusAction"
+											data-xf-init="tooltip"
+											title="{{ phrase('upgrade')|for_attr }}">
+											<xf:fa icon="fa-arrow-circle-up" /> {{ phrase('upgrade') }}
+										</a>
+									<xf:elseif is="$item.is_installed && $item.is_update_available" />
 										<a href="{$item.resource_url}"
 											target="_blank"
 											rel="noopener"
-											class="label label--warning cv6-rpg-statusAction">
-											<xf:fa icon="fa-arrow-circle-up" /> {{ phrase('cv6_rpg_update_available_x', {'version': $item.remote_version_string}) }}
+											class="label label--orange cv6-rpg-statusAction"
+											data-xf-init="tooltip"
+											title="{{ phrase('cv6_rpg_update_available_x', {'version': $item.remote_version_string})|for_attr }}">
+											<xf:fa icon="fa-arrow-circle-up" /> {{ phrase('cv6_rpg_update_available') }}
 										</a>
-									</xf:if>
-									<xf:if is="$item.is_active && $item.is_up_to_date">
+									<xf:elseif is="$item.is_active && $item.is_up_to_date" />
 										<span class="label label--green"
 											data-xf-init="tooltip"
 											title="{{ phrase('cv6_rpg_up_to_date')|for_attr }}">
-											<xf:fa icon="fa-check-circle" /> {{ phrase('installed') }}
+											<xf:fa icon="fa-check-circle" /> {{ phrase('cv6_rpg_installed') }}
 										</span>
 									<xf:elseif is="$item.is_active" />
 										<span class="label label--primary">
-											<xf:fa icon="fa-check-circle" /> {{ phrase('installed') }}
+											<xf:fa icon="fa-check-circle" /> {{ phrase('cv6_rpg_installed') }}
 										</span>
 									<xf:elseif is="$item.is_installed" />
 										<a href="{{ link('rpg/manager/toggle', null, {'addon_id': $item.addon_id, 't': csrf_token()}) }}"
-											class="label label--warning cv6-rpg-statusAction"
+											class="label label--orange cv6-rpg-statusAction"
 											data-xf-init="tooltip"
 											title="{{ phrase('enable')|for_attr }}">
 											<xf:fa icon="fa-pause-circle" /> {{ phrase('disabled') }} &bull; {{ phrase('enable') }}
@@ -90,11 +123,11 @@
 											class="label label--accent cv6-rpg-statusAction"
 											data-xf-init="tooltip"
 											title="{{ phrase('install')|for_attr }}">
-											<xf:fa icon="fa-box-open" /> {{ phrase('installable') }} &bull; {{ phrase('install') }}
+											<xf:fa icon="fa-box-open" /> {{ phrase('cv6_rpg_installable') }} &bull; {{ phrase('install') }}
 										</a>
 									<xf:elseif is="$item.is_available_on_disk" />
 										<span class="label label--accent">
-											<xf:fa icon="fa-box-open" /> {{ phrase('installable') }}
+											<xf:fa icon="fa-box-open" /> {{ phrase('cv6_rpg_installable') }}
 										</span>
 									<xf:else />
 										<span class="label label--subtle">
@@ -108,6 +141,13 @@
 				</xf:foreach>
 			</xf:datalist>
 		</div>
+		<xf:if is="$lastVersionCheck">
+			<div class="block-footer">
+				<span class="block-footer-counter">
+					{{ phrase('cv6_rpg_last_update_check_x', {'time': date_time($lastVersionCheck)}) }}
+				</span>
+			</div>
+		</xf:if>
 	</div>
 </div>
 
