@@ -2,6 +2,9 @@
 <xf:css src="cv6_rpg_admin.less" />
 
 <xf:pageaction>
+	<xf:button href="{{ link('rpg/manager', null, {'refresh': 1}) }}" fa="fa-sync-alt">
+		{{ phrase('cv6_rpg_check_for_updates') }}
+	</xf:button>
 	<xf:button href="{{ link_type('public', 'rpg') }}" target="_blank" fa="fa-external-link-alt">
 		{{ phrase('cv6_rpg_open_frontend_dashboard') }}
 	</xf:button>
@@ -23,6 +26,13 @@
 							<xf:cell colspan="4">{{ phrase_dynamic($group.title_phrase) }}</xf:cell>
 						</xf:datarow>
 						<xf:foreach loop="$group.items" key="$addOnId" value="$item">
+							<xf:if is="$item.version_string">
+								<xf:set var="$versionText" value="{$item.version_string}" />
+							<xf:elseif is="$item.remote_version_string" />
+								<xf:set var="$versionText">{{ phrase('cv6_rpg_latest_version_x', {'version': $item.remote_version_string}) }}</xf:set>
+							<xf:else />
+								<xf:set var="$versionText" value="" />
+							</xf:if>
 							<xf:datarow>
 								<xf:if is="$item.addOn && $item.addOn.hasIcon()">
 									<xf:cell class="dataList-cell--min dataList-cell--image dataList-cell--imageSmall{{ !$item.is_active ? ' cv6-rpg-addonIcon--inactive' : '' }}">
@@ -39,7 +49,7 @@
 								</xf:if>
 								<xf:main
 									label="{$item.title}"
-									hint="{$item.addon_id}{{ $item.version_string ? ' • ' . $item.version_string : '' }} — {{ phrase_dynamic($item.desc_phrase) }}" />
+									hint="{$item.addon_id}{{ $versionText ? ' • ' . $versionText : '' }} — {{ phrase_dynamic($item.desc_phrase) }}" />
 								<xf:cell class="dataList-cell--min">
 									<xf:if is="$item.resource_url">
 										<a href="{$item.resource_url}" target="_blank" rel="noopener">
@@ -48,7 +58,21 @@
 									</xf:if>
 								</xf:cell>
 								<xf:cell class="dataList-cell--min">
-									<xf:if is="$item.is_active">
+									<xf:if is="$item.is_update_available">
+										<a href="{$item.resource_url}"
+											target="_blank"
+											rel="noopener"
+											class="label label--warning cv6-rpg-statusAction">
+											<xf:fa icon="fa-arrow-circle-up" /> {{ phrase('cv6_rpg_update_available_x', {'version': $item.remote_version_string}) }}
+										</a>
+									</xf:if>
+									<xf:if is="$item.is_active && $item.is_up_to_date">
+										<span class="label label--green"
+											data-xf-init="tooltip"
+											title="{{ phrase('cv6_rpg_up_to_date')|for_attr }}">
+											<xf:fa icon="fa-check-circle" /> {{ phrase('installed') }}
+										</span>
+									<xf:elseif is="$item.is_active" />
 										<span class="label label--primary">
 											<xf:fa icon="fa-check-circle" /> {{ phrase('installed') }}
 										</span>

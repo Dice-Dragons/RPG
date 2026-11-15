@@ -20,10 +20,8 @@
         "color": "@xf-successColor",
         "background-color": "@xf-successBg",
         "border-width": "@xf-borderSizeMinorFeature",
-        "border-style": "solid",
         "border-color": "xf-diminish(@xf-successBg, 10%)",
-        "border-radius": "@xf-borderRadiusLarge",
-        "extra": ""
+        "border-radius": "@xf-borderRadiusLarge"
     },
     "display_order": 1030
 }

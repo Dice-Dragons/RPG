@@ -1,15 +1,15 @@
 {
     "cv6Genre_cyberpunk.json": {
-        "hash": "45204eb20e492063f6df576cf817dd08"
+        "hash": "ee91b991dadbcec879176bbb716dfe17"
     },
     "cv6Genre_default.json": {
-        "hash": "670aead1eece2ebe7d2f2fd1460be4f8"
+        "hash": "43e67b2f0eb8ec82ffd89e79e043ec31"
     },
     "cv6Genre_fantasy.json": {
-        "hash": "23d6ed3d3535ce4f43bb070a99156312"
+        "hash": "4de4d7fe23daabe31e5930a12dd184ce"
     },
     "cv6Genre_horror.json": {
-        "hash": "0487b708b4b68b2cf7b7d92d75195673"
+        "hash": "5d55f1e182591fe5a205572179c713bc"
     },
     "cv6Genre_pa.json": {
         "hash": "e3dafbf2af0c439c89bf493b3c15f718"
@@ -18,9 +18,9 @@
         "hash": "ae307ae19bdc184030ebb6fd9766f0bd"
     },
     "cv6Genre_scifi.json": {
-        "hash": "54e75edbe0d8d6b1d9aa66057ba26675"
+        "hash": "db47deb0713cebace710154e3d4b0c06"
     },
     "cv6genre_base.json": {
-        "hash": "36be4aa5c4c066fbe7852bb16f23b075"
+        "hash": "17d098ab32e191096f15720ea906f83e"
     }
 }

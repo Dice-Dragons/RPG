@@ -3,7 +3,7 @@
 ## 1. Metadata & Architecture
 - **Add-on ID**: `cv6/RPG`
 - **Title**: `[DD] RPG Suite`
-- **Version**: `1.0.0 Beta 1` (`1000031`)
+- **Version**: `1.0.0 Beta 2` (`1000032`)
 - **Public Route**: `rpg/`
 - **Admin Routes**: `rpg/manager`, `rpg/genre`, `rpg/publisher`
 - **CLI Prefix**: `dd-rpg:*` (`dd-rpg:sync-schema`)
@@ -37,12 +37,13 @@
   - `cv6\RPG\Service\Genre\PropertyService`: Creates, updates, rebuilds, and deletes `cv6Genre_<class>` style properties in the `cv6Genre` group and maintains the `genreMap` simpleCache.
   - `cv6\RPG\Service\Export\Publisher` & `cv6\RPG\Service\Import\PublisherImport`: JSON and ZIP (with logo images) export and import for publishers.
 - **Admin Controllers**:
-  - `cv6\RPG\Admin\Controller\ManagerController`: Ecosystem & add-on status overview (`admin:cv6_rpg_manager`) with direct enable action.
+  - `cv6\RPG\Admin\Controller\ManagerController`: Ecosystem & add-on status overview (`admin:cv6_rpg_manager`) with direct enable action and a 6-hour `simpleCache`-backed remote version check against `versions.json`.
   - `cv6\RPG\Admin\Controller\GenreController`: Full CRUD, toggle, manual/alphabetical sorting, and style property sync (`admin:cv6_rpg_genre_*`).
   - `cv6\RPG\Admin\Controller\PublisherController`: Full CRUD, toggle, manual/alphabetical sorting, and JSON/ZIP export/import (`admin:cv6_rpg_publisher_*`).
 - **Public Controllers & Widgets**:
   - `cv6\RPG\Pub\Controller\IndexController`: Public RPG Suite Dashboard (`public:cv6_rpg_dashboard`) at `/rpg/` with `genre_id` context filtering.
-  - `cv6\RPG\Widget\Genres`: Genre filter widget (`cv6_rpg_genres`) supporting `sidenav`, `grid`, and `pills` layouts and `total_count`/`setting_count`/`map_count`/`wireset_count` badges.
+  - `cv6\RPG\Widget\Genres`: Genre filter widget (`cv6_rpg_genres`) supporting `sidenav`, `grid`, and `pills` layouts and `total_count`/`setting_count`/`map_count`/`wireset_count` badges across all dashboard positions.
+  - `cv6\RPG\Widget\CampaignAssets`: Dedicated campaign assets widget (`cv6_rpg_campaign_assets`) displaying linked BattleMaps and Handouts on the campaign overview page (`cv6_campaign_main`).
 
 ## 4. Frontend Assets & Class Extensions
 - **JavaScript**: `src/addons/cv6/RPG/_files/js/cv6/rpg/suite.js` (`XF.cv6RpgRollCharacter` and `XF.cv6RpgQuickRollClick`, minified via `build.json`).

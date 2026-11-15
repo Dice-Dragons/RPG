@@ -21,7 +21,6 @@
         "font-weight": "@xf-fontWeightHeavy",
         "background-color": "@xf-contentAltBg",
         "border-width": "@xf-borderSizeMinorFeature",
-        "border-style": "solid",
         "border-color": "@xf-borderColor",
         "border-radius": "@xf-borderRadiusLarge"
     },

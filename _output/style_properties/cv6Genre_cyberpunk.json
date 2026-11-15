@@ -21,7 +21,6 @@
         "font-weight": "@xf-fontWeightHeavy",
         "background-color": "#111116",
         "border-width": "1px",
-        "border-style": "solid",
         "border-color": "#ff0055",
         "border-radius": "0px",
         "extra": "font-family: @xf-fontFamilyCode;\nletter-spacing: 1px;\ntext-transform: uppercase;"

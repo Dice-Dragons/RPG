@@ -1,3 +1,9 @@
+1.0.0 Beta 2 (2026-11-15)
+=========================
+* Added zero-credential remote version check on the AdminCP RPG Suite Ecosystem & Add-on Overview (admin.php?rpg/manager) with a 6-hour cache, update badges, and manual refresh button.
+* Added right-hand sidebar widget position (cv6_rpg_dashboard_sidebar) and genre filter widget support across all dashboard positions on /rpg/.
+* Added dedicated Campaign Assets widget (cv6_rpg_campaign_assets) for linked BattleMaps and Handouts on the campaign overview page.
+
 1.0.0 Beta 1 (2026-11-08)
 =========================
 * Added standalone RPG domain platform for Genres (xf_cv6_genre) and Publishers (xf_cv6_publisher) with AdminCP management, sorting, and publisher JSON/ZIP export & import.

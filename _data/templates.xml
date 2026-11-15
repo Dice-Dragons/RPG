@@ -258,6 +258,9 @@ a.cv6-rpg-statusAction
 <xf:css src="cv6_rpg_admin.less" />
 
 <xf:pageaction>
+	<xf:button href="{{ link('rpg/manager', null, {'refresh': 1}) }}" fa="fa-sync-alt">
+		{{ phrase('cv6_rpg_check_for_updates') }}
+	</xf:button>
 	<xf:button href="{{ link_type('public', 'rpg') }}" target="_blank" fa="fa-external-link-alt">
 		{{ phrase('cv6_rpg_open_frontend_dashboard') }}
 	</xf:button>
@@ -279,6 +282,13 @@ a.cv6-rpg-statusAction
 							<xf:cell colspan="4">{{ phrase_dynamic($group.title_phrase) }}</xf:cell>
 						</xf:datarow>
 						<xf:foreach loop="$group.items" key="$addOnId" value="$item">
+							<xf:if is="$item.version_string">
+								<xf:set var="$versionText" value="{$item.version_string}" />
+							<xf:elseif is="$item.remote_version_string" />
+								<xf:set var="$versionText">{{ phrase('cv6_rpg_latest_version_x', {'version': $item.remote_version_string}) }}</xf:set>
+							<xf:else />
+								<xf:set var="$versionText" value="" />
+							</xf:if>
 							<xf:datarow>
 								<xf:if is="$item.addOn && $item.addOn.hasIcon()">
 									<xf:cell class="dataList-cell--min dataList-cell--image dataList-cell--imageSmall{{ !$item.is_active ? ' cv6-rpg-addonIcon--inactive' : '' }}">
@@ -295,7 +305,7 @@ a.cv6-rpg-statusAction
 								</xf:if>
 								<xf:main
 									label="{$item.title}"
-									hint="{$item.addon_id}{{ $item.version_string ? ' • ' . $item.version_string : '' }} — {{ phrase_dynamic($item.desc_phrase) }}" />
+									hint="{$item.addon_id}{{ $versionText ? ' • ' . $versionText : '' }} — {{ phrase_dynamic($item.desc_phrase) }}" />
 								<xf:cell class="dataList-cell--min">
 									<xf:if is="$item.resource_url">
 										<a href="{$item.resource_url}" target="_blank" rel="noopener">
@@ -304,7 +314,21 @@ a.cv6-rpg-statusAction
 									</xf:if>
 								</xf:cell>
 								<xf:cell class="dataList-cell--min">
-									<xf:if is="$item.is_active">
+									<xf:if is="$item.is_update_available">
+										<a href="{$item.resource_url}"
+											target="_blank"
+											rel="noopener"
+											class="label label--warning cv6-rpg-statusAction">
+											<xf:fa icon="fa-arrow-circle-up" /> {{ phrase('cv6_rpg_update_available_x', {'version': $item.remote_version_string}) }}
+										</a>
+									</xf:if>
+									<xf:if is="$item.is_active && $item.is_up_to_date">
+										<span class="label label--green"
+											data-xf-init="tooltip"
+											title="{{ phrase('cv6_rpg_up_to_date')|for_attr }}">
+											<xf:fa icon="fa-check-circle" /> {{ phrase('installed') }}
+										</span>
+									<xf:elseif is="$item.is_active" />
 										<span class="label label--primary">
 											<xf:fa icon="fa-check-circle" /> {{ phrase('installed') }}
 										</span>
@@ -1143,7 +1167,6 @@ a.cv6-rpg-statusAction
 	arg-campaign="!"
 	arg-battlemapLinks="{{ [] }}"
 	arg-handoutLinks="{{ [] }}"
-	arg-recentRolls="{{ [] }}"
 	arg-isGm="{{ false }}">
 
 	<xf:css src="cv6_rpg.less" />
@@ -1294,53 +1317,6 @@ a.cv6-rpg-statusAction
 			</div>
 		</div>
 	</xf:if>
-
-	<xf:if is="is_addon_active('cv6/DiceRoller') && $recentRolls is not empty">
-		<div class="block">
-			<div class="block-container">
-				<h2 class="block-header">
-					<xf:fa icon="fa-dice-d20" /> {{ phrase('cv6_rpg_campaign_dice_log') }}
-				</h2>
-				<div class="block-body">
-					<xf:datalist>
-						<xf:foreach loop="$recentRolls" value="$roll">
-							<xf:datarow>
-								<xf:cell>
-									<xf:if is="$roll.hasCharacter()">
-										<a href="{{ link('char', $roll.Character) }}"><strong>{$roll.Character.name}</strong></a>
-										<span class="u-muted">({{ $roll.User ? $roll.User.username : '' }})</span>
-									<xf:elseif is="$roll.User" />
-										<xf:username user="{$roll.User}" />
-									</xf:if>
-									—
-									<strong>{{ $roll.Wireset ? $roll.Wireset.title : $roll.wireset }}</strong>
-									<xf:if is="$roll.comment">
-										<span class="u-muted">({$roll.comment})</span>
-									</xf:if>
-									<xf:if is="$roll.Thread">
-										<div class="u-muted u-smaller">
-											<a href="{{ link('threads', $roll.Thread) }}">{$roll.Thread.title}</a> • <xf:date time="{$roll.roll_time}" />
-										</div>
-									</xf:if>
-								</xf:cell>
-								<xf:cell class="dataList-cell--min">
-									<xf:if is="$roll.RuleResult">
-										<span class="label label--{{ $roll.RuleResult.isSuccess() ? 'green' : 'red' }}">
-											{$roll.RuleResult.getBadgeText()}
-										</span>
-									<xf:elseif is="$roll.result_sum !== null" />
-										<strong>{$roll.result_sum}</strong>
-									<xf:elseif is="$roll.wins" />
-										<strong>{$roll.wins}</strong>
-									</xf:if>
-								</xf:cell>
-							</xf:datarow>
-						</xf:foreach>
-					</xf:datalist>
-				</div>
-			</div>
-		</div>
-	</xf:if>
 </xf:macro>
 ]]></template>
   <template type="public" title="cv6_rpg_dashboard" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[<xf:title>{{ phrase('cv6_rpg_suite') }}</xf:title>
@@ -1378,11 +1354,14 @@ a.cv6-rpg-statusAction
 </xf:pageaction>
 
 <xf:widgetpos id="cv6_rpg_dashboard_sidenav" position="sidenav" context-genre_id="{$genreId}" />
-<xf:widgetpos id="cv6_rpg_dashboard_sidebar" position="sidenav" context-genre_id="{$genreId}" />
 <xf:sidenav>
 	<xf:ad position="cv6_rpg_dashboard_sidenav_below" />
-	<xf:ad position="cv6_rpg_dashboard_sidebar_below" />
 </xf:sidenav>
+
+<xf:widgetpos id="cv6_rpg_dashboard_sidebar" position="sidebar" context-genre_id="{$genreId}" />
+<xf:sidebar>
+	<xf:ad position="cv6_rpg_dashboard_sidebar_below" />
+</xf:sidebar>
 
 <xf:ad position="cv6_rpg_dashboard_above" />
 
@@ -1834,6 +1813,14 @@ a.cv6-rpg-statusAction
 		</div>
 	</xf:if>
 </xf:macro>
+]]></template>
+  <template type="public" title="cv6_rpg_widget_campaign_assets" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[<div {{ widget_data($widget) }}>
+	<xf:macro template="public:cv6_rpg_campaign_macros" name="campaign_assets"
+		arg-campaign="{$campaign}"
+		arg-battlemapLinks="{$battlemapLinks}"
+		arg-handoutLinks="{$handoutLinks}"
+		arg-isGm="{$isGm}" />
+</div>
 ]]></template>
   <template type="public" title="cv6_rpg_widget_genres" version_id="1000031" version_string="1.0.0 Beta 1"><![CDATA[<div {{ widget_data($widget) }}>
 	<xf:macro template="public:cv6_rpg_genre_macros" name="genre_filter_sidenav"

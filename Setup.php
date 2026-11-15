@@ -106,6 +106,7 @@ class Setup extends AbstractSetup
 	public function uninstallStep1(): void
 	{
 		$this->deleteWidget('cv6_rpg_dashboard_genres');
+		$this->deleteWidget('cv6_campaign_main_assets');
 		$this->dropColumnIfExists('xf_cv6_rolls', 'cv6_character_id');
 		$this->dropColumnIfExists('xf_cv6_character_field', ['cv6_rpg_rollable', 'cv6_rpg_roll_config']);
 		$this->dropColumnIfExists('xf_cv6_character', 'cv6_rpg_dice_set');
@@ -175,10 +176,35 @@ class Setup extends AbstractSetup
 			}
 		}
 
+		$assetsDefExists = $db->fetchOne(
+			"SELECT definition_id FROM xf_widget_definition WHERE definition_id = 'cv6_rpg_campaign_assets'"
+		);
+		$campaignPosExists = $db->fetchOne(
+			"SELECT position_id FROM xf_widget_position WHERE position_id = 'cv6_campaign_main'"
+		);
+		$assetsWidgetExists = $db->fetchOne(
+			"SELECT widget_id FROM xf_widget WHERE widget_key = 'cv6_campaign_main_assets'"
+		);
+
+		if ($assetsDefExists && $campaignPosExists && !$assetsWidgetExists)
+		{
+			$this->createWidget(
+				'cv6_campaign_main_assets',
+				'cv6_rpg_campaign_assets',
+				[
+					'positions' => [
+						'cv6_campaign_main' => 30,
+					],
+				],
+				'Campaign assets'
+			);
+		}
+
 		$defaultWidgetTitles = [
 			'widget.cv6_rpg_dashboard_genres' => 'Filter by genre',
 			'widget.cv6_rpg_dashboard_battlemaps' => 'BattleMaps',
 			'widget.cv6_rpg_dashboard_handouts' => 'Handouts',
+			'widget.cv6_campaign_main_assets' => 'Campaign assets',
 		];
 		/** @var \XF\Service\Phrase\CompileService $compileService */
 		$compileService = $this->app()->service('XF:Phrase\Compile');

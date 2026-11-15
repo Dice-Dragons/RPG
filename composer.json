@@ -19,5 +19,8 @@
     "require": {
         "php": ">=8.2.0",
         "dice-dragons/core": "^1.6.3"
+    },
+    "extra": {
+        "dd-tier": "rpg-suite"
     }
 }

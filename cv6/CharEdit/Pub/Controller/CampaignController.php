@@ -7,53 +7,9 @@ namespace cv6\RPG\cv6\CharEdit\Pub\Controller;
 use cv6\RPG\Entity\CampaignContent;
 use cv6\RPG\Repository\CampaignContentRepository;
 use XF\Mvc\ParameterBag;
-use XF\Mvc\Reply\View;
 
 class CampaignController extends XFCP_CampaignController
 {
-	public function actionView(ParameterBag $params)
-	{
-		$reply = parent::actionView($params);
-
-		if ($reply instanceof View)
-		{
-			/** @var \cv6\CharEdit\Entity\Campaign|null $campaign */
-			$campaign = $reply->getParam('campaign');
-			if ($campaign)
-			{
-				$visitor = \XF::visitor();
-				$isGm = $campaign->isGm($visitor) || $campaign->canEdit($visitor);
-				$onlyPlayers = !$isGm;
-
-				/** @var CampaignContentRepository $contentRepo */
-				$contentRepo = $this->repository('cv6\RPG:CampaignContent');
-
-				$battlemapLinks = $contentRepo->findContentForCampaign(
-					(int)$campaign->campaign_id,
-					CampaignContent::TYPE_BATTLEMAP,
-					$onlyPlayers
-				)->fetch();
-
-				$handoutLinks = $contentRepo->findContentForCampaign(
-					(int)$campaign->campaign_id,
-					CampaignContent::TYPE_HANDOUT,
-					$onlyPlayers
-				)->fetch();
-
-				$recentRolls = $contentRepo->getRecentRollsForNode((int)$campaign->node_id, $isGm, 25);
-
-				$reply->setParams([
-					'rpgBattlemapLinks' => $battlemapLinks,
-					'rpgHandoutLinks' => $handoutLinks,
-					'rpgRecentRolls' => $recentRolls,
-					'rpgIsGm' => $isGm,
-				]);
-			}
-		}
-
-		return $reply;
-	}
-
 	public function actionRpgLinkContent(ParameterBag $params)
 	{
 		$campaignId = $params->campaign_id ?: $params->url_slug;

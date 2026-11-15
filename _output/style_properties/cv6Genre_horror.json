@@ -21,10 +21,8 @@
         "font-weight": "@xf-fontWeightHeavy",
         "background-color": "#3f0713",
         "border-width": "1px",
-        "border-style": "solid",
         "border-color": "#881337",
-        "border-radius": "@xf-borderRadiusLarge",
-        "extra": ""
+        "border-radius": "@xf-borderRadiusLarge"
     },
     "display_order": 1060
 }

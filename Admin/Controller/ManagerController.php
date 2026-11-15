@@ -11,9 +11,22 @@ use XF\Mvc\Reply\AbstractReply;
 
 class ManagerController extends AbstractController
 {
+	protected const VERSIONS_JSON_URL = 'https://raw.githubusercontent.com/Dice-Dragons/.github/main/versions.json';
+	protected const CACHE_KEY = 'remoteVersions';
+	protected const CACHE_TTL = 21600; // 6 hours
+
 	public function actionIndex(): AbstractReply
 	{
 		$this->setSectionContext('cv6RpgManager');
+
+		if ($this->filter('refresh', 'bool'))
+		{
+			$this->getRemoteVersions(true);
+			return $this->redirect($this->buildLink('rpg/manager'));
+		}
+
+		$remoteInfo = $this->getRemoteVersions(false);
+		$remoteData = is_array($remoteInfo['data'] ?? null) ? $remoteInfo['data'] : [];
 
 		$catalog = [
 			'foundation' => [
@@ -29,7 +42,7 @@ class ManagerController extends AbstractController
 						'default_title' => '[DD] RPG Suite',
 						'desc_phrase' => 'cv6_rpg_addon_desc_rpg',
 						'icon' => 'fa-dice-d20',
-						'resource_url' => 'https://forum.dice-dragons.de/downloads/',
+						'resource_url' => 'https://forum.dice-dragons.de/downloads/rpg-suite.191/',
 					],
 					'cv6/CustomFields' => [
 						'default_title' => '[DD] Custom Fields Extension',
@@ -58,13 +71,13 @@ class ManagerController extends AbstractController
 						'default_title' => '[DD] BattleMap Generator',
 						'desc_phrase' => 'cv6_rpg_addon_desc_battlemaps',
 						'icon' => 'fa-map',
-						'resource_url' => 'https://forum.dice-dragons.de/downloads/',
+						'resource_url' => 'https://forum.dice-dragons.de/downloads/battle-map-generator.195/',
 					],
 					'cv6/Handout' => [
 						'default_title' => '[DD] Handout Generator',
 						'desc_phrase' => 'cv6_rpg_addon_desc_handout',
 						'icon' => 'fa-scroll',
-						'resource_url' => 'https://forum.dice-dragons.de/downloads/',
+						'resource_url' => 'https://forum.dice-dragons.de/downloads/handout-generator.194/',
 					],
 				],
 			],
@@ -121,12 +134,19 @@ class ManagerController extends AbstractController
 				$versionString = $installedEntity
 					? (string)$installedEntity->version_string
 					: ($addOnObj ? (string)$addOnObj->version_string : '');
+				$installedVersionId = $installedEntity
+					? (int)$installedEntity->version_id
+					: ($addOnObj ? (int)$addOnObj->version_id : 0);
 
-				$resourceUrl = $meta['resource_url'];
-				if ($addOnObj && !empty($addOnObj->faq_url) && $addOnObj->faq_url !== 'https://forum.dice-dragons.de/downloads/')
-				{
-					$resourceUrl = (string)$addOnObj->faq_url;
-				}
+				$remote = is_array($remoteData[$addOnId] ?? null) ? $remoteData[$addOnId] : null;
+				$remoteVersionId = $remote ? (int)($remote['version_id'] ?? 0) : 0;
+				$remoteVersionString = $remote ? (string)($remote['version_string'] ?? '') : '';
+
+				$resourceUrl = $this->resolveResourceUrl(
+					$addOnObj ? (string)($addOnObj->faq_url ?? '') : '',
+					$remote ? (string)($remote['faq_url'] ?? '') : '',
+					$meta['resource_url']
+				);
 
 				$resolvedItems[$addOnId] = [
 					'addon_id' => $addOnId,
@@ -134,6 +154,11 @@ class ManagerController extends AbstractController
 					'addOn' => $addOnObj,
 					'title' => $title,
 					'version_string' => $versionString,
+					'version_id' => $installedVersionId,
+					'remote_version_id' => $remoteVersionId,
+					'remote_version_string' => $remoteVersionString,
+					'is_update_available' => ($installedVersionId > 0 && $remoteVersionId > $installedVersionId),
+					'is_up_to_date' => ($installedVersionId > 0 && $remoteVersionId > 0 && $installedVersionId >= $remoteVersionId),
 					'desc_phrase' => $meta['desc_phrase'],
 					'icon' => $meta['icon'],
 					'resource_url' => $resourceUrl,
@@ -154,7 +179,76 @@ class ManagerController extends AbstractController
 
 		return $sectionPlugin->actionView('cv6Rpg', null, null, 'cv6_rpg_manager', [
 			'addonGroups' => $addonGroups,
+			'lastVersionCheck' => (int)($remoteInfo['fetched_at'] ?? 0),
 		]);
+	}
+
+	/**
+	 * Resolves the most specific resource page URL across local add-on metadata, remote registry, and catalog defaults.
+	 */
+	protected function resolveResourceUrl(string $localUrl, string $remoteUrl, string $fallbackUrl): string
+	{
+		$genericUrls = [
+			'https://forum.dice-dragons.de/',
+			'https://forum.dice-dragons.de/downloads/',
+		];
+
+		foreach ([$localUrl, $remoteUrl] as $candidate)
+		{
+			$candidate = trim($candidate);
+			if ($candidate !== '' && !in_array($candidate, $genericUrls, true))
+			{
+				return $candidate;
+			}
+		}
+
+		return $fallbackUrl;
+	}
+
+	/**
+	 * Fetches and caches the public Dice Dragons versions.json registry (6-hour TTL).
+	 */
+	protected function getRemoteVersions(bool $forceRefresh = false): array
+	{
+		$simpleCache = $this->app()->simpleCache()->getSet('cv6/RPG');
+		$cached = $simpleCache->getValue(self::CACHE_KEY);
+
+		if (
+			!$forceRefresh
+			&& is_array($cached)
+			&& isset($cached['fetched_at'], $cached['data'])
+			&& (\XF::$time - (int)$cached['fetched_at']) < self::CACHE_TTL
+		)
+		{
+			return $cached;
+		}
+
+		try
+		{
+			$response = $this->app()->http()->client()->get(self::VERSIONS_JSON_URL, [
+				'timeout' => 5,
+			]);
+
+			if ($response->getStatusCode() === 200)
+			{
+				$decoded = json_decode((string)$response->getBody(), true);
+				if (is_array($decoded))
+				{
+					$fresh = [
+						'fetched_at' => \XF::$time,
+						'data' => $decoded,
+					];
+					$simpleCache->setValue(self::CACHE_KEY, $fresh);
+					return $fresh;
+				}
+			}
+		}
+		catch (\Throwable $e)
+		{
+			// Fail silently and fall back to cached data or empty registry when GitHub is unreachable
+		}
+
+		return is_array($cached) ? $cached : ['fetched_at' => 0, 'data' => []];
 	}
 
 	public function actionToggle(): AbstractReply

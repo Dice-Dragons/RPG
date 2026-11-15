@@ -32,7 +32,7 @@
     "admin/cv6_rpg_manager.html": {
         "version_id": 1000031,
         "version_string": "1.0.0 Beta 1",
-        "hash": "56aa6300a6e6817ca03bc9a85354ff08"
+        "hash": "d44793d42daf80722ab72eb597e2e1c1"
     },
     "admin/cv6_rpg_publisher_delete.html": {
         "version_id": 1000031,
@@ -82,12 +82,12 @@
     "public/cv6_rpg_campaign_macros.html": {
         "version_id": 1000031,
         "version_string": "1.0.0 Beta 1",
-        "hash": "148ac19b75a63c25e9440ea51c693930"
+        "hash": "78f2035fe7a9dc78e82d07b281ac732c"
     },
     "public/cv6_rpg_dashboard.html": {
         "version_id": 1000031,
         "version_string": "1.0.0 Beta 1",
-        "hash": "6868da262ba12f1e7502ee0081fa00b4"
+        "hash": "5b99787c963086c4201794a9d0acfa86"
     },
     "public/cv6_rpg_genre_macros.html": {
         "version_id": 1000031,
@@ -98,6 +98,11 @@
         "version_id": 1000031,
         "version_string": "1.0.0 Beta 1",
         "hash": "a8ed301c9e868be874184a5c3e3c121a"
+    },
+    "public/cv6_rpg_widget_campaign_assets.html": {
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "be22b50bdc29d19a25aeb6988fd88e9c"
     },
     "public/cv6_rpg_widget_genres.html": {
         "version_id": 1000031,

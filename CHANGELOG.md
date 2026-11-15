@@ -2,6 +2,13 @@
 
 All notable changes to **[DD] RPG Suite** (`cv6/RPG`) are documented in this file.
 
+## [1.0.0 Beta 2] - 2026-11-15
+
+### Added
+- Zero-credential remote version check on the AdminCP RPG Suite Ecosystem & Add-on Overview (`admin.php?rpg/manager`) with a 6-hour `simpleCache` TTL, update badges, and a manual "Check for updates" action.
+- Right-hand sidebar widget position (`cv6_rpg_dashboard_sidebar`) and genre filter widget support across all dashboard positions on `/rpg/`.
+- Dedicated `[DD] RPG Suite: Campaign Assets (BattleMaps & Handouts)` widget (`cv6_rpg_campaign_assets`) for the campaign overview page (`cv6_campaign_main`).
+
 ## [1.0.0 Beta 1] - 2026-11-08
 
 ### Added

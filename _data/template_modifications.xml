@@ -16,20 +16,6 @@
 		</xf:if>
 	</xf:if>]]></replace>
   </modification>
-  <modification type="public" template="cv6_campaign_view" modification_key="cv6_rpg_campaign_view_assets" description="Adds BattleMaps, Handouts, and Dice Roll Log blocks to Campaign Hub" execution_order="10" enabled="1" action="str_replace">
-    <find><![CDATA[<div class="block">
-	<div class="block-container">
-		<h2 class="block-header">
-			<xf:fa icon="fa-shield-alt" /> {{ phrase('cv6_ce_party_characters') }}]]></find>
-    <replace><![CDATA[<xf:macro template="cv6_rpg_campaign_macros" name="campaign_assets"
-	arg-campaign="{$campaign}"
-	arg-battlemapLinks="{$rpgBattlemapLinks}"
-	arg-handoutLinks="{$rpgHandoutLinks}"
-	arg-recentRolls="{$rpgRecentRolls}"
-	arg-isGm="{$rpgIsGm}" />
-
-$0]]></replace>
-  </modification>
   <modification type="admin" template="cv6_character_field_edit" modification_key="cv6_rpg_character_field_edit_rollable" description="Adds RPG rollable field options to CharacterField edit form" execution_order="10" enabled="1" action="str_replace">
     <find><![CDATA[<xf:checkboxrow label="{{ phrase('cv6_visibility') }}">]]></find>
     <replace><![CDATA[<xf:if is="is_addon_active('cv6/DiceRoller')">

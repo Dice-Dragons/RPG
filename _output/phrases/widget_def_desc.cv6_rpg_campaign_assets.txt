@@ -1,0 +1,1 @@
+Displays linked BattleMaps and Handouts on the campaign overview page.

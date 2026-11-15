@@ -35,6 +35,9 @@ class Genres extends AbstractWidget
 			$this->widgetConfig->widgetKey === 'cv6_rpg_dashboard_genres'
 			|| isset($positions['cv6_rpg_dashboard_sidenav'])
 			|| isset($positions['cv6_rpg_dashboard_sidebar'])
+			|| isset($positions['cv6_rpg_dashboard_above'])
+			|| isset($positions['cv6_rpg_dashboard_main'])
+			|| isset($positions['cv6_rpg_dashboard_below'])
 		);
 
 		$targetRoute = $options['target_route'] ?? 'rpg';
